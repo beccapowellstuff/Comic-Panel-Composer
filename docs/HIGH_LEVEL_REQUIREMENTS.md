@@ -1,6 +1,6 @@
-# Comic Panel Composer — High-Level Requirements
+# Comic Page Composer — High-Level Requirements
 
-Version: 0.2 — consolidated draft  
+Version: 0.2
 Date: 11 October 2026  
 Subtitle: Comic page layout and lettering
 
@@ -8,13 +8,13 @@ Subtitle: Comic page layout and lettering
 
 Build a local Windows application for composing multi-page comics from existing pictures, editable panels, balloons, captions and lettering. Provide reusable page templates, panel layouts, styles, custom shapes, advanced fonts and publication output.
 
-Initial image editing focuses on basic adjustments, filters and background removal. Drawing, line-art creation, advanced painting/healing, complex selections, Photoshop plug-ins and generative image features are outside the initial scope.
+Initial image editing focuses on basic adjustments. Filters, background alpha, Drawing, line-art creation, advanced painting/healing, complex selections, Photoshop plug-ins and generative image features are outside the initial scope. Generative Image creation is out of scope for the project, however AI assistance of improving panels, layout, balloons, captions and lettering maybe be included in later stages.
 
-This is the consolidated review draft from the previous requirements and feature list. Checkboxes are for reviewing scope, not implementation status. Cross out unwanted entries, delete them or add comments. Sections are organised by purpose, with overlapping capabilities combined. Individual items still subject to design decisions are identified below.
+This is the consolidated review draft from the previous requirements and feature list. The idea is to take what is liked from present tooling, and upgrade the behaviour offering more future capabilities, and grow it into a full blown Comic Page Composer. The primary purpose of the application is create replace Comic Life 3, since that hasn't been updated or enhanced for many years.
 
 ## Platform, performance and scope
 
-- [ ] Initially target Windows 10 and later as a local desktop application using local projects and assets; verify compatibility with the selected toolchain and renderer.
+- [ ] Initially target Windows 10+ as a local desktop application using local projects and assets; verify compatibility with the selected toolchain and renderer.
 - [ ] Prioritise the owner's Windows workflow and hardware. Support for other operating systems is deferred.
 - [ ] Use a performant compiled implementation suitable for interactive graphics editing.
 - [ ] Keep dragging, resizing, zooming and text editing responsive with large images and multi-page projects.
