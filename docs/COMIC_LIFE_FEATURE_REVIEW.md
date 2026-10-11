@@ -17,9 +17,8 @@ The supplied 52-page PDF is a legacy Mac manual, not a version-labelled Comic Li
 - [ ] Create a comic from a blank document.
 - [ ] Create a comic from a designed template.
 - [ ] Start with a script-only document.
-- [ ] Save and reopen an editable `.comiclife` comic archive.
+- [ ] Save and reopen an editable comic archive.
 - [ ] Work with multiple document windows.
-- [ ] Open older Comic Life documents; compatibility with version 1 is mentioned in release notes.
 - [ ] Add pages to a multi-page comic.
 - [ ] Choose a template page when adding a page.
 - [ ] Navigate using numbered, scrollable page thumbnails.
@@ -409,35 +408,12 @@ These capabilities are documented in the supplied old manual. They are included 
 - [ ] Set a default page format.
 - [ ] Position and style page numbers, including inset and a caption-style backdrop.
 - [ ] Customise toolbar contents.
-- [ ] Copy comic elements into other applications.
 - [ ] Check for application updates on launch.
 
-### Legacy output and services
 
 - [ ] Print a low-resolution proof.
 - [ ] Export an HTML comic presentation.
 - [ ] Choose an HTML frame theme and JPEG quality.
-- [ ] Export a QuickTime slideshow/movie.
-- [ ] Set the duration of each page in a movie.
-- [ ] Compose an email with page images attached.
-- [ ] Export to iPhoto.
-- [ ] Publish to .Mac.
-- [ ] Create a web thumbnail index and reader through .Mac publishing.
-- [ ] Rename, delete and reorder hosted comics.
-- [ ] Publish an RSS feed for hosted comics.
-- [ ] Use Core Image filtering and Quartz rendering on Mac.
-
-## 15. Coverage notes
-
-- This is a review list, not a promise of exact parity or a recommendation to retain every feature.
-- The version 3 guide clarifies that **Factor adjusts a selected caption/panel effect's strength**, and **filter Level adjusts filter strength**. These were previously unclear from screenshots alone.
-- Product pages and editions report different bundled-asset counts. The comparison chart gives 74 fonts for version 3 and 76 for version 4; marketing uses broader counts such as 70+ fonts, 35 version 3 templates and 60+ version 4 templates. Treat bundled libraries as capabilities, not fixed replacement quotas.
-- The comparison page lists 17 advanced parametric filters and advertises 14 newer-generation filters. The complete named filter catalogue was not available in the reviewed documents; named filters above are the ones explicitly identified.
-- The comparison chart also lists 191 creative fills, 11 stroke types and 16 page textures. The detailed names of every preset are not enumerated by these sources.
-- Apple integrations, historical sharing services and legacy exports should not be assumed to work identically on Windows or in current releases.
-- Font UI and text controls differ by platform according to the version 3 guide. Variable fonts, app-only fonts and comprehensive OpenType controls are requirements for our project to investigate, not verified Comic Life capabilities.
-- Colour balance is in our project requirements but is not established as a Comic Life feature by these sources; it has not been added as a claimed product capability.
-- A feature missing from public documentation is not evidence that the application lacks it. Further in-app help inspection can extend this inventory if needed.
 
 ## Official references
 
