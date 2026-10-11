@@ -1,282 +1,271 @@
-# Comic Life 3 and 4 - Feature Review
+# Comic Panel Composer - Feature Requirements Review
 
-For Comic Panel Composer  
 Date: 12 October 2026  
-Status: Review inventory, not approved requirements
+Status: Candidate requirements for review
 
-## How to review
+Cross out unwanted items with `~~strikethrough~~`, delete them, or add comments. Checkboxes indicate review choices, not implementation status. Related capabilities are grouped by purpose and duplicate entries are combined. This remains separate from the high-level requirements until your review is complete.
 
-Cross out unwanted items using `~~strikethrough~~`, delete them, or add a comment. Checkboxes are for your review, not implementation status. Nothing in this file has been merged into the high-level requirements.
+## 1. Projects and saving
 
-This inventory covers the capabilities documented in the official desktop guides, feature pages, comparison chart and release notes reviewed, together with the Comic Life screenshots supplied earlier. It is not a claim that every undocumented menu command has been tested. Version 4 refers to the Mac application; platform-specific integrations are collected separately.
+- [ ] Create a comic from a blank document or a designed template.
+- [ ] Save and reopen an editable comic project.
+- [ ] Autosave documents.
+- [ ] Revert a document to its saved state.
+- [ ] Store author, title, issue, series and copyright information.
+- [ ] Check for application updates on launch.
 
-The supplied 52-page PDF is a legacy Mac manual, not a version-labelled Comic Life 3 or 4 manual. Features established only by that manual are listed separately rather than silently attributed to the newer versions.
+## 2. Pages and document layout
 
-## 1. Comic Life 3 desktop - Documents and pages
-
-- [ ] Create a comic from a blank document.
-- [ ] Create a comic from a designed template.
-- [ ] Start with a script-only document.
-- [ ] Save and reopen an editable comic archive.
-- [ ] Work with multiple document windows.
 - [ ] Add pages to a multi-page comic.
+- [ ] Delete pages with confirmation.
 - [ ] Choose a template page when adding a page.
-- [ ] Navigate using numbered, scrollable page thumbnails.
-- [ ] Move page thumbnails up or down to reorder pages.
-- [ ] Scroll the page overview while moving pages.
-- [ ] Use preset page sizes.
-- [ ] Create custom page sizes.
+- [ ] Create a new page using the current page's panel layout.
+- [ ] Navigate and reorder pages in a numbered thumbnail panel, with scrolling while moving pages.
+- [ ] Use preset or custom page sizes.
 - [ ] Choose page orientation.
+- [ ] Set a default page format.
 - [ ] Set left, right, top and bottom margins.
 - [ ] Configure facing pages.
 - [ ] Show two pages side by side.
-- [ ] Continue numbering from the preceding page.
-- [ ] Specify a starting page number.
-- [ ] Add built-in page texture overlays.
-- [ ] Add a custom page texture.
-- [ ] Use a master page for repeated elements.
-- [ ] Show or omit master-page elements on individual pages.
-- [ ] Set image-filter processing resolution.
+- [ ] Continue page numbering or specify a starting number.
+- [ ] Position and style page numbers, including inset and a caption-style backdrop.
+- [ ] Apply built-in or custom page textures.
+- [ ] Use a master page for repeating elements, with a per-page visibility setting.
+- [ ] Increase or decrease all balloon/caption text on a page at once.
+- [ ] Clear all balloon/caption text on a page.
 
-## 2. Comic Life 3 desktop - Templates and libraries
+## 3. Templates, panel layouts and automatic composition
 
-- [ ] Browse templates in a visual chooser.
-- [ ] Choose a blank template with styles.
-- [ ] Choose a blank template without styles.
-- [ ] Use sample scripts and a blank script template.
-- [ ] Save a script-only document as a template.
+- [ ] Browse a visual collection of comic templates.
+- [ ] Start from a blank template with or without predefined styles.
 - [ ] Use complete template pages with panels, balloons, captions and lettering.
 - [ ] Edit the content and styles supplied by a template.
-- [ ] Use separate panel-only layout presets.
-- [ ] Browse built-in panel layouts by category.
-- [ ] Save the current panel arrangement as a reusable layout.
-- [ ] Browse saved layouts in the miscellaneous layout collection.
 - [ ] Use templates with predefined image filters.
 - [ ] Create reusable comic templates.
-- [ ] Browse images through the integrated media browser.
-- [ ] Browse images by album or collection.
-- [ ] Show named image thumbnails.
-- [ ] Drag images from the media browser onto pages or panels.
-- [ ] Drag images directly from the operating system's file browser.
-- [ ] Reveal an external image's source file from its context menu.
-- [ ] Browse PDF images in the Mac media browser.
+- [ ] Use separate panel-only layout presets.
+- [ ] Browse built-in panel layouts by category.
+- [ ] Save the current panel arrangement and browse it as a reusable layout.
+- [ ] Resize layouts automatically to fit page margins.
+- [ ] Generate a grid page from row, column and gutter settings.
+- [ ] Automatically compose a comic from an album using a layout collection, random page arrangements, a stylesheet, page format and orientation.
 
-## 3. Comic Life 3 desktop - Workspace and editing
+## 4. Workspace and navigation
 
-- [ ] Use a central page canvas with surrounding page, style, script and asset panels.
+- [ ] Provide a clear central editing canvas with surrounding page, style, script and asset panels.
 - [ ] Add panels, captions, lettering and balloons from a visual element well.
 - [ ] Hide or show the element well and other workspace sections.
 - [ ] Access save and print actions from the toolbar.
-- [ ] Zoom in and out.
-- [ ] Zoom to fit.
-- [ ] Open multiple inspector windows.
-- [ ] Inspect script, document, page, graphics, form, image, lettering, metrics and text settings.
-- [ ] Move and resize page elements.
-- [ ] Enter precise element width and height.
-- [ ] Enter precise X/Y positions.
-- [ ] Constrain proportions when resizing.
-- [ ] Restore an image's original size.
-- [ ] Rotate elements using interactive or numeric controls.
-- [ ] Flip images horizontally.
-- [ ] Flip images vertically.
-- [ ] Inspect image file information.
-- [ ] Lock page elements.
-- [ ] Group elements.
-- [ ] Resize grouped elements.
-- [ ] Duplicate groups of elements.
-- [ ] Bring elements forward or send them backward, including keyboard shortcuts.
-- [ ] Use rulers and ruler guides.
-- [ ] Use smart alignment guides.
-- [ ] Use spacing guides.
-- [ ] Snap to a grid.
-- [ ] Distribute elements evenly horizontally.
-- [ ] Distribute elements evenly vertically.
-- [ ] Undo editing actions.
-- [ ] Use full-screen mode on Mac.
+- [ ] Customise toolbar contents.
+- [ ] Zoom in, zoom out and zoom to fit.
+- [ ] Work with multiple documents in separate windows or tabs.
+- [ ] Open multiple inspectors for document, page, script, graphic, shape, image, lettering, metrics and text settings.
+- [ ] Use full-screen mode.
+- [ ] Use dark mode.
 
-## 4. Comic Life 3 desktop - Panels and shapes
+## 5. Selecting, arranging and transforming objects
+
+- [ ] Select several elements for common editing actions.
+- [ ] Copy, paste and delete selected elements.
+- [ ] Undo editing actions.
+- [ ] Move and resize page elements.
+- [ ] Set precise width, height and X/Y position numerically.
+- [ ] Constrain proportions when resizing.
+- [ ] Rotate elements interactively or numerically, with 90-degree snapping.
+- [ ] Flip images horizontally or vertically.
+- [ ] Lock elements or pin them to the page.
+- [ ] Group elements, resize groups and duplicate groups.
+- [ ] Overlap panels and page elements.
+- [ ] Control stacking order: front, back, forward and backward, with keyboard shortcuts.
+- [ ] Align elements relative to a page or panel.
+- [ ] Use rulers, ruler guides, smart alignment guides and spacing guides.
+- [ ] Snap to a grid.
+- [ ] Distribute elements evenly horizontally or vertically.
+- [ ] Resize selected elements using a trackpad pinch.
+
+## 6. Panels and custom shapes
 
 - [ ] Add empty image panels.
 - [ ] Use predefined smart shapes.
 - [ ] Use freeform shapes.
 - [ ] Customise panel shapes.
-- [ ] Overlap panels and page elements.
-- [ ] Fit a dropped image automatically to its panel.
-- [ ] Clip an image to the panel boundary.
-- [ ] Reposition an image inside its panel.
-- [ ] Resize an image independently inside its panel.
+- [ ] Make polygon panels with three to eight independently movable corners.
+- [ ] Convert an irregular panel back to a bounding rectangle.
 - [ ] Use frame-free or invisible panel styles.
-- [ ] Choose caption and panel shape effects.
-- [ ] Adjust a shape effect's strength using Factor.
-- [ ] Give panels and shapes fills, borders, shadows and opacity.
+- [ ] Apply caption/panel shape effects with adjustable strength (Factor).
+- [ ] Combine and edit shapes to customise panel, balloon and caption outlines.
+- [ ] Move a panel and its contents as a unit.
+- [ ] Control clipping to panel boundaries per element and by default; allow elements to extend outside panels.
 
-## 5. Comic Life 3 desktop - Balloons and captions
+## 7. Image libraries, placement and capture
 
-- [ ] Add speech balloons.
-- [ ] Add thought balloons.
-- [ ] Add whisper balloons.
-- [ ] Add Exclamation balloons.
-- [ ] Add Exclamation 2 balloons.
-- [ ] Add Rough balloons.
-- [ ] Add Rough 2 balloons.
-- [ ] Add Robot balloons.
-- [ ] Add Square balloons.
-- [ ] Add Buzz balloons.
-- [ ] Add Space balloons.
+- [ ] Browse image albums, collections and folders through named thumbnails with adjustable preview size.
+- [ ] Drag images onto pages or panels from the built-in browser or operating system file browser.
+- [ ] Reveal an external image's source file from its context menu.
+- [ ] Browse PDF images in the Mac media browser.
+- [ ] Inspect image file information.
+- [ ] Fit a dropped image automatically to its panel.
+- [ ] Reposition and resize images independently inside panels.
+- [ ] Restore an image's original size.
+- [ ] Place multiple independently transformed images in a panel, using a modifier key to add rather than replace.
+- [ ] Replace a panel image by dropping another image onto it.
+- [ ] Give images their own frames and shadows.
+- [ ] Capture webcam pictures, drag frames from a live preview, and freeze or resume the preview.
+- [ ] Offer camera-preview compatibility settings on Windows.
+- [ ] Integrate with Apple's Photos library.
+- [ ] Export comics to the Mac Photos application.
+- [ ] Launch Photo Booth and drag captured pictures into the editor.
+- [ ] Import photos from an iPad or iPhone.
+
+## 8. Image adjustments, filters and backgrounds
+
+- [ ] Apply standard and advanced parametric comic-style filters, including newer filter effects.
+- [ ] Offer Rotoscope, Paintoscope, Hatched, Sketched/Sketch, Smooth, Pen and Retro filter presets.
+- [ ] Adjust the selected filter's strength using Level.
+- [ ] Adjust brightness, exposure, saturation, sharpness, contrast and blur.
+- [ ] Provide an image-adjustment window with sliders and numeric inputs.
+- [ ] Reset image adjustments.
+- [ ] Invert image colours.
+- [ ] Colourise an image using a selected tint.
+- [ ] Set image-filter processing resolution.
+- [ ] Remove image backgrounds by selecting a colour and expanding the removal selection with an Instant Alpha tool.
+- [ ] Combine a cut-out image with a different background.
+
+## 9. Balloons and dialogue
+
+- [ ] Create speech, thought and whisper balloons.
+- [ ] Create Exclamation and Exclamation 2 balloons.
+- [ ] Create Rough and Rough 2 balloons.
+- [ ] Create Robot, Square, Buzz and Space balloons.
 - [ ] Change balloon kind without losing its text.
 - [ ] Adjust balloon shape using the Variety control.
-- [ ] Add extension bubbles to an existing balloon.
-- [ ] Use different kinds for extension and primary bubbles.
+- [ ] Add connected extension bubbles, allowing different kinds within an assembly.
 - [ ] Connect bubbles with bendable tails.
 - [ ] Add multiple tails.
 - [ ] Reposition balloon tails precisely.
-- [ ] Choose curved tails.
-- [ ] Choose straight tails.
-- [ ] Choose jagged tails.
-- [ ] Use automatic tail mode.
+- [ ] Choose curved, straight, jagged or automatic tails.
 - [ ] Enable automatic tail curvature.
 - [ ] Choose thin, medium or thick tails.
-- [ ] Clip balloons to panel boundaries.
-- [ ] Allow balloons to extend beyond panel boundaries.
+- [ ] Customise balloon tail designs.
+- [ ] Use a stroke-style balloon tail.
+- [ ] Reverse tail connections in multi-bubble assemblies.
+- [ ] Wrap a bubble around lettering using Envelop.
+- [ ] Move a balloon body while leaving its tail tip anchored.
+- [ ] Move a balloon and its tails together using a separate handle.
+
+## 10. Captions and text flow
+
 - [ ] Add caption boxes.
 - [ ] Edit caption shapes and appearance.
 - [ ] Edit balloon and caption text in place.
-- [ ] Set text inset margins.
-- [ ] Set balloon and caption line spacing.
-- [ ] Set balloon and caption opacity.
+- [ ] Grow balloons/captions to accommodate entered text.
+- [ ] Add decorative initial capitals to captions.
+- [ ] Connect captions into threads across a page.
+- [ ] Offset text inside balloons and captions.
+- [ ] Wrap text around captions and bubbles.
+- [ ] Insert manual line breaks to shape dialogue inside a balloon.
 
-## 6. Comic Life 3 desktop - Text and fonts
+## 11. Fonts and ordinary text formatting
 
-- [ ] Use the bundled comic and creative fonts.
+- [ ] Provide a collection of comic and creative fonts.
 - [ ] Use additional fonts available through the operating system.
 - [ ] Browse font families and typefaces.
 - [ ] Preview the selected font.
-- [ ] Select preset font sizes.
-- [ ] Enter a custom font size.
+- [ ] Choose preset or custom font sizes.
 - [ ] Apply or revert font-panel changes.
 - [ ] Increase or decrease text size with quick toolbar actions.
+- [ ] Mix fonts and styles within ordinary text.
 - [ ] Set text colour.
 - [ ] Align text left, centre, right or justified.
 - [ ] Align text vertically at the top, middle or bottom.
-- [ ] Adjust character spacing where supported by the platform's text controls.
-- [ ] Adjust line spacing.
+- [ ] Adjust character spacing.
+- [ ] Adjust line spacing, including dialogue and captions.
 - [ ] Adjust text inset margins.
-- [ ] Find and replace within the script.
-- [ ] Find and replace across comic pages.
+- [ ] Apply strikethrough to text.
+- [ ] Outline text glyphs.
+- [ ] Find and replace text in scripts and across comic pages.
 - [ ] Paste text while matching the destination style.
 - [ ] Check spelling while typing.
 - [ ] Use accented letters and umlauts in decorative lettering.
 - [ ] Paste characters from Windows Character Map.
 
-## 7. Comic Life 3 desktop - Decorative lettering
+## 12. Decorative titles and sound effects
 
 - [ ] Create titles and sound-effect lettering.
 - [ ] Edit the wording and font of lettering.
-- [ ] Bend lettering.
-- [ ] Warp lettering with Bezier controls.
+- [ ] Bend and warp lettering using Bezier controls.
+- [ ] Scale lettering separately from warping it.
+- [ ] Retain lettering distortion when changing its wording.
+- [ ] Create multiline lettering with adjustable vertical spread.
+- [ ] Place lettering along a path with adjustable horizontal shear.
 - [ ] Adjust glyph spread.
 - [ ] Adjust glyph skew.
 - [ ] Adjust glyph stagger.
+- [ ] Tilt glyphs.
 - [ ] Join glyphs for a combined appearance.
-- [ ] Add multiple outlines to lettering.
-- [ ] Add dimensional/3D lettering effects.
-- [ ] Set the 3D colour.
-- [ ] Enable or disable 3D lighting.
-- [ ] Adjust lighting angle.
+- [ ] Fill individual glyphs or joined lettering with gradients.
+- [ ] Apply 3D lettering with a selectable extrusion colour.
+- [ ] Enable or disable 3D lighting and adjust its angle.
 - [ ] Adjust 3D horizontal and vertical offset.
-- [ ] Adjust perspective.
-- [ ] Adjust depth.
+- [ ] Adjust 3D perspective and depth.
 - [ ] Apply lettering presets from a visual style gallery.
 
-## 8. Comic Life 3 desktop - Fills, strokes and effects
+## 13. Fills, colour and compositing
 
-- [ ] Enable or disable fills.
-- [ ] Use solid-colour fills.
+- [ ] Enable or disable solid-colour fills.
 - [ ] Use gradient fills.
-- [ ] Use image fills.
-- [ ] Use tinted image fills.
-- [ ] Use colourised image fills.
+- [ ] Use image, tinted-image and colourised-image fills.
 - [ ] Control fill-image size and proportions.
-- [ ] Use speedline fills.
-- [ ] Use halftone fills.
-- [ ] Use full-colour halftone fills.
-- [ ] Use texture fills.
-- [ ] Use tiled fills.
 - [ ] Import a custom image as a fill.
+- [ ] Use speedline fills.
+- [ ] Use monochrome or full-colour halftone fills.
+- [ ] Use texture and tiled fills.
 - [ ] Control fill opacity.
+- [ ] Choose colours using a colour wheel and brightness control, with numeric opacity.
+- [ ] Control overall object opacity separately from fill and shadow opacity, including balloons and captions.
+- [ ] Use composite blending.
+- [ ] Apply shared fill, border, shadow and opacity controls to panels and shapes.
+
+## 14. Borders, outlines and shadows
+
 - [ ] Enable or disable strokes.
 - [ ] Choose clean or hand-drawn/brush-like stroke styles.
-- [ ] Set stroke colour.
-- [ ] Set stroke width.
-- [ ] Add multiple outlines with alternating colours.
-- [ ] Adjust outline count.
+- [ ] Set stroke colour and width.
+- [ ] Apply multiple outlines, controlling count and alternating colours, including on lettering.
 - [ ] Use the Compact outline option; its precise behaviour still needs inspection.
 - [ ] Customise line endpoints, including arrows and circles.
+- [ ] Adjust the stroke miter limit.
 - [ ] Enable or disable shadows.
 - [ ] Set shadow colour.
-- [ ] Position shadows using a visual pad.
-- [ ] Set shadow X/Y offsets numerically.
-- [ ] Set shadow blur.
-- [ ] Set shadow opacity.
-- [ ] Set overall object opacity separately from fill and shadow opacity.
-- [ ] Choose colours with a colour wheel and brightness control.
-- [ ] Enter colour opacity numerically.
+- [ ] Position shadows with a visual pad or numeric X/Y offsets.
+- [ ] Adjust shadow blur and opacity.
 
-## 9. Comic Life 3 desktop - Images and filters
+## 15. Reusable styles
 
-- [ ] Apply standard comic-style image filters.
-- [ ] Apply advanced parametric filters.
-- [ ] Use Rotoscope.
-- [ ] Use Paintoscope.
-- [ ] Use Hatched.
-- [ ] Use Sketched/Sketch; official sources use both labels.
-- [ ] Use Smooth.
-- [ ] Use Pen.
-- [ ] Use Retro.
-- [ ] Adjust the selected filter's strength using Level.
-- [ ] Adjust brightness.
-- [ ] Adjust exposure.
-- [ ] Adjust saturation.
-- [ ] Adjust sharpness.
-- [ ] Adjust contrast.
-- [ ] Adjust blur.
-- [ ] Use sliders and numeric adjustment inputs.
-- [ ] Reset image adjustments.
-- [ ] Invert image colours.
-- [ ] Colourise an image using a selected tint.
-- [ ] Remove a background using Instant Alpha.
-- [ ] Select a colour with Instant Alpha and drag to expand the removal selection.
-- [ ] Combine a cut-out image with a different background.
+- [ ] Choose predefined styles or create custom element styles.
+- [ ] Use styles consistently across pages.
+- [ ] Copy and paste element styles.
+- [ ] Update a named style and propagate changes to elements using it.
+- [ ] Revert an element's style overrides.
+- [ ] Save and load complete stylesheets independently of a comic.
+- [ ] Set a default stylesheet for new comics.
 
-## 10. Comic Life 3 desktop - Script workflow
+## 16. Script writing and page composition
 
-- [ ] Write a script in the integrated editor.
-- [ ] Import a script.
-- [ ] Paste a script.
-- [ ] Start with a script tutorial/sample.
-- [ ] Recognise page breaks through script keywords.
-- [ ] Recognise panel descriptions through keywords.
-- [ ] Recognise captions through keywords.
-- [ ] Recognise titles and sound effects through keywords.
-- [ ] Recognise balloon dialogue and kinds through keywords.
-- [ ] Add custom keywords.
-- [ ] Edit or remove keywords.
+- [ ] Start with a blank script or a sample/tutorial script.
+- [ ] Write, import or paste scripts in an integrated editor.
+- [ ] Save a script-only document as a template.
+- [ ] Recognise page, panel, caption, title, sound-effect and balloon keywords in scripts.
+- [ ] Add, edit and remove script keywords.
 - [ ] Map matching dialogue to a balloon kind.
 - [ ] Assign an element style through the script.
 - [ ] Show recognised element icons beside script text.
-- [ ] Drag a script element onto a comic page to create its corresponding object.
-- [ ] Populate a created object with its script text.
+- [ ] Drag recognised script elements onto a page to create objects populated with the script text.
 - [ ] Drop script text onto an existing caption to replace its text.
 - [ ] Begin page composition without losing the existing script.
 - [ ] Print a script.
-- [ ] Store author, title, issue, series and copyright information.
 
-## 11. Comic Life 3 desktop - Styles, saving and publishing
+## 17. Exporting, printing and sharing
 
-- [ ] Choose predefined element styles.
-- [ ] Create custom element styles.
-- [ ] Use styles consistently across pages.
-- [ ] Save an editable project for later work.
 - [ ] Export a PDF.
 - [ ] Export high-resolution page images.
 - [ ] Export EPUB.
@@ -285,137 +274,26 @@ The supplied 52-page PDF is a legacy Mac manual, not a version-labelled Comic Li
 - [ ] Export all pages or a selected page range.
 - [ ] Preview the first and last pages of an export range.
 - [ ] Preserve DPI information in JPEG export.
-- [ ] Print a comic directly.
-- [ ] Customise the Mac toolbar.
-- [ ] Resize selected elements with a trackpad pinch on Mac.
-- [ ] Share by email.
-- [ ] Share to Facebook as advertised in the version 3 feature page; current service compatibility is not established.
-
-## 12. Comic Life 4 - Additional and enhanced capabilities
-
-These extend the version 3 inventory. The comparison page identifies the following additions or enhancements; existing features are not repeated here unless the change itself matters.
-
-### Balloons and captions
-
-- [ ] Customise tail design beyond the earlier controls.
-- [ ] Use the new stroke-tail style.
-- [ ] Reverse tail connections in multi-bubble assemblies.
-- [ ] Edit bubble outlines with shape operations.
-- [ ] Wrap a bubble around lettering using Envelop.
-- [ ] Add decorative initial capitals to captions.
-- [ ] Connect captions into threads across a page.
-- [ ] Edit caption outlines with shape operations.
-
-### Lettering and text
-
-- [ ] Create multiline decorative lettering.
-- [ ] Adjust multiline vertical spread.
-- [ ] Place lettering along a path using Line mode.
-- [ ] Apply horizontal shear to path lettering.
-- [ ] Tilt glyphs.
-- [ ] Offset text inside balloons and captions.
-- [ ] Wrap text around captions and bubbles.
-- [ ] Apply strikethrough to text.
-- [ ] Outline text glyphs.
-
-### Graphics and images
-
-- [ ] Apply the newer-generation image filters.
-- [ ] Use a dedicated Image Adjustment window.
-- [ ] Combine shapes for custom panel, caption and balloon designs.
-- [ ] Use composite blending.
-- [ ] Adjust the stroke miter limit.
-
-### Workspace and documents
-
-- [ ] Pin elements to the page.
-- [ ] Autosave documents.
-- [ ] Revert a document to its saved state.
-- [ ] Organise document windows with tabs.
-- [ ] Use dark mode.
-- [ ] Use the modernised interface.
-- [ ] Use an expanded template collection.
-- [ ] Use the expanded bundled font collection.
-
-## 13. Mac-specific integration and language support
-
-These are retained for review even though Comic Panel Composer initially targets Windows.
-
-- [ ] Integrate with Apple's photo library; version 4 advertises improved Photos integration.
-- [ ] Export a comic to the Mac Photos application in version 3.
-- [ ] Launch Photo Booth and drag captured pictures into the editor in version 4.
-- [ ] Import a photo from an iPad or iPhone in version 4.
-- [ ] Print using AirPrint in version 4.
-- [ ] Select a print page range.
-- [ ] Select the number of print copies.
-- [ ] Select two-sided printing.
-- [ ] Provide Dutch localisation.
-- [ ] Provide French localisation.
-- [ ] Provide German localisation.
-- [ ] Provide Italian localisation.
-- [ ] Provide Spanish localisation.
-- [ ] Provide Portuguese localisation; also documented in the Windows version 3 release history.
-- [ ] Capture pictures from a webcam in version 3; Windows release notes mention camera-preview support.
-- [ ] Offer camera-preview compatibility settings on Windows.
-
-## 14. Legacy-manual features - Verify retention before treating as version 3/4 features
-
-These capabilities are documented in the supplied old manual. They are included so you can decide whether the ideas are useful, but newer-version behaviour has not been established for these details.
-
-### Pages, panels and images
-
-- [ ] Delete pages with confirmation.
-- [ ] Select several elements for common editing actions.
-- [ ] Copy, paste and delete selected elements.
-- [ ] Send elements to the back or bring them to the front.
-- [ ] Align elements relative to a page or panel.
-- [ ] Generate a Quick Comic from a photo album.
-- [ ] Choose random page layouts from a collection for automatic composition.
-- [ ] Choose a stylesheet, page format and orientation for automatic composition.
-- [ ] Generate a grid page from row, column and gutter settings.
-- [ ] Create a new page using the current page's panel layout.
-- [ ] Increase or decrease all balloon/caption text on a page at once.
-- [ ] Clear all balloon/caption text on a page.
-- [ ] Resize layouts automatically to fit page margins.
-- [ ] Make polygon panels with three to eight independently movable corners.
-- [ ] Convert an irregular panel back to a bounding rectangle.
-- [ ] Put multiple independently transformed images inside one panel.
-- [ ] Replace a panel image by dropping another image onto it.
-- [ ] Use a modifier key to add rather than replace a panel image.
-- [ ] Give images their own frames and shadows.
-- [ ] Move a panel and its contents as a unit.
-- [ ] Snap rotation to 90-degree increments.
-- [ ] Adjust media-browser thumbnail size.
-- [ ] Capture a live camera frame by dragging from the preview.
-- [ ] Freeze and resume a camera preview.
-
-### Balloon, lettering and style details
-
-- [ ] Mix fonts and styles within ordinary text.
-- [ ] Insert manual line breaks to shape dialogue inside a balloon.
-- [ ] Move a balloon body while leaving its tail tip anchored.
-- [ ] Move a balloon and its tails together using a separate handle.
-- [ ] Grow balloons/captions to accommodate entered text.
-- [ ] Set clipping individually or as the default for new elements.
-- [ ] Scale lettering separately from warping it.
-- [ ] Retain lettering distortion when changing its wording.
-- [ ] Fill individual glyphs or joined lettering with gradients.
-- [ ] Copy and paste element styles.
-- [ ] Update a named style and propagate changes to elements using it.
-- [ ] Revert an element's style overrides.
-- [ ] Save and load complete stylesheets independently of a comic.
-- [ ] Set a default stylesheet for new comics.
-- [ ] Set a default page format.
-- [ ] Position and style page numbers, including inset and a caption-style backdrop.
-- [ ] Customise toolbar contents.
-- [ ] Check for application updates on launch.
-
-
+- [ ] Print comics with page-range, copy-count and two-sided options.
+- [ ] Print using AirPrint.
 - [ ] Print a low-resolution proof.
-- [ ] Export an HTML comic presentation.
-- [ ] Choose an HTML frame theme and JPEG quality.
+- [ ] Export an HTML comic presentation with a frame theme and JPEG-quality setting.
+- [ ] Share by email.
+- [ ] Share to Facebook; integration compatibility remains to be established.
 
-## Official references
+## 18. Interface languages
+
+- [ ] Provide Dutch, French, German, Italian, Spanish and Portuguese localisation.
+
+## Details still to define
+
+- Exact behaviour of the Compact outline control.
+- Final filter and preset catalogues; the named options above are examples from the reviewed material.
+- Whether platform-specific integrations should be retained or replaced for Windows.
+- Compatibility of external sharing services.
+
+## References
+
 
 - [Supplied legacy manual](https://plasq.com/helpfiles/Comic_LIfe_manual.pdf)
 - [Comic Life 3 Getting Started guide](https://plasq.com/manuals/comiclife/3.0/comiclife-3.0-gettingstarted.pdf)
