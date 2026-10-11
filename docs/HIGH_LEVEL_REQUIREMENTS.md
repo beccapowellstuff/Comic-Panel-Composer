@@ -1,159 +1,370 @@
 # Comic Panel Composer — High-Level Requirements
 
-Version: 0.1 — requirements draft  
-Date: 12 October 2026  
-Application name: Comic Panel Composer
+Version: 0.2 — consolidated draft  
+Date: 11 October 2026  
 Subtitle: Comic page layout and lettering
 
-## 1. Purpose and scope
+## Purpose
 
-Create a local Windows desktop application for composing comics from existing pictures, editable panels, lettering, captions and balloons. The intended workflow takes inspiration from Comic Life and the comic composition capabilities of Clip Studio Paint.
+Build a local Windows application for composing multi-page comics from existing pictures, editable panels, balloons, captions and lettering. Provide reusable page templates, panel layouts, styles, custom shapes, advanced fonts and publication output.
 
-The application must support complete multi-page comics, reusable layouts and styles, custom shapes, advanced fonts and export. Initial image editing is limited to basic adjustments and filters. A comprehensive Photoshop-style painting, retouching or image manipulation suite is outside the initial scope.
+Initial image editing focuses on basic adjustments, filters and background removal. Drawing, line-art creation, advanced painting/healing, complex selections, Photoshop plug-ins and generative image features are outside the initial scope.
 
-This document consolidates the agreed product direction and high-level requirements. It describes the intended product, not functionality already implemented. All listed functional areas remain in the target scope; a delivery sequence does not remove later features.
+This is the consolidated review draft from the previous requirements and feature list. Checkboxes are for reviewing scope, not implementation status. Cross out unwanted entries, delete them or add comments. Sections are organised by purpose, with overlapping capabilities combined. Individual items still subject to design decisions are identified below.
 
-## 2. Platform and performance
+## Platform, performance and scope
 
-| ID | Requirement |
-| --- | --- |
-| PL-01 | Initially target Windows 10 and later as a local desktop application with local project files and assets. Earlier Windows versions are outside the target. Compatibility must be verified with the selected toolchain and renderer. A browser-based interface is not the chosen direction. |
-| PL-02 | Use a performant compiled implementation suitable for responsive graphics editing. |
-| PL-03 | Keep dragging, resizing, zooming and text editing responsive while working with large images and multi-page documents. |
-| PL-04 | Perform expensive image processing and exports without blocking normal interface interaction. |
-| PL-05 | Support normal Windows display scaling with legible controls and crisp page rendering. |
-| PL-06 | Prioritise the owner's Windows workflow and hardware for initial development. Support for other operating systems is deferred. Graphics compatibility and minimum RAM, GPU memory and CPU requirements will be established through testing; a dedicated graphics card is not yet a confirmed requirement. |
+- [ ] Initially target Windows 10 and later as a local desktop application using local projects and assets; verify compatibility with the selected toolchain and renderer.
+- [ ] Prioritise the owner's Windows workflow and hardware. Support for other operating systems is deferred.
+- [ ] Use a performant compiled implementation suitable for interactive graphics editing.
+- [ ] Keep dragging, resizing, zooming and text editing responsive with large images and multi-page projects.
+- [ ] Run expensive image processing and exports without blocking normal interaction.
+- [ ] Support Windows display scaling with legible controls and crisp rendering.
+- [ ] Establish supported graphics hardware and minimum RAM, GPU memory and CPU requirements through representative tests. A dedicated graphics card is not yet a confirmed requirement.
 
-**Technology direction:** Rust is the current candidate, not a final selection. Rust with egui/eframe and a suitable graphics renderer is an option to evaluate. C++/Qt remains an alternative. Framework selection must demonstrate the required text, shape, editing and export capabilities; language choice alone does not establish performance.
+Rust is the current language candidate; egui/eframe with a suitable renderer is one option, and C++/Qt remains an alternative. The final stack must prove its text, shape, editing and export capabilities.
 
-## 3. Documents and pages
+## Projects and saving
 
-| ID | Requirement |
-| --- | --- |
-| DOC-01 | Create multi-page comic documents; add, insert, duplicate and remove pages. |
-| DOC-02 | Reorder pages directly in the Pages panel by moving page thumbnails up or down. The resulting panel order determines the document's page sequence and export order. Dragging thumbnails is a proposed interaction; the exact gesture is not yet confirmed. |
-| DOC-03 | Show a scrollable page thumbnail list with page numbers and a clear current-page selection. |
-| DOC-04 | Configure page size and document margins: left, right, top and bottom. |
-| DOC-05 | Support facing-page documents. Exact margin and spread behaviour remains open. |
-| DOC-06 | Continue page numbering from the preceding page or specify a starting number. |
-| DOC-07 | Support page textures and master-page elements, with control over whether master elements are drawn on a page. |
-| DOC-08 | Store author, title, issue, series and copyright metadata. Support keywords; their interface remains open. |
-| DOC-09 | Configure the resolution used for image filters independently of export settings. |
+- [ ] Create a comic from a blank document or a designed template.
+- [ ] Save and reopen an editable project containing all pages, editable objects, styles, image assets/references and adjustment settings.
+- [ ] Autosave documents and recover interrupted work.
+- [ ] Revert a document to its saved state.
+- [ ] Save safely without corrupting the last valid project if a save fails.
+- [ ] Store author, title, issue, series and copyright information.
+- [ ] Store document keywords.
+- [ ] Check for application updates on launch.
 
-## 4. Templates, layouts and reusable styles
+## Pages and document layout
 
-| ID | Requirement |
-| --- | --- |
-| LIB-01 | Create, save and reuse full-page templates containing layouts and styling. |
-| LIB-02 | Create, save and reuse panel layouts independently of full-page templates. Allow saving the current page's panel arrangement as a layout. |
-| LIB-03 | Define reusable default panel appearance, including borders, fills and other supported styling. |
-| LIB-04 | Provide visual thumbnail galleries for page templates and panel layouts, with selectable collections and built-in layouts. |
-| LIB-05 | Include panel arrangements with different counts, sizes and proportions; retain user-created arrangements. |
-| LIB-06 | Provide reusable lettering and appearance presets with previews showing their actual effects. |
-| LIB-07 | Provide an image library with selectable albums/collections, named thumbnails and scrolling. |
-| LIB-08 | Save and reuse custom balloon and shape presets. |
+- [ ] Add, insert and duplicate pages in a multi-page comic.
+- [ ] Delete pages with confirmation.
+- [ ] Choose a template page when adding a page.
+- [ ] Create a new page using the current page's panel layout.
+- [ ] Navigate and reorder pages by moving thumbnails up or down in the Pages panel, with visible page numbers, scrolling while moving pages and a clear selected-page highlight. The new sequence must determine document and export order.
+- [ ] Use preset or custom page sizes.
+- [ ] Choose page orientation.
+- [ ] Set a default page format.
+- [ ] Set left, right, top and bottom margins.
+- [ ] Configure facing pages.
+- [ ] Show two pages side by side.
+- [ ] Continue page numbering or specify a starting number.
+- [ ] Position and style page numbers, including inset and a caption-style backdrop.
+- [ ] Apply built-in or custom page textures.
+- [ ] Use a master page for repeating elements, with a per-page visibility setting.
+- [ ] Increase or decrease all balloon/caption text on a page at once.
+- [ ] Clear all balloon/caption text on a page.
 
-A **page template** may include styled page content. A **panel layout** describes panel arrangement. A **style preset** describes appearance. They should be distinct concepts even where they work together.
+## Templates, panel layouts and automatic composition
 
-## 5. Panels, shapes and object editing
+- [ ] Browse a visual collection of comic templates.
+- [ ] Start from a blank template with or without predefined styles.
+- [ ] Use complete template pages with panels, balloons, captions and lettering.
+- [ ] Edit the content and styles supplied by a template.
+- [ ] Use templates with predefined image filters.
+- [ ] Create reusable comic templates.
+- [ ] Keep full-page templates, panel-only layouts and appearance presets as separate reusable concepts.
+- [ ] Use separate panel-only layout presets.
+- [ ] Browse built-in panel layouts by category.
+- [ ] Provide panel layouts with different counts, sizes and proportions, alongside saved user layouts.
+- [ ] Save the current panel arrangement and browse it as a reusable layout.
+- [ ] Resize layouts automatically to fit page margins.
+- [ ] Generate a grid page from row, column and gutter settings.
+- [ ] Automatically compose a comic from an album using a layout collection, random page arrangements, a stylesheet, page format and orientation.
 
-| ID | Requirement |
-| --- | --- |
-| OBJ-01 | Create and edit panels with standard and custom shapes, including dynamically adjustable geometry. |
-| OBJ-02 | Allow overlapping panels and other page objects, with controllable stacking order. |
-| OBJ-03 | Place images inside panels and crop/clip them to the panel shape. Reposition and scale the image independently of the panel. |
-| OBJ-04 | Move, resize and rotate page objects using direct manipulation and numeric controls. |
-| OBJ-05 | Expose width, height, X/Y position and rotation; support constrained proportions and restoring an applicable object's original size. |
-| OBJ-06 | Provide a shape selector for captions and panels. Rectangle is verified; additional shapes are to be defined. |
-| OBJ-07 | Support selecting overlapping objects reliably, multi-selection, grouping, duplication and deletion. |
-| OBJ-08 | Provide canvas zooming and panning. Alignment, distribution, guides and snapping are proposed editing aids. |
-| OBJ-09 | Provide a visual element-selection controller/palette beside the editing canvas. Let the user choose an element type through recognisable previews, including a panel, caption/text box, decorative lettering, and different balloon shapes. The reference presents a horizontal palette below the canvas. |
+## Workspace and navigation
 
-The screenshot's caption/panel **Factor** control and two metrics-panel icon controls remain open; no behaviour is assumed for them.
+- [ ] Provide a clear central editing canvas with surrounding page, style, script and asset panels.
+- [ ] Add panels, captions, lettering and balloons from a visual element well.
+- [ ] Show recognisable element previews in a controller below or beside the canvas, including panels, captions, lettering and balloon kinds.
+- [ ] Hide or show the element well and other workspace sections.
+- [ ] Access save and print actions from the toolbar.
+- [ ] Customise toolbar contents.
+- [ ] Zoom in, zoom out and zoom to fit.
+- [ ] Pan around the editing canvas.
+- [ ] Work with multiple documents in separate windows or tabs.
+- [ ] Open multiple inspectors for document, page, script, graphic, shape, image, lettering, metrics and text settings.
+- [ ] Use full-screen mode.
+- [ ] Use dark mode.
 
-## 6. Balloons, thoughts and captions
+## Selecting, arranging and transforming objects
 
-| ID | Requirement |
-| --- | --- |
-| BAL-01 | Create speech balloons, thought balloons, captions and custom balloon shapes. |
-| BAL-02 | Provide reference kinds: Speech, Thought, Exclamation, Exclamation 2, Whisper, Rough, Rough 2, Robot, Square, Buzz and Space. Their precise geometry must be specified. |
-| BAL-03 | Offer adjustable shape variation for balloon kinds, corresponding to the reference Variety control. |
-| BAL-04 | Create and edit tails with Curved, Straight, Jagged and Auto modes, plus an Auto-curve option. Exact automatic behaviour remains open. |
-| BAL-05 | Offer Thin, Medium and Thick tail widths and an Add Tail action. |
-| BAL-06 | Allow multiple tails and direct adjustment of their attachment and tip positions. |
-| BAL-07 | Keep balloon shapes, tails and text editable after creation and reopening a project. Maintain clean joins between balloon bodies and tails. |
+- [ ] Select several elements for common editing actions.
+- [ ] Select the intended object reliably when objects overlap.
+- [ ] Copy, paste, duplicate and delete selected elements.
+- [ ] Undo and redo editing actions.
+- [ ] Move and resize page elements.
+- [ ] Set precise width, height and X/Y position numerically.
+- [ ] Constrain proportions when resizing.
+- [ ] Rotate elements interactively or numerically, with 90-degree snapping.
+- [ ] Flip images horizontally or vertically.
+- [ ] Lock elements or pin them to the page.
+- [ ] Group elements, resize groups and duplicate groups.
+- [ ] Overlap panels and page elements.
+- [ ] Control stacking order: front, back, forward and backward, with keyboard shortcuts.
+- [ ] Align elements relative to a page or panel.
+- [ ] Use rulers, ruler guides, smart alignment guides and spacing guides.
+- [ ] Snap to a grid.
+- [ ] Distribute elements evenly horizontally or vertically.
+- [ ] Resize selected elements using a trackpad pinch.
 
-## 7. Text and fonts
+## Panels and custom shapes
 
-| ID | Requirement |
-| --- | --- |
-| TXT-01 | Create editable text for dialogue, captions, titles and sound effects. |
-| TXT-02 | Discover and offer the installed Windows font library. |
-| TXT-03 | Support an application-only font library without requiring system-wide installation. |
-| TXT-04 | Support advanced font capabilities. Variable font axes, OpenType features, ligatures and kerning are candidate interpretations of the user's request for dynamic fonts; confirm the exact coverage. |
-| TXT-05 | Provide font-family and typeface selection, preset and custom font sizes, live previews, and apply/revert actions. |
-| TXT-06 | Support text colour and left, centre, right and justified alignment. |
-| TXT-07 | Support top, middle and bottom vertical alignment, line spacing and text inset margins. |
-| TXT-08 | Support mixed formatting within a text object, dependable wrapping and text selection/editing. |
-| TXT-09 | Preserve text layout consistently between editing, saving/reopening and export. Report missing fonts with a clear replacement choice. |
+- [ ] Add empty image panels.
+- [ ] Use predefined smart shapes.
+- [ ] Use freeform shapes.
+- [ ] Create and edit custom panel shapes with dynamically adjustable geometry.
+- [ ] Make polygon panels with three to eight independently movable corners.
+- [ ] Convert an irregular panel back to a bounding rectangle.
+- [ ] Use frame-free or invisible panel styles.
+- [ ] Apply caption/panel shape effects with adjustable strength (Factor).
+- [ ] Combine and edit shapes to customise panel, balloon and caption outlines.
+- [ ] Save and reuse custom shape presets.
+- [ ] Move a panel and its contents as a unit.
+- [ ] Control clipping to panel boundaries per element and by default; allow elements to extend outside panels.
 
-Ordinary paragraph text and decorative lettering share font handling but require different editing capabilities. Ordinary text must remain practical for dialogue; decorative effects must not prevent later wording changes.
+## Image libraries, placement and capture
 
-## 8. Decorative lettering and visual appearance
+- [ ] Browse image albums, collections and folders through named thumbnails with adjustable preview size.
+- [ ] Drag images onto pages or panels from the built-in browser or operating system file browser.
+- [ ] Reveal an external image's source file from its context menu.
+- [ ] Browse PDF images in the media browser.
+- [ ] Inspect image file information.
+- [ ] Import pictures and preserve original image quality for export; choose supported input formats during detailed design.
+- [ ] Fit a dropped image automatically to its panel.
+- [ ] Reposition and resize images independently inside panels.
+- [ ] Restore an image's original size.
+- [ ] Place multiple independently transformed images in a panel, using a modifier key to add rather than replace.
+- [ ] Replace a panel image by dropping another image onto it.
+- [ ] Give images their own frames and shadows.
+- [ ] Capture webcam pictures, drag frames from a live preview, and freeze or resume the preview.
+- [ ] Offer camera-preview compatibility settings on Windows.
+- [ ] Integrate with Apple's Photos library.
+- [ ] Export comics to the Mac Photos application.
+- [ ] Launch Photo Booth and drag captured pictures into the editor.
+- [ ] Import photos from an iPad or iPhone.
 
-| ID | Requirement |
-| --- | --- |
-| FX-01 | Enable/disable object fills; select fill colour and fill opacity. |
-| FX-02 | Enable/disable strokes; control stroke style, colour and width. |
-| FX-03 | Support outlines, including an outline-count control and outline colour. Clarify the reference Compact option and other stroke controls. |
-| FX-04 | Provide endpoint styles where applicable. |
-| FX-05 | Enable/disable shadows; control colour, X/Y offset, blur and opacity. |
-| FX-06 | Control overall object opacity separately from fill and shadow opacity. |
-| FX-07 | Provide colour selection with a colour wheel, brightness and opacity controls, including numeric opacity input. |
-| FX-08 | Support decorative glyph controls: Joined, Spread, Skew and Stagger. Define their exact effects during detailed design. |
-| FX-09 | Support optional dimensional lettering with colour, lighting angle, X/Y offset, perspective and depth controls. |
-| FX-10 | Support reusable lettering styles, including the outlined, gradient and dimensional appearances visible in the style gallery. |
+## Image adjustments, filters and backgrounds
 
-## 9. Images, adjustments and filters
+- [ ] Apply standard and advanced parametric comic-style filters, including newer filter effects.
+- [ ] Choose filters through a visual selector with previews.
+- [ ] Offer Rotoscope, Paintoscope, Hatched, Sketched/Sketch, Smooth, Pen and Retro filter presets.
+- [ ] Adjust the selected filter's strength using Level.
+- [ ] Adjust brightness, exposure, saturation, sharpness, contrast and blur.
+- [ ] Adjust colour balance.
+- [ ] Provide image-adjustment sliders, numeric inputs and step controls.
+- [ ] Reset image adjustments.
+- [ ] Keep image adjustments non-destructive and editable, retaining original image data while using suitable editing previews.
+- [ ] Invert image colours.
+- [ ] Colourise an image using a selected tint.
+- [ ] Set image-filter processing resolution independently of export settings.
+- [ ] Remove image backgrounds by selecting a colour and expanding the removal selection with an Instant Alpha tool.
+- [ ] Combine a cut-out image with a different background.
 
-| ID | Requirement |
-| --- | --- |
-| IMG-01 | Import existing pictures and preserve their original quality for export. Supported input formats remain to be selected. |
-| IMG-02 | Provide brightness, exposure, saturation, sharpness, contrast and blur adjustments. |
-| IMG-03 | Provide colour balance adjustments. |
-| IMG-04 | Offer adjustment sliders alongside numeric inputs with step controls, plus a Reset action. |
-| IMG-05 | Provide an image-filter selector with preview, Invert, optional Colorize with colour selection, and a Level control. The filter catalogue and Level semantics remain open. |
-| IMG-06 | Keep adjustments non-destructive and editable; use suitable previews while retaining original image data. |
+## Balloons and dialogue
 
-Advanced painting, healing, complex selections, Photoshop plug-ins and generative image features are not initial requirements.
+- [ ] Create speech, thought and whisper balloons.
+- [ ] Create Exclamation and Exclamation 2 balloons.
+- [ ] Create Rough and Rough 2 balloons.
+- [ ] Create Robot, Square, Buzz and Space balloons.
+- [ ] Create, save and reuse custom balloon shapes.
+- [ ] Change balloon kind without losing its text.
+- [ ] Adjust balloon shape using the Variety control.
+- [ ] Add connected extension bubbles, allowing different kinds within an assembly.
+- [ ] Connect bubbles with bendable tails.
+- [ ] Add multiple tails.
+- [ ] Adjust tail attachment points and tip positions precisely.
+- [ ] Choose curved, straight, jagged or automatic tails.
+- [ ] Enable automatic tail curvature.
+- [ ] Choose thin, medium or thick tails.
+- [ ] Customise balloon tail designs.
+- [ ] Use a stroke-style balloon tail.
+- [ ] Reverse tail connections in multi-bubble assemblies.
+- [ ] Wrap a bubble around lettering using Envelop.
+- [ ] Move a balloon body while leaving its tail tip anchored.
+- [ ] Move a balloon and its tails together using a separate handle.
+- [ ] Keep balloon bodies, tails and text editable after save/reopen, with clean joins between bodies and tails.
 
-## 10. Saving and export
+## Captions and text flow
 
-| ID | Requirement |
-| --- | --- |
-| OUT-01 | Save and reopen editable projects containing all pages, objects, styles, image references/assets and adjustment settings. |
-| OUT-02 | Provide undo/redo and autosave/recovery. Save reliably without corrupting the last valid project on failure. |
-| OUT-03 | Export PDF, images, EPUB and CBZ. |
-| OUT-04 | For PDF, configure an image-resolution limit; choose all pages or a page range; preview the range's first and last pages. |
-| OUT-05 | Produce output consistent with the document's page order, dimensions, image crops, text, shapes and effects. |
-| OUT-06 | Define export quality, image formats, naming and packaging options for images, EPUB and CBZ during detailed requirements. |
+- [ ] Add caption boxes.
+- [ ] Edit caption shapes and appearance.
+- [ ] Edit balloon and caption text in place.
+- [ ] Grow balloons/captions to accommodate entered text.
+- [ ] Add decorative initial capitals to captions.
+- [ ] Connect captions into threads across a page.
+- [ ] Offset text inside balloons and captions.
+- [ ] Wrap text around captions and bubbles.
+- [ ] Insert manual line breaks to shape dialogue inside a balloon.
 
-## 11. Open questions
+## Fonts and ordinary text formatting
 
-1. Measured minimum hardware targets. Initial OS target: Windows 10 and later; other operating systems are deferred. Confirm compatible graphics hardware after selecting and testing the renderer.
-2. Final language, GUI framework, renderer and text-layout approach; Rust is a candidate.
-3. Exact meaning and expected examples of dynamic fonts; required variable/OpenType features.
-4. Whether app-only fonts are global to the app, per project, or both; whether projects package assets/fonts or link to them.
-5. Custom shape editing workflow and the exact meaning of balloon Variety, automatic tails and caption/panel Factor.
-6. Stroke Compact behaviour, the three unlabeled stroke controls, and the two metrics icon controls.
-7. Master-page editing, facing-page margins, page textures and keyword management.
-8. Filter catalogue, filter Level behaviour, numeric ranges/units and Reset scope.
-9. Supported input/output image formats, EPUB layout/reader targets, CBZ packaging and PDF font/vector handling.
-10. Whether importing existing Comic Life projects is wanted. It is not currently a committed requirement.
-11. Quantitative performance targets and representative document sizes.
-12. Element-palette interaction: whether choosing an icon creates an element immediately, activates a placement tool, or supports dragging onto the page. The screenshot establishes the palette and choices, not the placement gesture or the meaning of its plus-marked balloon icon.
+- [ ] Provide a collection of comic and creative fonts.
+- [ ] Discover and offer the installed Windows font library.
+- [ ] Maintain an application-only font library without system-wide installation.
+- [ ] Support advanced font capabilities; confirm coverage of variable font axes, OpenType features, ligatures and kerning.
+- [ ] Browse font families and typefaces.
+- [ ] Preview the selected font.
+- [ ] Choose preset or custom font sizes.
+- [ ] Apply or revert font-panel changes.
+- [ ] Increase or decrease text size with quick toolbar actions.
+- [ ] Mix fonts and formatting within an editable text object, with dependable text selection and wrapping.
+- [ ] Set text colour.
+- [ ] Align text left, centre, right or justified.
+- [ ] Align text vertically at the top, middle or bottom.
+- [ ] Adjust character spacing.
+- [ ] Adjust line spacing, including dialogue and captions.
+- [ ] Adjust text inset margins.
+- [ ] Apply strikethrough to text.
+- [ ] Outline text glyphs.
+- [ ] Find and replace text in scripts and across comic pages.
+- [ ] Paste text while matching the destination style.
+- [ ] Check spelling while typing.
+- [ ] Use accented letters and umlauts in decorative lettering.
+- [ ] Paste characters from Windows Character Map.
+- [ ] Preserve text layout consistently between editing, save/reopen and export.
+- [ ] Report missing fonts and offer a clear replacement choice.
 
-## 12. Proposed delivery sequence
+## Decorative titles and sound effects
+
+- [ ] Create titles and sound-effect lettering.
+- [ ] Edit the wording and font of lettering.
+- [ ] Bend and warp lettering using Bezier controls.
+- [ ] Scale lettering separately from warping it.
+- [ ] Retain lettering distortion when changing its wording.
+- [ ] Create multiline lettering with adjustable vertical spread.
+- [ ] Place lettering along a path with adjustable horizontal shear.
+- [ ] Adjust glyph spread.
+- [ ] Adjust glyph skew.
+- [ ] Adjust glyph stagger.
+- [ ] Tilt glyphs.
+- [ ] Join glyphs for a combined appearance.
+- [ ] Fill individual glyphs or joined lettering with gradients.
+- [ ] Apply 3D lettering with a selectable extrusion colour.
+- [ ] Enable or disable 3D lighting and adjust its angle.
+- [ ] Adjust 3D horizontal and vertical offset.
+- [ ] Adjust 3D perspective and depth.
+- [ ] Apply reusable lettering presets from a visual gallery that previews actual outlined, gradient and dimensional effects.
+
+## Fills, colour and compositing
+
+- [ ] Enable or disable solid-colour fills.
+- [ ] Use gradient fills.
+- [ ] Use image, tinted-image and colourised-image fills.
+- [ ] Control fill-image size and proportions.
+- [ ] Import a custom image as a fill.
+- [ ] Use speedline fills.
+- [ ] Use monochrome or full-colour halftone fills.
+- [ ] Use texture and tiled fills.
+- [ ] Control fill opacity.
+- [ ] Choose colours using a colour wheel and brightness control, with numeric opacity.
+- [ ] Control overall object opacity separately from fill and shadow opacity, including balloons and captions.
+- [ ] Use composite blending.
+- [ ] Apply shared fill, border, shadow and opacity controls to panels and shapes.
+
+## Borders, outlines and shadows
+
+- [ ] Enable or disable strokes.
+- [ ] Choose clean or hand-drawn/brush-like stroke styles.
+- [ ] Set stroke colour and width.
+- [ ] Apply multiple outlines, controlling count and alternating colours, including on lettering.
+- [ ] Use the Compact outline option; its precise behaviour still needs inspection.
+- [ ] Customise line endpoints, including arrows and circles.
+- [ ] Adjust the stroke miter limit.
+- [ ] Enable or disable shadows.
+- [ ] Set shadow colour.
+- [ ] Position shadows with a visual pad or numeric X/Y offsets.
+- [ ] Adjust shadow blur and opacity.
+
+## Reusable styles
+
+- [ ] Choose predefined styles or create custom element styles.
+- [ ] Use styles consistently across pages.
+- [ ] Copy and paste element styles.
+- [ ] Update a named style and propagate changes to elements using it.
+- [ ] Revert an element's style overrides.
+- [ ] Save and load complete stylesheets independently of a comic.
+- [ ] Set a default stylesheet for new comics.
+- [ ] Define reusable default panel appearance, including fills, borders and other supported effects.
+
+## Script writing and page composition
+
+- [ ] Start with a blank script or a sample/tutorial script.
+- [ ] Write, import or paste scripts in an integrated editor.
+- [ ] Save a script-only document as a template.
+- [ ] Recognise page, panel, caption, title, sound-effect and balloon keywords in scripts.
+- [ ] Add, edit and remove script keywords.
+- [ ] Map matching dialogue to a balloon kind.
+- [ ] Assign an element style through the script.
+- [ ] Show recognised element icons beside script text.
+- [ ] Drag recognised script elements onto a page to create objects populated with the script text.
+- [ ] Drop script text onto an existing caption to replace its text.
+- [ ] Begin page composition without losing the existing script.
+- [ ] Print a script.
+
+## Exporting, printing and sharing
+
+- [ ] Export a PDF.
+- [ ] Export high-resolution page images.
+- [ ] Export EPUB.
+- [ ] Export CBZ.
+- [ ] Limit PDF image resolution.
+- [ ] Export all pages or a selected page range.
+- [ ] Preview the first and last pages of an export range.
+- [ ] Preserve DPI information in JPEG export.
+- [ ] Preserve page order, dimensions, crops, text, shapes and effects consistently in output.
+- [ ] Configure export image formats, quality, naming and packaging; final options are to be specified.
+- [ ] Print comics with page-range, copy-count and two-sided options.
+- [ ] Print using AirPrint.
+- [ ] Print a low-resolution proof.
+- [ ] Export an HTML comic presentation with a frame theme and JPEG-quality setting.
+- [ ] Share by email.
+- [ ] Share to Facebook; integration compatibility remains to be established.
+
+## Interface languages
+
+- [ ] Provide Dutch, French, German, Italian, Spanish and Portuguese localisation.
+
+## Decisions to define by feature
+
+### Platform and performance
+
+- Select the language, GUI framework, renderer and text-layout approach.
+- Set quantitative performance targets and representative document sizes.
+- Decide whether the platform-specific photo, capture, printing and sharing integrations in this draft should be retained, replaced or deferred for Windows.
+
+### Project files and asset libraries
+
+- Decide whether projects package assets/fonts or link to them.
+- Decide whether the application-only font library is global, per project, or both.
+- Decide whether importing existing Comic Life projects is wanted; it is not yet a committed requirement.
+
+### Pages, templates and the workspace
+
+- Specify facing-page margins, spread behaviour and master-page editing.
+- Specify texture management and document-keyword editing.
+- Confirm click, placement-tool and drag interactions for the element palette, including the plus-marked balloon control.
+
+### Shapes, balloons and effects
+
+- Define the custom-shape editing workflow and preset geometry.
+- Specify balloon Variety and automatic tail behaviour.
+- Define the Compact outline option and the three unlabeled stroke controls.
+- Factor represents caption/panel effect strength. Filter Level represents filter strength; detailed parameter behaviour still needs defining.
+
+### Text and fonts
+
+- Confirm examples and exact coverage of dynamic fonts, variable axes and OpenType features.
+- Specify text layout and formatting preservation when applying styles or changing decorative lettering.
+
+### Images and output
+
+- Select input/output formats and the final filter/preset catalogues.
+- Specify image-adjustment ranges, units and Reset scope.
+- Specify EPUB layout and reader targets, CBZ packaging, and PDF font/vector handling.
+- Establish compatibility before retaining external sharing services.
+
+## Proposed delivery sequence
 
 This sequence is a proposal, not a reduction of the target scope.
 
@@ -163,7 +374,7 @@ This sequence is a proposal, not a reduction of the target scope.
 4. **Advanced presentation:** advanced font controls, decorative lettering, outlines, shadows, image adjustments and filters.
 5. **Complete output workflow:** all target export formats, document metadata and agreed quality settings.
 
-## 13. High-level acceptance scenarios
+## High-level acceptance scenarios
 
 - Compose a multi-page comic, move pages up and down in the Pages panel, and confirm that the document sequence follows the new order. Save, reopen and export it; retain that order and the editable page content.
 - Save a custom panel layout and a styled page template; reuse both in another page without losing their intended geometry or appearance.
@@ -173,3 +384,15 @@ This sequence is a proposal, not a reduction of the target scope.
 - Apply borders, outlines, shadows and decorative lettering while retaining editable source objects.
 - Adjust image appearance, reset adjustments and reopen the project without losing access to the original image.
 - Export the complete comic and a selected page range in the applicable formats, preserving page order and matching the edited layout.
+
+## References
+
+- [Supplied legacy manual](https://plasq.com/helpfiles/Comic_LIfe_manual.pdf)
+- [Comic Life 3 Getting Started guide](https://plasq.com/manuals/comiclife/3.0/comiclife-3.0-gettingstarted.pdf)
+- [Comic Life 3 desktop features](https://plasq.com/apps/comiclife/macwin/features-galore/)
+- [What's New in Comic Life 3](https://plasq.com/apps/comiclife/macwin/new-in-cl3/)
+- [Comic Life 3 Fancy Fills tutorial](https://plasq.com/2014/12/fancy-fills/)
+- [Comic Life 3 Windows release history](https://plasq.com/downloads/comiclife3/win/history/)
+- [Comic Life 3 Mac release history](https://plasq.com/downloads/comiclife3/mac/history/)
+- [Comic Life 4 product page](https://plasq.com/apps/comiclife4/mac/)
+- [Comic Life version comparison](https://plasq.com/apps/comiclife4/why-upgrade-mac/)
