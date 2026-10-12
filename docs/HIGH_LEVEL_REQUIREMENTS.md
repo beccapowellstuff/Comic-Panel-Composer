@@ -12,84 +12,92 @@ Initial image editing focuses on basic adjustments. Filters, background alpha, D
 
 This is the consolidated review draft from the previous requirements and feature list. The idea is to take what is liked from present tooling, and upgrade the behaviour offering more future capabilities, and grow it into a full blown Comic Page Composer. The primary purpose of the application is create replace Comic Life 3, since that hasn't been updated or enhanced for many years.
 
+Requirements that are ticked have been validate as required.
+
 ## Platform, performance and scope
 
-- [ ] Initially target Windows 10+ as a local desktop application using local projects and assets; verify compatibility with the selected toolchain and renderer.
-- [ ] Prioritise the owner's Windows workflow and hardware. Support for other operating systems is deferred.
-- [ ] Use a performant compiled implementation suitable for interactive graphics editing.
-- [ ] Keep dragging, resizing, zooming and text editing responsive with large images and multi-page projects.
-- [ ] Run expensive image processing and exports without blocking normal interaction.
-- [ ] Support Windows display scaling with legible controls and crisp rendering.
-- [ ] Establish supported graphics hardware and minimum RAM, GPU memory and CPU requirements through representative tests. A dedicated graphics card is not yet a confirmed requirement.
-
-Rust is the current language candidate; egui/eframe with a suitable renderer is one option, and C++/Qt remains an alternative. The final stack must prove its text, shape, editing and export capabilities.
+- [x] Initially target Windows 10+ as a local desktop application using local projects and assets; verify compatibility with the selected toolchain and renderer.
+- [x] Prioritise the owner's Windows workflow and hardware. Support for other operating systems is deferred.
+- [x] Use a performant compiled implementation suitable for interactive graphics editing.
+- [x] Dragging, resizing, zooming and text editing responsive with large images and multi-page projects.
+- [x] Run expensive image processing and exports without blocking normal interaction.
+- [x] Support Windows display scaling with legible controls and crisp rendering.
+- [x] Establish supported graphics hardware and minimum RAM, GPU memory and CPU requirements through representative tests. A dedicated graphics card is not yet a confirmed requirement.
+- [x] Rust is the current language candidate; egui/eframe with a suitable renderer is one option, and C++/Qt remains an alternative. The final stack must prove its text, shape, editing and export capabilities.
 
 ## Projects and saving
 
-- [ ] Create a comic from a blank document or a designed template.
-- [ ] Save and reopen an editable project containing all pages, editable objects, styles, image assets/references and adjustment settings.
-- [ ] Autosave documents and recover interrupted work.
-- [ ] Revert a document to its saved state.
-- [ ] Save safely without corrupting the last valid project if a save fails.
-- [ ] Store author, title, issue, series and copyright information.
-- [ ] Store document keywords.
-- [ ] Check for application updates on launch.
+- [x] Create a comic from a blank document or a designed template.
+- [x] Save and reopen an editable project containing all pages, editable objects, styles, image assets/references and adjustment settings.
+- [x] Autosave documents and recover interrupted work.
+- [x] Revert a document to its saved state.
+- [x] Save safely without corrupting the last valid project if a save fails.
+- [x] Store author, title, issue, series and copyright information.
+- [x] Store document keywords.
+- [x] Check for application updates on launch.
 
 ## Pages and document layout
 
-- [ ] Add, insert and duplicate pages in a multi-page comic.
-- [ ] Delete pages with confirmation.
-- [ ] Choose a template page when adding a page.
-- [ ] Create a new page using the current page's panel layout.
-- [ ] Navigate and reorder pages by moving thumbnails up or down in the Pages panel, with visible page numbers, scrolling while moving pages and a clear selected-page highlight. The new sequence must determine document and export order.
-- [ ] Use preset or custom page sizes.
-- [ ] Choose page orientation.
-- [ ] Set a default page format.
-- [ ] Set left, right, top and bottom margins.
-- [ ] Configure facing pages.
-- [ ] Show two pages side by side.
-- [ ] Continue page numbering or specify a starting number.
-- [ ] Position and style page numbers, including inset and a caption-style backdrop.
-- [ ] Apply built-in or custom page textures.
-- [ ] Use a master page for repeating elements, with a per-page visibility setting.
-- [ ] Increase or decrease all balloon/caption text on a page at once.
-- [ ] Clear all balloon/caption text on a page.
+- [x] Add, insert and duplicate pages in a multi-page comic.
+- [x] Delete pages with confirmation.
+- [x] Choose a template page when adding a page.
+- [x] Create a new page using the current page's panel layout.
+- [x] Navigate and reorder pages by moving thumbnails up or down in the Pages panel, with visible page numbers, scrolling while moving pages and a clear selected-page highlight. The new sequence must determine document and export order.
+- [x] Use preset or custom page sizes.
+- [x] Choose page orientation.
+- [x] Allow multiple orientations in the comic.
+- [x] Allow for double page displays (full open pages)
+- [x] Set a default page format.
+- [x] Set left, right, top and bottom margins.
+- [x] Configure facing pages.
+- [x] Show two pages side by side.
+- [x] Continue page numbering or specify a starting number.
+- [x] Position and style page numbers, including inset and a caption-style backdrop.
+- [x] Apply built-in or custom page textures.
+- [x] Use a master page for repeating elements, with a per-page visibility setting.
+- [x] Increase or decrease all balloon/caption text on a page at once.
+- [x] Clear all balloon/caption text on a page.
 
 ## Templates, panel layouts and automatic composition
 
-- [ ] Browse a visual collection of comic templates.
-- [ ] Start from a blank template with or without predefined styles.
-- [ ] Use complete template pages with panels, balloons, captions and lettering.
-- [ ] Edit the content and styles supplied by a template.
-- [ ] Use templates with predefined image filters.
-- [ ] Create reusable comic templates.
-- [ ] Keep full-page templates, panel-only layouts and appearance presets as separate reusable concepts.
-- [ ] Use separate panel-only layout presets.
-- [ ] Browse built-in panel layouts by category.
-- [ ] Provide panel layouts with different counts, sizes and proportions, alongside saved user layouts.
-- [ ] Save the current panel arrangement and browse it as a reusable layout.
-- [ ] Resize layouts automatically to fit page margins.
-- [ ] Generate a grid page from row, column and gutter settings.
-- [ ] Automatically compose a comic from an album using a layout collection, random page arrangements, a stylesheet, page format and orientation.
+- [x] Browse a visual collection of comic templates.
+- [x] Start from a blank template with or without predefined styles.
+- [x] Use complete template pages with panels, balloons, captions and lettering.
+- [x] Edit the content and styles supplied by a template.
+- [x] Use templates with predefined image filters.
+- [x] Create reusable comic templates.
+- [x] Export templates for reuse on other machines
+- [x] Load templates from saved file
+- [x] Keep full-page templates, panel-only layouts and appearance presets as separate reusable concepts.
+- [x] Use separate panel-only layout presets.
+- [x] Create Separate panel-only layout presets.
+- [x] Save Seperate panel-only layout presets.
+- [x] Load Seperate panel-only layout presets
+- [x] Browse built-in panel layouts by category.
+- [x] Provide panel layouts with different counts, sizes and proportions, alongside saved user layouts.
+- [x] Save the current panel arrangement and browse it as a reusable layout.
+- [x] Resize layouts automatically to fit page margins.
+- [x] Generate a grid page from row, column and gutter settings.
+- [x] Automatically compose a comic from an album using a layout collection, random page arrangements, a stylesheet, page format and orientation.
 
 ## Workspace and navigation
 
-- [ ] Provide a clear central editing canvas with surrounding page, style, script and asset panels.
-- [ ] Add panels, captions, lettering and balloons from a visual element well.
-- [ ] Show recognisable element previews in a controller below or beside the canvas, including panels, captions, lettering and balloon kinds.
-- [ ] Hide or show the element well and other workspace sections.
-- [ ] Dock, undock, move and resize workspace panels, including inspectors, libraries and tool panels.
-- [ ] Float workspace panels as independent windows, including on other monitors and alongside other application windows.
-- [ ] Keep floating panels usable when moving between monitors with different DPI scaling; preserve correct text and control sizes, positions and hit targets.
-- [ ] Save and restore customised workspace layouts, provide named layout presets and allow restoration of the default layout.
-- [ ] Access save and print actions from the toolbar.
-- [ ] Customise toolbar contents.
-- [ ] Zoom in, zoom out and zoom to fit.
-- [ ] Pan around the editing canvas.
-- [ ] Work with multiple documents in separate windows or tabs.
-- [ ] Open multiple inspectors for document, page, script, graphic, shape, image, lettering, metrics and text settings.
-- [ ] Use full-screen mode.
-- [ ] Use dark mode.
+- [x] Provide a clear central editing canvas with surrounding page, style, script and asset panels.
+- [x] Add panels, captions, lettering and balloons from a visual element well.
+- [x] Show recognisable element previews in a controller below or beside the canvas, including panels, captions, lettering and balloon kinds.
+- [x] Hide or show the element well and other workspace sections.
+- [x] Dock, undock, move and resize workspace panels, including inspectors, libraries and tool panels.
+- [x] Float workspace panels as independent windows, including on other monitors and alongside other application windows.
+- [x] Keep floating panels usable when moving between monitors with different DPI scaling; preserve correct text and control sizes, positions and hit targets.
+- [x] Save and restore customised workspace layouts, provide named layout presets and allow restoration of the default layout.
+- [x] Access save and print actions from the toolbar.
+- [x] Customise toolbar contents.
+- [x] Zoom in, zoom out and zoom to fit.
+- [x] Pan around the editing canvas.
+- [x] Work with multiple documents in separate windows or tabs.
+- [x] Open multiple inspectors for document, page, script, graphic, shape, image, lettering, metrics and text settings.
+- [x] Use full-screen mode.
+- [x] Use dark mode.
 
 ## Selecting, arranging and transforming objects
 
