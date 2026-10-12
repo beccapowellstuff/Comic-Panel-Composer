@@ -78,6 +78,10 @@ Rust is the current language candidate; egui/eframe with a suitable renderer is 
 - [ ] Add panels, captions, lettering and balloons from a visual element well.
 - [ ] Show recognisable element previews in a controller below or beside the canvas, including panels, captions, lettering and balloon kinds.
 - [ ] Hide or show the element well and other workspace sections.
+- [ ] Dock, undock, move and resize workspace panels, including inspectors, libraries and tool panels.
+- [ ] Float workspace panels as independent windows, including on other monitors and alongside other application windows.
+- [ ] Keep floating panels usable when moving between monitors with different DPI scaling; preserve correct text and control sizes, positions and hit targets.
+- [ ] Save and restore customised workspace layouts, provide named layout presets and allow restoration of the default layout.
 - [ ] Access save and print actions from the toolbar.
 - [ ] Customise toolbar contents.
 - [ ] Zoom in, zoom out and zoom to fit.
@@ -102,6 +106,11 @@ Rust is the current language candidate; egui/eframe with a suitable renderer is 
 - [ ] Group elements, resize groups and duplicate groups.
 - [ ] Overlap panels and page elements.
 - [ ] Control stacking order: front, back, forward and backward, with keyboard shortcuts.
+- [ ] Provide a Layers panel for each page that shows panels, images, balloons, captions, lettering and effects in their stacking order.
+- [ ] Reorder objects by dragging in the Layers panel; select, show, hide, lock and unlock individual entries.
+- [ ] Group objects in the Layers panel with expandable/collapsible groups, retaining independent editing where appropriate.
+- [ ] Allow balloons, text, imagery and effects to be deliberately arranged in front of or behind each other, including balloons behind characters or other artwork.
+- [ ] Preserve object stacking, grouping, visibility and locking when saving/reopening, and render visible objects in the same order on export.
 - [ ] Align elements relative to a page or panel.
 - [ ] Use rulers, ruler guides, smart alignment guides and spacing guides.
 - [ ] Snap to a grid.
@@ -122,6 +131,8 @@ Rust is the current language candidate; egui/eframe with a suitable renderer is 
 - [ ] Save and reuse custom shape presets.
 - [ ] Move a panel and its contents as a unit.
 - [ ] Control clipping to panel boundaries per element and by default; allow elements to extend outside panels.
+- [ ] Allow balloons to overlap panel borders and protrude beyond a panel while remaining editable.
+- [ ] Support fully visible balloons, panel-clipped balloons and balloons partially cut off at panel or page edges for intentional off-panel dialogue effects.
 
 ## Image libraries, placement and capture
 
@@ -170,6 +181,7 @@ Rust is the current language candidate; egui/eframe with a suitable renderer is 
 - [ ] Create, save and reuse custom balloon shapes.
 - [ ] Change balloon kind without losing its text.
 - [ ] Adjust balloon shape using the Variety control.
+- [ ] Reshape balloon bodies interactively using editable control points or equivalent handles, without losing their text or tail connections.
 - [ ] Add connected extension bubbles, allowing different kinds within an assembly.
 - [ ] Connect bubbles with bendable tails.
 - [ ] Add multiple tails.
@@ -181,6 +193,7 @@ Rust is the current language candidate; egui/eframe with a suitable renderer is 
 - [ ] Use a stroke-style balloon tail.
 - [ ] Reverse tail connections in multi-bubble assemblies.
 - [ ] Wrap a bubble around lettering using Envelop.
+- [ ] Envelop or reshape balloon bodies around selected lettering, sound effects and other page objects while keeping the balloon, contained text and affected objects editable.
 - [ ] Move a balloon body while leaving its tail tip anchored.
 - [ ] Move a balloon and its tails together using a separate handle.
 - [ ] Keep balloon bodies, tails and text editable after save/reopen, with clean joins between bodies and tails.
@@ -220,6 +233,9 @@ Rust is the current language candidate; egui/eframe with a suitable renderer is 
 - [ ] Find and replace text in scripts and across comic pages.
 - [ ] Paste text while matching the destination style.
 - [ ] Check spelling while typing.
+- [ ] Offer spelling suggestions and replacement actions for misspelt words in balloons, captions, ordinary text and scripts.
+- [ ] Allow adding words to a custom spelling dictionary, including character names and invented terms.
+- [ ] Allow ignoring a spelling suggestion once or for the current document, and managing entries in the custom dictionary.
 - [ ] Use accented letters and umlauts in decorative lettering.
 - [ ] Paste characters from Windows Character Map.
 - [ ] Preserve text layout consistently between editing, save/reopen and export.
@@ -344,11 +360,14 @@ Rust is the current language candidate; egui/eframe with a suitable renderer is 
 - Specify facing-page margins, spread behaviour and master-page editing.
 - Specify texture management and document-keyword editing.
 - Confirm click, placement-tool and drag interactions for the element palette, including the plus-marked balloon control.
+- Validate floating, docking and workspace restoration behaviour, including mixed-DPI multi-monitor setups, against candidate Windows GUI frameworks.
+- Define Layers panel semantics for grouping, selection, clipping, object ownership and stacking order.
 
 ### Shapes, balloons and effects
 
 - Define the custom-shape editing workflow and preset geometry.
 - Specify balloon Variety and automatic tail behaviour.
+- Define whether balloon clipping follows the panel shape, page bounds or a user-adjustable mask, and how enveloping interacts with other objects.
 - Define the Compact outline option and the three unlabeled stroke controls.
 - Factor represents caption/panel effect strength. Filter Level represents filter strength; detailed parameter behaviour still needs defining.
 
@@ -380,6 +399,9 @@ This sequence is a proposal, not a reduction of the target scope.
 - Save a custom panel layout and a styled page template; reuse both in another page without losing their intended geometry or appearance.
 - Overlap differently shaped panels, adjust their image crops, and select/edit the intended object reliably.
 - Create speech and thought balloons, customise a shape, add and move tails, and edit the text afterwards.
+- Place a balloon behind an image while another balloon crosses a panel boundary; reorder them in the Layers panel, save/reopen and verify the same appearance in export.
+- Detach an inspector, move it to a monitor with a different display scaling setting and restore the workspace without inaccessible or incorrectly scaled controls.
+- Correct a misspelling, add a fictional character name to the user dictionary and verify it is recognised in later text editing.
 - Select installed and app-only fonts, apply supported advanced font features, and retain the intended appearance in export.
 - Apply borders, outlines, shadows and decorative lettering while retaining editable source objects.
 - Adjust image appearance, reset adjustments and reopen the project without losing access to the original image.
