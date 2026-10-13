@@ -11,6 +11,7 @@ This is a **comic composition tool**, not a drawing, painting or inking applicat
 ![Comic Panel Composer infographic illustrating the planned comic creation workflow and features](docs/Comic%20Panel%20Composer%20Infographic.png)
 
 *Product-vision illustration, not a screenshot of working software. The features shown are ideas and requirements, not promises of what will be delivered.*
+*More details of the requirements can be found at [High-Level Requirements](docs/HIGH_LEVEL_REQUIREMENTS.md)*
 
 ## Current status: research and requirements
 
