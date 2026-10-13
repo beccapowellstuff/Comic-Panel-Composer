@@ -1,67 +1,77 @@
 # Comic Panel Composer
 
-*Comic page layout and lettering.*
+*Comic page layout and lettering — an experimental project.*
 
-A planned local Windows desktop application for arranging existing pictures into comic pages, with editable panels, speech and thought balloons, captions, decorative lettering and reusable templates.
+Comic Panel Composer is a proposed Windows desktop application for **building comics from existing artwork**. The aim is to retain the straightforward comic-creation experience of tools such as Comic Life while offering more control over pages, panels, image placement, layers, speech and thought balloons, captions, lettering, effects and publishing formats, including vertical-scroll webcomics.
 
-The focus is comic composition rather than drawing or a full painting application.
+This is a **comic composition tool**, not a drawing, painting or inking application.
 
-## Comic Panel Composer at a glance
+## The vision
 
-![Comic Panel Composer infographic showing the planned comic creation workflow and features](docs/Comic%20Panel%20Composer%20Infographic.png)
+![Comic Panel Composer infographic illustrating the planned comic creation workflow and features](docs/Comic%20Panel%20Composer%20Infographic.png)
 
-*Concept illustration of the product vision. Features shown are planned, not implemented.*
+*Product-vision illustration, not a screenshot of working software. The features shown are ideas and requirements, not promises of what will be delivered.*
 
-## Project status
+## Current status: research and requirements
 
-Requirements and design stage. No application implementation has been added yet.
+**There is no working application or release to download yet.**
 
-- Initial platform target: Windows 10 and later.
-- Other operating systems are deferred.
-- Rust is the current language candidate; the GUI framework and renderer remain to be selected and validated.
-- Minimum hardware requirements will be established through testing.
+This project is an experiment to discover whether a carefully directed, AI-assisted software development approach can produce an application that meets the product owner's expectations for usability, functionality and engineering quality.
 
-## Development approach
+**There is no guaranteed release, delivery date or commitment to implement every requirement.** This will take time. A feature being recorded or approved as desirable does not mean it belongs in the first phase or will necessarily be built.
 
-The project is currently in research and exploration. We will investigate the foundations, agree a delivery plan, then build and test in manageable increments. Findings from prototypes and testing will feed back into the requirements and plan.
+The aim is not to settle for something that merely looks impressive or is "good enough". Progress will be assessed against agreed behaviour and quality expectations. If the results do not meet those expectations, work may be rethought, repeated, paused or stopped.
 
-### 1. Investigate the foundations
+## How the project will be approached
 
-Clarify the intended workflows, distinguish essential features from useful additions and deferred work, and investigate the technical options before committing to a stack. A feature in the requirements is not automatically part of the first release.
+### 1. Break the requirements into phases
 
-Use small, purposeful prototypes to test uncertain foundations, each with a clear question and acceptance criteria. The proposed first technical proof combines an image clipped to an editable shaped panel, an overlapping balloon with an adjustable tail, editable text, save/reopen and a matching export. Assess interaction, typography, performance and the underlying design; a convincing interface alone does not establish architectural quality.
+Review and prioritise the requirements into manageable delivery phases. Identify what is essential for a useful first phase, what can come later, and what should be deferred or excluded. Agree the scope and success criteria before treating any phase as a delivery commitment.
 
-### 2. Plan delivery
+### 2. Investigate and establish the application foundations
 
-Agree the initial scope, architectural boundaries, delivery phases and acceptance criteria using the investigation results. Record significant decisions with their rationale, alternatives and consequences.
+Research the technology and prove the difficult foundations through small, purposeful prototypes before building out the application.
 
-For each increment, define what will be delivered, how it will be verified, which checks can be automated, and what requires manual testing by the owner or pilot users. Keep the plan open to adjustment as evidence emerges.
+Establish a maintainable structure with clear boundaries between the document model, editing operations, rendering, persistence and user interface. Test practical needs such as editable panels, lettering, image handling, save/reopen, export and responsiveness. Choose technologies on evidence rather than enthusiasm, and avoid speculative frameworks or unnecessary complexity.
 
-### Engineering priorities
+### 3. Build the first phase and test it
 
-- **Maintainability:** use clear, understandable code and the simplest design that meets the agreed needs.
-- **Supportability:** make failures diagnosable, protect saved projects and support recovery from interrupted work.
-- **Testability:** keep core behaviour testable independently of the interface, with appropriate automated checks.
-- **Extensibility:** maintain clear boundaries between the document model, editing operations, rendering, persistence and interface so features can evolve without unnecessary coupling.
-- **Correctness and consistency:** preserve editable content and its intended appearance through editing, save/reopen and export.
-- **Responsiveness:** verify performance with representative documents and hardware rather than assume minimum specifications.
+Implement the agreed first phase in manageable increments. Review the code and design, use appropriate automated tests, and perform manual workflow testing. Check that the application behaves correctly with realistic comic projects, not just demonstration examples.
 
-Avoid speculative abstractions and unnecessary frameworks. Foundations should support concrete product needs and be demonstrated through evidence.
+A feature is not accepted merely because it appears to work. It must meet the agreed requirements and the product owner's quality expectations.
 
-### 3. Build and test iteratively
+### 4. Review the results and decide what comes next
 
-Implement against the agreed plan in small, reviewable increments. Review the code and architectural fit alongside automated tests, manual workflow checks and pilot feedback. Verify important claims through direct results, and report unresolved limitations clearly.
+Assess what has actually been achieved, what works well, what needs improvement and whether continuing makes sense. The outcome may be another phase, rework, a change of direction, a pause **or a decision to stop**. No future phase is guaranteed.
 
-Update requirements and design records when decisions change. Revisit foundations when testing exposes a problem rather than carrying an unverified assumption into later work.
+### 5. Welcome suggestions throughout — without making promises
 
-### Direction and AI collaboration
+Ideas, feedback and feature suggestions are welcome at any stage, especially from people who create comics. Suggestions will be considered against the product's purpose, priorities, complexity and technical findings.
 
-The product owner retains responsibility for product direction, architecture and significant technology or scope decisions. AI contributes research, design alternatives, implementation and verification, and is expected to challenge assumptions where there is a sound reason.
+**A suggestion is not a commitment.** There is no promise that it will be added to the requirements, implemented, or delivered by a particular date.
 
-Suggestions remain proposals until agreed. Once an implementation increment is authorised, AI should complete the agreed work and routine, reversible choices without repeatedly requesting confirmation.
+## Engineering principles and AI collaboration
 
-## Requirements
+The product owner directs the product, architecture, priorities and acceptance decisions. AI is used to help research options, challenge assumptions, implement agreed tasks and verify results — **not** to decide independently what the application should become.
 
-See [High-Level Requirements](docs/HIGH_LEVEL_REQUIREMENTS.md) for the product scope and capability requirements.
+The main engineering priorities are:
 
-Unresolved questions, provisional delivery ideas and example acceptance scenarios are captured separately in [Project Planning (DRAFT)](docs/PROJECT_PLANNING_DRAFT.md). That document is for information capture only; it is not an approved plan.
+- **Maintainability and extensibility:** clear, simple designs that can be understood, tested and changed.
+- **Reliability and supportability:** protect project files, handle errors clearly and recover safely from failures.
+- **Testability:** automated checks where useful, alongside real editing and export workflows.
+- **Correctness:** preserve editable content and visual results across editing, saving, reopening and exporting.
+- **Responsiveness:** test performance on representative projects and hardware rather than assuming it will be fast.
+
+A convincing interface or a large amount of AI-generated code is not proof of a sound application. The foundations must hold up as the software grows.
+
+## Platform and technology
+
+- **Initial target:** Windows 10 and later, subject to confirming compatibility with the selected technology.
+- **Other operating systems:** deferred.
+- **Language and framework:** not yet decided. Rust is a candidate, not an approved choice; the user interface and rendering technologies must be investigated and tested.
+- **Minimum hardware requirements:** to be established through testing.
+
+## Project documents
+
+- [High-Level Requirements](docs/HIGH_LEVEL_REQUIREMENTS.md) — the detailed product requirements and intended capabilities. Ticked requirements have been validated as wanted; they are **not** completed features or first-release promises.
+- [Project Planning (DRAFT)](docs/PROJECT_PLANNING_DRAFT.md) — captured questions, provisional sequencing ideas and example acceptance scenarios. This is **not** an approved delivery plan.
