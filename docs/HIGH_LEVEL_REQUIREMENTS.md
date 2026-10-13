@@ -66,6 +66,20 @@ Requirements that are ticked have been validate as required.
 - [x] Increase or decrease all balloon/caption text on a page at once.
 - [x] Clear all balloon/caption text on a page.
 
+## Webcomics and vertical-scroll composition
+
+- [ ] Create and edit vertical-scrolling webcomics as a native document format alongside conventional fixed-page comics, without forcing the scrolling composition into fixed print-page boundaries.
+- [ ] Set a webcomic's working width and adjust its vertical extent as content is added, supporting long compositions without requiring the entire strip to be handled as one enormous bitmap.
+- [ ] Organise webcomic content into ordered episodes/chapters and manageable editable sections while presenting the episode as a continuous scrolling composition.
+- [ ] Insert, duplicate, resize, split, move and reorder sections or sequences of panels without flattening or losing editable content.
+- [ ] Freely position, resize, overlap and arrange panels, balloons, captions, decorative lettering and other objects along a vertical strip, including full-width impact panels and elements positioned between panels.
+- [ ] Adjust vertical gutters and deliberate empty space between panels or scenes independently, including large gaps for storytelling pace and transitions.
+- [ ] Place backgrounds, fills and visual motifs behind or across multiple vertically arranged panels and gutters, with normal layer order and clipping controls.
+- [ ] Provide templates and reusable layouts designed for vertically scrolling comics, rather than relying solely on traditional page templates.
+- [ ] Preview a webcomic as a continuously scrolling reader would see it, including a configurable phone-width/viewport preview and optional guides for legibility, spacing and safe placement.
+- [ ] Recompose existing fixed-page comic content into a separate editable vertical-scroll layout, retaining the original artwork and page layout while allowing independent panel positions, crops, balloons and lettering adjustments; do not require an automatic conversion to be perfect.
+- [ ] Keep webcomic episode/section order and reading flow independent of export-image slice boundaries, preserving all editable objects when saving and reopening.
+
 ## Templates, panel layouts and automatic composition
 
 - [x] Browse a visual collection of comic templates.
@@ -394,6 +408,11 @@ Requirements that are ticked have been validate as required.
 - [ ] Preserve DPI information in JPEG export.
 - [ ] Preserve page order, dimensions, crops, text, shapes and effects consistently in output.
 - [ ] Configure export image formats, quality, naming and packaging; final options are to be specified.
+- [ ] Export vertical-scroll webcomic episodes as a continuous image where supported or as an ordered set of sequential images, with selectable output width, format, quality and naming.
+- [ ] Automatically split a scrolling composition into consecutive image slices according to configurable maximum dimensions and file-size limits, keeping adjacent slices visually seamless and in the intended reading order.
+- [ ] Preview and, where possible, adjust proposed webcomic export slice boundaries to avoid awkward cuts through dialogue or important artwork, with clear warnings when destination limits prevent a preferred split.
+- [ ] Offer editable publishing-format presets for common webcomic services, including WEBTOON CANVAS and Tapas, and allow custom profiles; validate exported dimensions, formats and file sizes against the selected profile without hard-coding a platform's rules into the document.
+- [ ] Preview webcomic export at its intended display width so creators can assess text readability, panel spacing and visual continuity before generating publishing files.
 - [ ] Print comics with page-range, copy-count and two-sided options.
 - [ ] Print using AirPrint.
 - [ ] Print a low-resolution proof.
@@ -418,6 +437,14 @@ Requirements that are ticked have been validate as required.
 - Decide whether projects package assets/fonts or link to them.
 - Decide whether the application-only font library is global, per project, or both.
 - Decide whether importing existing Comic Life projects is wanted; it is not yet a committed requirement.
+
+### Webcomic formats and publishing workflows
+
+- Establish the editable document structure for very long scrolling compositions and episodes, including smooth navigation and performance on representative hardware; choose internal sectioning only after testing.
+- Specify how print-page and webcomic layouts can share source content while retaining separate non-destructive arrangements, styles and text positions; automatic reflow is not assumed.
+- Define the scope of webcomic templates, mobile/reader previews, scrolling guides, gutters and pacing controls.
+- Check destination-specific limits and export rules against current official publisher documentation before defining preset values; handle changing platform specifications without requiring a document-format change.
+- Decide which webcomic publishing assets beyond episode images (such as thumbnails and cover images) belong in an initial or later release. Direct publication to third-party sites is not implied by export support.
 
 ### Pages, templates and the workspace
 
@@ -499,6 +526,9 @@ This sequence is a proposal, not a reduction of the target scope.
 - Apply borders, outlines, shadows and decorative lettering while retaining editable source objects.
 - Adjust image appearance, reset adjustments and reopen the project without losing access to the original image.
 - Export the complete comic and a selected page range in the applicable formats, preserving page order and matching the edited layout.
+- Compose a multi-section vertical-scroll episode with a continuous background, editable panels, intentionally varied gaps and dialogue between panels; inspect its pacing and lettering in the phone-width scrolling preview, save and reopen without loss of editability.
+- Duplicate and recompose conventional comic artwork into a separate vertical-scroll layout; alter panel crops and balloon positions, then confirm the original page layout is unchanged.
+- Export a tall webcomic episode using two configurable publishing profiles with different maximum image dimensions; inspect the numbered slices for correct sequence, seamless joins, visual quality, file-size compliance and suitable break placement.
 
 ## References
 
@@ -513,5 +543,7 @@ This sequence is a proposal, not a reduction of the target scope.
 - [Comic Life version comparison](https://plasq.com/apps/comiclife4/why-upgrade-mac/)
 - [Blambot Comic Book Grammar & Tradition](https://blambot.com/pages/comic-book-grammar-tradition) — examples of visual lettering conventions and editorial practices; not mandatory style rules.
 - [Clip Studio Paint Frames and Panels manual](https://help.clip-studio.com/en-us/manual_en/540_comic/Frames_and_Panels.htm) — reference workflows for frame borders, masks, frame division and editing.
-- [Clip Studio Tips: How to Panel Comics for WEBTOON and Print](https://tips.clip-studio.com/en-us/articles/9420) — creator examples of page-wide background bleeds, open panels and layout/lettering in gutters.
+- [Clip Studio Tips: How to Panel Comics for WEBTOON and Print](https://tips.clip-studio.com/en-us/articles/9420) — creator examples of page-wide background bleeds, open panels and layout/lettering in gutters, plus vertical-scroll and hybrid formatting workflows.
+- [WEBTOON CANVAS announcement: Uploading Long Episode Images](https://www.webtoons.com/en/notice/detail?noticeNo=1766) — official description of slicing oversized uploads.
+- [Tapas: How to Publish a Comic Episode](https://help.tapas.io/hc/en-us/articles/1260802028970-Series-Basics-How-to-publish-a-comic-episode-on-Tapas) — official upload dimensions and file-format guidance.
 - [MediBang Paint: Settings for Comic Guidelines](https://medibangpaint.com/en/use/2023/11/setting-draft/) — reference for print trim, safe area and bleed guides.
