@@ -53,43 +53,38 @@ Requirements that are ticked have been validate as required.
 - [x] Show two pages side by side.
 - [x] Continue page numbering or specify a starting number.
 - [x] Position and style page numbers, including inset and a caption-style backdrop.
-- [ ] Assign an explicit reading order to panels on each page, independently of their position, size and stacking order; allow background-only and decorative panels to be excluded from that sequence.
-- [ ] Provide a Reading Order mode where users can click panels in the intended sequence or reorder them in a simple list, without moving the actual panels.
-- [ ] Allow left-to-right and right-to-left reading-direction preferences, with optional automatically suggested ordering for conventional layouts and manual override for unconventional compositions.
-- [ ] Show optional editor-only numbered panel overlays and connecting guides/arrows to review reading flow; do not include them in normal comic exports.
-- [ ] Allow creators to place optional editable numbered shapes/markers on the page for readers to see, with custom positioning and styles and an option to use the assigned panel order for their numbers; unlike editing guides, these markers are exportable page objects.
-- [ ] Preserve panel reading order and the distinction between editing-only guides and printed markers through save/reopen and export.
 - [x] Apply built-in or custom page textures.
-- [ ] Set a full-page background image or fill independently of individual comic panels, with editable positioning, sizing, cropping and appearance; the background remains visible in any uncovered areas or gutters.
-- [ ] Show optional, non-exported print-layout guides for safe/live area, trim boundaries and bleed, with configurable bleed dimensions distinct from ordinary page margins.
+- [x] Set a full-page background image or fill independently of individual comic panels, with editable positioning, sizing, cropping and appearance; the background remains visible in any uncovered areas or gutters.
+- [x] Show optional, non-exported print-layout guides for safe/live area, trim boundaries and bleed, with configurable bleed dimensions distinct from ordinary page margins.
 - [x] Use a master page for repeating elements, with a per-page visibility setting.
 - [x] Increase or decrease all balloon/caption text on a page at once.
 - [x] Clear all balloon/caption text on a page.
 
 ## Creator notes and optional annotated output
 
-- [ ] Attach editable private creator notes to individual pages and panels, separate from captions, dialogue, script text and editorial notes intended to appear in the comic.
-- [ ] Show unobtrusive note markers directly over the relevant page or panel while editing (such as a quotation-mark or speech-bubble symbol); select a marker to read, edit or remove its note without changing the comic artwork.
-- [ ] Provide a clear Show/Hide Notes toggle that hides both the on-page markers and any expanded notes when off, without deleting notes or affecting the underlying page, panel or export.
-- [ ] Allow note markers to be repositioned to avoid covering important artwork while remaining associated with their page or panel.
-- [ ] Preserve creator notes, marker positions and page/panel associations through project save/reopen, page and panel rearrangement, and duplication, without silently losing or detaching notes.
-- [ ] Always save creator notes inside the editable project; exclude their text, markers and metadata from ordinary print, export and publishing output unless the creator explicitly requests an annotated copy.
-- [ ] Offer a clearly labelled Include Notes option for printing and supported saved/exported output formats; leave it unticked by default for each output operation, so publishing a comic never accidentally reveals private notes.
-- [ ] When Include Notes is selected, preview an annotated output showing readable notes as well as their markers, with suitable placement to limit obstruction of comic artwork; preserve the normal artwork-only output as a separate choice.
+- [x] Attach editable private creator notes to individual pages and panels, separate from captions, dialogue, script text and editorial notes intended to appear in the comic.
+- [x] Show unobtrusive note markers directly over the relevant page or panel while editing (such as a quotation-mark or speech-bubble symbol); select a marker to read, edit or remove its note without changing the comic artwork.
+- [x] Provide a clear Show/Hide Notes toggle that hides both the on-page markers and any expanded notes when off, without deleting notes or affecting the underlying page, panel or export.
+- [x] Allow note markers to be repositioned to avoid covering important artwork while remaining associated with their page or panel.
+- [x] Preserve creator notes, marker positions and page/panel associations through project save/reopen, page and panel rearrangement, and duplication, without silently losing or detaching notes.
+- [x] Always save creator notes inside the editable project; exclude their text, markers and metadata from ordinary print, export and publishing output unless the creator explicitly requests an annotated copy.
+- [x] Offer a clearly labelled Include Notes option for printing and supported saved/exported output formats; leave it unticked by default for each output operation, so publishing a comic never accidentally reveals private notes.
+- [x] When Include Notes is selected, preview an annotated output showing readable notes as well as their markers, with suitable placement to limit obstruction of comic artwork; preserve the normal artwork-only output as a separate choice.
+- [x] Allow individual notes to be expanded or collapsed independently. When collapsed, only their note marker remains visible. Expanding or minimising one note must not affect other notes.
 
 ## Webcomics and vertical-scroll composition
 
-- [ ] Create and edit vertical-scrolling webcomics as a native document format alongside conventional fixed-page comics, without forcing the scrolling composition into fixed print-page boundaries.
-- [ ] Set a webcomic's working width and adjust its vertical extent as content is added, supporting long compositions without requiring the entire strip to be handled as one enormous bitmap.
-- [ ] Organise webcomic content into ordered episodes/chapters and manageable editable sections while presenting the episode as a continuous scrolling composition.
-- [ ] Insert, duplicate, resize, split, move and reorder sections or sequences of panels without flattening or losing editable content.
-- [ ] Freely position, resize, overlap and arrange panels, balloons, captions, decorative lettering and other objects along a vertical strip, including full-width impact panels and elements positioned between panels.
-- [ ] Adjust vertical gutters and deliberate empty space between panels or scenes independently, including large gaps for storytelling pace and transitions.
-- [ ] Place backgrounds, fills and visual motifs behind or across multiple vertically arranged panels and gutters, with normal layer order and clipping controls.
-- [ ] Provide templates and reusable layouts designed for vertically scrolling comics, rather than relying solely on traditional page templates.
-- [ ] Preview a webcomic as a continuously scrolling reader would see it, including a configurable phone-width/viewport preview and optional guides for legibility, spacing and safe placement.
-- [ ] Recompose existing fixed-page comic content into a separate editable vertical-scroll layout, retaining the original artwork and page layout while allowing independent panel positions, crops, balloons and lettering adjustments; do not require an automatic conversion to be perfect.
-- [ ] Keep webcomic episode/section order and reading flow independent of export-image slice boundaries, preserving all editable objects when saving and reopening.
+- [x] Create and edit vertical-scrolling webcomics as a native document format alongside conventional fixed-page comics, without forcing the scrolling composition into fixed print-page boundaries.
+- [x] Set a webcomic's working width and adjust its vertical extent as content is added, supporting long compositions without requiring the entire strip to be handled as one enormous bitmap.
+- [x] Organise webcomic content into ordered episodes/chapters and manageable editable sections while presenting the episode as a continuous scrolling composition.
+- [x] Insert, duplicate, resize, split, move and reorder sections or sequences of panels without flattening or losing editable content.
+- [x] Freely position, resize, overlap and arrange panels, balloons, captions, decorative lettering and other objects along a vertical strip, including full-width impact panels and elements positioned between panels.
+- [x] Adjust vertical gutters and deliberate empty space between panels or scenes independently, including large gaps for storytelling pace and transitions.
+- [x] Place backgrounds, fills and visual motifs behind or across multiple vertically arranged panels and gutters, with normal layer order and clipping controls.
+- [x] Provide templates and reusable layouts designed for vertically scrolling comics, rather than relying solely on traditional page templates.
+- [x] Preview a webcomic as a continuously scrolling reader would see it, including a configurable phone-width/viewport preview and optional guides for legibility, spacing and safe placement.
+- [x] Recompose existing fixed-page comic content into a separate editable vertical-scroll layout, retaining the original artwork and page layout while allowing independent panel positions, crops, balloons and lettering adjustments; do not require an automatic conversion to be perfect.
+- [x] Keep webcomic episode/section order and reading flow independent of export-image slice boundaries, preserving all editable objects when saving and reopening.
 
 ## Templates, panel layouts and automatic composition
 
@@ -131,123 +126,123 @@ Requirements that are ticked have been validate as required.
 - [x] Open multiple inspectors for document, page, script, graphic, shape, image, lettering, metrics and text settings.
 - [x] Use full-screen mode.
 - [x] Use dark mode.
-- [ ] Choose from a built-in collection of application colour themes, with previews of the overall workspace appearance.
-- [ ] Customise the colours of application windows, workspace panels, menus, toolbars and other interface controls.
-- [ ] Apply and customise button themes/styles, including their normal, hovered, pressed, selected and disabled appearances, either as part of an application theme or independently.
-- [ ] Save, load, import and export custom application and button themes so people can reuse and share them.
+- [x] Choose from a built-in collection of application colour themes, with previews of the overall workspace appearance.
+- [x] Customise the colours of application windows, workspace panels, menus, toolbars and other interface controls.
+- [x] Apply and customise button themes/styles, including their normal, hovered, pressed, selected and disabled appearances, either as part of an application theme or independently.
+- [x] Save, load, import and export custom application and button themes so people can reuse and share them.
 
 ## Selecting, arranging and transforming objects
 
-- [ ] Select several elements for common editing actions.
-- [ ] Select the intended object reliably when objects overlap.
-- [ ] Copy, paste, duplicate and delete selected elements.
-- [ ] Undo and redo editing actions.
-- [ ] Move and resize page elements.
-- [ ] Set precise width, height and X/Y position numerically.
-- [ ] Constrain proportions when resizing.
-- [ ] Rotate elements interactively or numerically, with 90-degree snapping.
-- [ ] Flip images horizontally or vertically.
-- [ ] Lock elements or pin them to the page.
-- [ ] Group elements, resize groups and duplicate groups.
-- [ ] Overlap panels and page elements.
-- [ ] Control stacking order: front, back, forward and backward, with keyboard shortcuts.
-- [ ] Provide a Layers panel for each page that shows panels, images, balloons, captions, lettering and effects in their stacking order.
-- [ ] Reorder objects by dragging in the Layers panel; select, show, hide, lock and unlock individual entries.
-- [ ] Group objects in the Layers panel with expandable/collapsible groups, retaining independent editing where appropriate.
-- [ ] Allow balloons, text, imagery and effects to be deliberately arranged in front of or behind each other, including balloons behind characters or other artwork.
-- [ ] Preserve object stacking, grouping, visibility and locking when saving/reopening, and render visible objects in the same order on export.
-- [ ] Align elements relative to a page or panel.
-- [ ] Use rulers, ruler guides, smart alignment guides and spacing guides.
-- [ ] Offer optional lettering placement guides for speech-tail aiming and near-touching visual tangents between balloons, text, panel borders and other objects, without imposing the suggested layout.
-- [ ] Snap to a grid.
-- [ ] Distribute elements evenly horizontally or vertically.
-- [ ] Resize selected elements using a trackpad pinch.
+- [x] Select several elements for common editing actions.
+- [x] Select the intended object reliably when objects overlap.
+- [x] Copy, paste, duplicate and delete selected elements.
+- [x] Undo and redo editing actions.
+- [x] Move and resize page elements.
+- [x] Set precise width, height and X/Y position numerically.
+- [x] Constrain proportions when resizing.
+- [x] Rotate elements interactively or numerically, with 90-degree snapping.
+- [x] Flip images horizontally or vertically.
+- [x] Lock elements or pin them to the page.
+- [x] Group elements, resize groups and duplicate groups.
+- [x] Overlap panels and page elements.
+- [x] Control stacking order: front, back, forward and backward, with keyboard shortcuts.
+- [x] Provide a Layers panel for each page that shows panels, images, balloons, captions, lettering and effects in their stacking order.
+- [x] Reorder objects by dragging in the Layers panel; select, show, hide, lock and unlock individual entries.
+- [x] Group objects in the Layers panel with expandable/collapsible groups, retaining independent editing where appropriate.
+- [x] Allow balloons, text, imagery and effects to be deliberately arranged in front of or behind each other, including balloons behind characters or other artwork.
+- [x] Preserve object stacking, grouping, visibility and locking when saving/reopening, and render visible objects in the same order on export.
+- [x] Align elements relative to a page or panel.
+- [x] Use rulers, ruler guides, smart alignment guides and spacing guides.
+- [x] Offer optional lettering placement guides for speech-tail aiming and near-touching visual tangents between balloons, text, panel borders and other objects, without imposing the suggested layout.
+- [x] Snap to a grid.
+- [x] Distribute elements evenly horizontally or vertically.
+- [x] Resize selected elements using a trackpad pinch.
 
 ## Panels and custom shapes
 
-- [ ] Add empty image panels.
-- [ ] Use predefined smart shapes.
-- [ ] Use freeform shapes.
-- [ ] Create and edit custom panel shapes with dynamically adjustable geometry.
-- [ ] Freely reshape the outlines of all shape-based page objects, including panels, balloons, captions, text boxes, image frames, decorative shapes and other editable boxes; do not restrict customisation to a small set of fixed outlines or corner-radius options.
-- [ ] Insert, remove and move outline points independently, with no fixed limit of three to eight corners for custom shapes; support both straight edges and Bézier curves with editable handles.
-- [ ] Preserve editable text, images, fills, borders, effects, clipping and balloon tails as their enclosing shapes are changed, saved, reopened and exported.
-- [ ] Make polygon panels with three to eight independently movable corners.
-- [ ] Convert an irregular panel back to a bounding rectangle.
-- [ ] Use frame-free or invisible panel styles.
-- [ ] Apply caption/panel shape effects with adjustable strength (Factor).
-- [ ] Combine and edit shapes to customise panel, balloon and caption outlines.
-- [ ] Apply non-destructive vector Boolean operations to user-created shapes: Combine/Union (including seamless visual merging), Subtract, Intersect and Exclude, producing correct visible outlines without unwanted internal strokes.
-- [ ] Retain the original shapes as editable components of a compound shape; move, rotate, resize and reshape each component, add or remove components, and change the operation without destroying the original geometry.
-- [ ] Allow the combined result to be moved and transformed as a single page object, while retaining independent access to its constituent shapes and their relative positions.
-- [ ] Update the compound shape's outline, fills, cut-outs and borders as component shapes or operations change, consistently in the canvas, saved project and export.
-- [ ] Save and reuse custom shape presets.
-- [ ] Move a panel and its contents as a unit.
-- [ ] Provide explicit editing modes to move, resize, rotate and otherwise transform the panel frame alone, its contained artwork alone, or the frame and contents together; preserve the chosen content crop and placement when editing the frame only.
-- [ ] Associate each panel with an editable collection of images and other page objects, allowing selection and editing of its contents independently, per-object clipping to the panel shape, and deliberate overflow beyond the frame while retaining the panel relationship.
-- [ ] Remove a panel frame or border without deleting its associated artwork and other objects, keeping that content editable on the page; alternatively allow intentional deletion of both the panel and its contents, with undo/redo support.
-- [ ] Place smaller inset panels, framed images and other editable objects above a larger background panel or page background without merging their artwork; preserve independent crops, borders, clipping and stacking order.
-- [ ] Leave panel gutters and other unoccupied page areas transparent to underlying page artwork when desired, with no forced white fill; allow captions, balloons, sound effects and other objects to occupy or cross gutter space.
-- [ ] Support page-edge, borderless and full-bleed/open panels which can extend into a configured bleed area, with predictable trimming and clipping in print and digital exports.
-- [ ] Divide an existing editable panel into two or more independently editable panels using straight or angled cuts, with adjustable gutters; preserve the existing placed image and allow its assignment/crop in the resulting panels to be edited without data loss.
-- [ ] Offer equal row/column division and manual cuts, with a clear choice to start resulting panels empty, duplicate existing content, or reuse the original source artwork with independently editable positioning and crops; do not silently discard or flatten content.
-- [ ] Adjust horizontal, vertical and irregular gutters between adjacent panels, including zero gaps; optionally keep adjoining frame boundaries aligned when resizing, without preventing deliberate overlaps or unusual spacing.
-- [ ] Control clipping to panel boundaries per element and by default; allow elements to extend outside panels.
-- [ ] Let images, characters, props, leaves, particles and other artwork or effects remain associated with a panel while selected portions extend beyond its frame, without requiring a destructive cut-out of the panel image.
-- [ ] Render a panel's border behind selected breakout artwork while retaining visible border segments elsewhere, including where an element crosses the border into the gutter.
-- [ ] Control panel-border breakout behaviour for individual objects or edges without disabling the entire frame, and retain independent editing, clipping and stacking of the panel, border and breakout objects.
-- [ ] Allow balloons to overlap panel borders and protrude beyond a panel while remaining editable.
-- [ ] Support fully visible balloons, panel-clipped balloons and balloons partially cut off at panel or page edges for intentional off-panel dialogue effects.
+- [x] Add empty image panels.
+- [x] Use predefined smart shapes.
+- [x] Use freeform shapes.
+- [x] Create and edit custom panel shapes with dynamically adjustable geometry.
+- [x] Freely reshape the outlines of all shape-based page objects, including panels, balloons, captions, text boxes, image frames, decorative shapes and other editable boxes; do not restrict customisation to a small set of fixed outlines or corner-radius options.
+- [x] Insert, remove and move outline points independently, with no fixed limit of three to eight corners for custom shapes; support both straight edges and Bézier curves with editable handles.
+- [x] Preserve editable text, images, fills, borders, effects, clipping and balloon tails as their enclosing shapes are changed, saved, reopened and exported.
+- [x] Make polygon panels with three to eight independently movable corners.
+- [x] Convert an irregular panel back to a bounding rectangle.
+- [x] Use frame-free or invisible panel styles.
+- [x] Apply caption/panel shape effects with adjustable strength (Factor).
+- [x] Combine and edit shapes to customise panel, balloon and caption outlines.
+- [x] Apply non-destructive vector Boolean operations to user-created shapes: Combine/Union (including seamless visual merging), Subtract, Intersect and Exclude, producing correct visible outlines without unwanted internal strokes.
+- [x] Retain the original shapes as editable components of a compound shape; move, rotate, resize and reshape each component, add or remove components, and change the operation without destroying the original geometry.
+- [x] Allow the combined result to be moved and transformed as a single page object, while retaining independent access to its constituent shapes and their relative positions.
+- [x] Update the compound shape's outline, fills, cut-outs and borders as component shapes or operations change, consistently in the canvas, saved project and export.
+- [x] Save and reuse custom shape presets.
+- [x] Move a panel and its contents as a unit.
+- [x] Provide explicit editing modes to move, resize, rotate and otherwise transform the panel frame alone, its contained artwork alone, or the frame and contents together; preserve the chosen content crop and placement when editing the frame only.
+- [x] Associate each panel with an editable collection of images and other page objects, allowing selection and editing of its contents independently, per-object clipping to the panel shape, and deliberate overflow beyond the frame while retaining the panel relationship.
+- [x] Remove a panel frame or border without deleting its associated artwork and other objects, keeping that content editable on the page; alternatively allow intentional deletion of both the panel and its contents, with undo/redo support.
+- [x] Place smaller inset panels, framed images and other editable objects above a larger background panel or page background without merging their artwork; preserve independent crops, borders, clipping and stacking order.
+- [x] Leave panel gutters and other unoccupied page areas transparent to underlying page artwork when desired, with no forced white fill; allow captions, balloons, sound effects and other objects to occupy or cross gutter space.
+- [x] Support page-edge, borderless and full-bleed/open panels which can extend into a configured bleed area, with predictable trimming and clipping in print and digital exports.
+- [x] Divide an existing editable panel into two or more independently editable panels using straight or angled cuts, with adjustable gutters; preserve the existing placed image and allow its assignment/crop in the resulting panels to be edited without data loss.
+- [x] Offer equal row/column division and manual cuts, with a clear choice to start resulting panels empty, duplicate existing content, or reuse the original source artwork with independently editable positioning and crops; do not silently discard or flatten content.
+- [x] Adjust horizontal, vertical and irregular gutters between adjacent panels, including zero gaps; optionally keep adjoining frame boundaries aligned when resizing, without preventing deliberate overlaps or unusual spacing.
+- [x] Control clipping to panel boundaries per element and by default; allow elements to extend outside panels.
+- [x] Let images, characters, props, leaves, particles and other artwork or effects remain associated with a panel while selected portions extend beyond its frame, without requiring a destructive cut-out of the panel image.
+- [x] Render a panel's border behind selected breakout artwork while retaining visible border segments elsewhere, including where an element crosses the border into the gutter.
+- [x] Control panel-border breakout behaviour for individual objects or edges without disabling the entire frame, and retain independent editing, clipping and stacking of the panel, border and breakout objects.
+- [x] Allow balloons to overlap panel borders and protrude beyond a panel while remaining editable.
+- [x] Support fully visible balloons, panel-clipped balloons and balloons partially cut off at panel or page edges for intentional off-panel dialogue effects.
 
 ## Image libraries, placement and capture
 
-- [ ] Browse image albums, collections and folders through named thumbnails with adjustable preview size.
-- [ ] Drag images onto pages or panels from the built-in browser or operating system file browser.
-- [ ] Reveal an external image's source file from its context menu.
-- [ ] Browse PDF images in the media browser.
-- [ ] Inspect image file information.
-- [ ] Import pictures and preserve original image quality for export; choose supported input formats during detailed design.
-- [ ] Fit a dropped image automatically to its panel.
-- [ ] Reposition and resize images independently inside panels.
-- [ ] Restore an image's original size.
-- [ ] Place multiple independently transformed images in a panel, using a modifier key to add rather than replace.
-- [ ] Replace a panel image by dropping another image onto it.
-- [ ] Give images their own frames and shadows.
-- [ ] Capture webcam pictures, drag frames from a live preview, and freeze or resume the preview.
-- [ ] Offer camera-preview compatibility settings on Windows.
-- [ ] Integrate with Apple's Photos library.
-- [ ] Export comics to the Mac Photos application.
-- [ ] Launch Photo Booth and drag captured pictures into the editor.
-- [ ] Import photos from an iPad or iPhone.
+- [x] Browse image albums, collections and folders through named thumbnails with adjustable preview size.
+- [x] Drag images onto pages or panels from the built-in browser or operating system file browser.
+- [x] Reveal an external image's source file from its context menu.
+- [x] Browse PDF images in the media browser.
+- [x] Inspect image file information.
+- [x] Import pictures and preserve original image quality for export; choose supported input formats during detailed design.
+- [x] Fit a dropped image automatically to its panel.
+- [x] Reposition and resize images independently inside panels.
+- [x] Restore an image's original size.
+- [x] Place multiple independently transformed images in a panel, using a modifier key to add rather than replace.
+- [x] Replace a panel image by dropping another image onto it.
+- [x] Give images their own frames and shadows.
+- [x] Capture webcam pictures, drag frames from a live preview, and freeze or resume the preview.
+- [x] Offer camera-preview compatibility settings on Windows.
+- [x] Integrate with Apple's Photos library.
+- [x] Export comics to the Mac Photos application.
+- [x] Launch Photo Booth and drag captured pictures into the editor.
+- [x] Import photos from an iPad or iPhone.
 
 ## Image adjustments, filters and backgrounds
 
-- [ ] Apply standard and advanced parametric comic-style filters, including newer filter effects.
-- [ ] Choose filters through a visual selector with previews.
-- [ ] Offer Rotoscope, Paintoscope, Hatched, Sketched/Sketch, Smooth, Pen and Retro filter presets.
-- [ ] Adjust the selected filter's strength using Level.
-- [ ] Adjust brightness, exposure, saturation, sharpness, contrast and blur.
-- [ ] Adjust colour balance.
-- [ ] Provide image-adjustment sliders, numeric inputs and step controls.
-- [ ] Provide a dedicated Image Adjustment window or dockable/floating panel that brings image-adjustment and filter controls together, consistent with customisable workspace behaviour.
-- [ ] Reset image adjustments.
-- [ ] Keep image adjustments non-destructive and editable, retaining original image data while using suitable editing previews.
-- [ ] Invert image colours.
-- [ ] Colourise an image using a selected tint.
-- [ ] Set image-filter processing resolution independently of export settings.
-- [ ] Remove image backgrounds by selecting a colour and expanding the removal selection with an Instant Alpha tool.
-- [ ] Combine a cut-out image with a different background.
+- [x] Apply standard and advanced parametric comic-style filters, including newer filter effects.
+- [x] Choose filters through a visual selector with previews.
+- [x] Offer Rotoscope, Paintoscope, Hatched, Sketched/Sketch, Smooth, Pen and Retro filter presets.
+- [x] Adjust the selected filter's strength using Level.
+- [x] Adjust brightness, exposure, saturation, sharpness, contrast and blur.
+- [x] Adjust colour balance.
+- [x] Provide image-adjustment sliders, numeric inputs and step controls.
+- [x] Provide a dedicated Image Adjustment window or dockable/floating panel that brings image-adjustment and filter controls together, consistent with customisable workspace behaviour.
+- [x] Reset image adjustments.
+- [x] Keep image adjustments non-destructive and editable, retaining original image data while using suitable editing previews.
+- [x] Invert image colours.
+- [x] Colourise an image using a selected tint.
+- [x] Set image-filter processing resolution independently of export settings.
+- [x] Remove image backgrounds by selecting a colour and expanding the removal selection with an Instant Alpha tool.
+- [x] Combine a cut-out image with a different background.
 
 ## Balloons and dialogue
 
-- [ ] Create speech, thought and whisper balloons.
-- [ ] Offer editable presets for comic-lettering conventions including burst/shout balloons, wavy or distressed speech balloons, telepathic balloons and radio/electric/broadcast balloons; allow the user to override the preset shape and styling.
-- [ ] Provide thought-balloon tails with an editable default chain of spaced, decreasing-size circles, and whispered-dialogue styles including dashed or muted outlines.
-- [ ] Independently edit every thought-tail bubble's size, shape (including circles, ovals and custom outlines), position, fill and stroke; add, remove and reorder bubbles without regenerating the entire tail.
-- [ ] Adjust the gaps, direction and progression between individual thought-tail bubbles, allowing uneven spacing or irregular arrangements without automatically changing neighbouring bubbles.
-- [ ] Keep individually edited thought-tail bubbles associated with the parent balloon while allowing independent selection and editing, with their appearance and relationships retained after save/reopen and export.
-- [ ] Insert, position and style editable breath marks (small dash clusters) around dialogue or as standalone closing marks, including use in distressed and telepathic lettering.
-- [ ] Create tail-free telepathic balloons with independently adjustable irregular or overlapping wavy outlines, optional additional contours and editable breath marks on selected sides or corners; retain full shape and decoration editing after applying a preset.
+- [x] Create speech, thought and whisper balloons.
+- [x] Offer editable presets for comic-lettering conventions including burst/shout balloons, wavy or distressed speech balloons, telepathic balloons and radio/electric/broadcast balloons; allow the user to override the preset shape and styling.
+- [x] Provide thought-balloon tails with an editable default chain of spaced, decreasing-size circles, and whispered-dialogue styles including dashed or muted outlines.
+- [x] Independently edit every thought-tail bubble's size, shape (including circles, ovals and custom outlines), position, fill and stroke; add, remove and reorder bubbles without regenerating the entire tail.
+- [x] Adjust the gaps, direction and progression between individual thought-tail bubbles, allowing uneven spacing or irregular arrangements without automatically changing neighbouring bubbles.
+- [x] Keep individually edited thought-tail bubbles associated with the parent balloon while allowing independent selection and editing, with their appearance and relationships retained after save/reopen and export.
+- [x] Insert, position and style editable breath marks (small dash clusters) around dialogue or as standalone closing marks, including use in distressed and telepathic lettering.
+- [x] Create tail-free telepathic balloons with independently adjustable irregular or overlapping wavy outlines, optional additional contours and editable breath marks on selected sides or corners; retain full shape and decoration editing after applying a preset.
 - [ ] Provide electric/radio balloon tail styles, including editable lightning-bolt paths, and small burst accents where a shout balloon tail joins the body.
 - [ ] Create double-outline balloons with independently adjustable outline spacing, colours, weights and choice of which outline the tail joins.
 - [ ] Create Exclamation and Exclamation 2 balloons.
