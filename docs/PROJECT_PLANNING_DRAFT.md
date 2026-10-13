@@ -76,7 +76,7 @@ Product requirements remain in [HIGH_LEVEL_REQUIREMENTS.md](HIGH_LEVEL_REQUIREME
 
 ## Proposed delivery sequence
 
-This sequence is a proposal, not a reduction of the target scope.
+This earlier, feature-led sequence is retained as a provisional idea, not an approved plan or a reduction of target scope. See [Development Direction (DRAFT)](DEVELOPMENT_DIRECTION_DRAFT.md) for a newer, investigation-first proposal. Neither sequence is a release commitment.
 
 1. **Technical proof:** an image clipped to an editable shaped panel, an overlapping balloon with an adjustable tail, editable text, save/reopen and a matching export. Evaluate typography and interaction alongside performance.
 2. **Usable document editor:** multi-page management, page settings, ordinary panels/balloons/captions, font selection, undo/redo and dependable saving.
