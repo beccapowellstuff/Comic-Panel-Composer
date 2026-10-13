@@ -243,39 +243,39 @@ Requirements that are ticked have been validate as required.
 - [x] Keep individually edited thought-tail bubbles associated with the parent balloon while allowing independent selection and editing, with their appearance and relationships retained after save/reopen and export.
 - [x] Insert, position and style editable breath marks (small dash clusters) around dialogue or as standalone closing marks, including use in distressed and telepathic lettering.
 - [x] Create tail-free telepathic balloons with independently adjustable irregular or overlapping wavy outlines, optional additional contours and editable breath marks on selected sides or corners; retain full shape and decoration editing after applying a preset.
-- [ ] Provide electric/radio balloon tail styles, including editable lightning-bolt paths, and small burst accents where a shout balloon tail joins the body.
-- [ ] Create double-outline balloons with independently adjustable outline spacing, colours, weights and choice of which outline the tail joins.
-- [ ] Create Exclamation and Exclamation 2 balloons.
-- [ ] Create Rough and Rough 2 balloons.
-- [ ] Create Robot, Square, Buzz and Space balloons.
-- [ ] Create, save and reuse custom balloon shapes.
-- [ ] Change balloon kind without losing its text.
-- [ ] Adjust balloon shape using the Variety control.
-- [ ] Reshape balloon bodies interactively by inserting, moving and removing outline points and editing straight or curved sections, without losing their text or tail connections.
-- [ ] Add connected extension bubbles, allowing different kinds within an assembly.
-- [ ] Join adjacent balloons directly as a visually continuous assembly or link them with editable curved/straight connectors; independently reposition component balloons and connectors without unwanted internal outlines.
-- [ ] Connect bubbles with bendable tails.
-- [ ] Add multiple tails.
-- [ ] Draw, add and remove custom tails or point/curve-defined extensions on balloons, captions and other suitable shape-based objects, rather than being limited to predefined tails.
-- [ ] Join an added tail or extension seamlessly to its parent shape without an internal outline at the attachment, while retaining independent editing of the extension's points, curves and attachment.
-- [ ] Adjust tail attachment points and tip positions precisely.
-- [ ] Adjust a balloon tail's width at the attachment, along its length and at its tip independently of its stroke thickness, with point/curve controls for its taper; narrowing the tail must not unintentionally collapse it into a single thin line.
-- [ ] Shape and resize tails with independently movable edges or equivalent width controls, including asymmetric tapers and curves, without breaking the seamless join to the balloon.
-- [ ] Attach editable squinks (small multi-pointed bursts), breath-mark-inspired bursts and other origin markers to tail endpoints; let users move, resize and reshape the marker and connected tail independently.
-- [ ] Make off-panel dialogue tails terminate at a panel border or an off-panel origin using editable straight, curved, arcing or S-shaped paths.
-- [ ] Choose curved, straight, jagged or automatic tails.
-- [ ] Enable automatic tail curvature.
-- [ ] Choose thin, medium or thick tails.
-- [ ] Customise balloon tail designs.
-- [ ] Use a stroke-style balloon tail.
-- [ ] Reverse tail connections in multi-bubble assemblies.
-- [ ] Wrap a bubble around lettering using Envelop.
-- [ ] Envelop or reshape balloon bodies around selected lettering, sound effects and other page objects while keeping the balloon, contained text and affected objects editable.
-- [ ] Move a balloon body while leaving its tail tip anchored.
-- [ ] Move a balloon and its tails together using a separate handle.
-- [ ] Keep balloon bodies, tails and text editable after save/reopen, with clean joins between bodies and tails.
-- [ ] Butt balloons flat against panel/page borders with selectable edge alignment and clipping, rather than only overlapping or hiding part of a rounded balloon.
-- [ ] Support breaking panel borders, where a balloon's fill visually continues into a gutter or interrupts a panel border, while keeping the relevant shapes, fills and clipping editable.
+- [x] Provide electric/radio balloon tail styles, including editable lightning-bolt paths, and small burst accents where a shout balloon tail joins the body.
+- [x] Create double-outline balloons with independently adjustable outline spacing, colours, weights and choice of which outline the tail joins.
+- [x] Create Exclamation and Exclamation 2 balloons.
+- [x] Create Rough and Rough 2 balloons.
+- [x] Create Robot, Square, Buzz and Space balloons.
+- [x] Create, save and reuse custom balloon shapes.
+- [x] Change balloon kind without losing its text.
+- [x] Adjust balloon shape using the Variety control.
+- [x] Reshape balloon bodies interactively by inserting, moving and removing outline points and editing straight or curved sections, without losing their text or tail connections.
+- [x] Add connected extension bubbles, allowing different kinds within an assembly.
+- [x] Join adjacent balloons directly as a visually continuous assembly or link them with editable curved/straight connectors; independently reposition component balloons and connectors without unwanted internal outlines.
+- [x] Connect bubbles with bendable tails.
+- [x] Add multiple tails.
+- [x] Draw, add and remove custom tails or point/curve-defined extensions on balloons, captions and other suitable shape-based objects, rather than being limited to predefined tails.
+- [x] Join an added tail or extension seamlessly to its parent shape without an internal outline at the attachment, while retaining independent editing of the extension's points, curves and attachment.
+- [x] Adjust tail attachment points and tip positions precisely.
+- [x] Adjust a balloon tail's width at the attachment, along its length and at its tip independently of its stroke thickness, with point/curve controls for its taper; narrowing the tail must not unintentionally collapse it into a single thin line.
+- [x] Shape and resize tails with independently movable edges or equivalent width controls, including asymmetric tapers and curves, without breaking the seamless join to the balloon.
+- [x] Attach editable squinks (small multi-pointed bursts), breath-mark-inspired bursts and other origin markers to tail endpoints; let users move, resize and reshape the marker and connected tail independently.
+- [x] Make off-panel dialogue tails terminate at a panel border or an off-panel origin using editable straight, curved, arcing or S-shaped paths.
+- [x] Choose curved, straight, jagged or automatic tails.
+- [x] Enable automatic tail curvature.
+- [x] Choose thin, medium or thick tails.
+- [x] Customise balloon tail designs.
+- [x] Use a stroke-style balloon tail.
+- [x] Reverse tail connections in multi-bubble assemblies.
+- [x] Wrap a bubble around lettering using Envelop.
+- [x] Envelop or reshape balloon bodies around selected lettering, sound effects and other page objects while keeping the balloon, contained text and affected objects editable.
+- [x] Move a balloon body while leaving its tail tip anchored.
+- [x] Move a balloon and its tails together using a separate handle.
+- [x] Keep balloon bodies, tails and text editable after save/reopen, with clean joins between bodies and tails.
+- [x] Butt balloons flat against panel/page borders with selectable edge alignment and clipping, rather than only overlapping or hiding part of a rounded balloon.
+- [x] Support breaking panel borders, where a balloon's fill visually continues into a gutter or interrupts a panel border, while keeping the relevant shapes, fills and clipping editable.
 
 ## Captions and text flow
 
