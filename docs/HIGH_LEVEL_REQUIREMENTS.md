@@ -460,28 +460,9 @@ Requirements that are ticked have been validate as required.
 ### Printing and presentations
 
 - [x] Print comics with page-range, copy-count and two-sided options.
-- ~~[ ] Print using AirPrint.~~
 - [x] Print a low-resolution proof.
 - [x] Export an HTML comic presentation with a frame theme and JPEG-quality setting.
 
 ## Interface languages
 
-- ~~[ ] Provide Dutch, French, German, Italian, Spanish and Portuguese localisation.~~
-
-## References
-
-- [Supplied legacy manual](https://plasq.com/helpfiles/Comic_LIfe_manual.pdf)
-- [Comic Life 3 Getting Started guide](https://plasq.com/manuals/comiclife/3.0/comiclife-3.0-gettingstarted.pdf)
-- [Comic Life 3 desktop features](https://plasq.com/apps/comiclife/macwin/features-galore/)
-- [What's New in Comic Life 3](https://plasq.com/apps/comiclife/macwin/new-in-cl3/)
-- [Comic Life 3 Fancy Fills tutorial](https://plasq.com/2014/12/fancy-fills/)
-- [Comic Life 3 Windows release history](https://plasq.com/downloads/comiclife3/win/history/)
-- [Comic Life 3 Mac release history](https://plasq.com/downloads/comiclife3/mac/history/)
-- [Comic Life 4 product page](https://plasq.com/apps/comiclife4/mac/)
-- [Comic Life version comparison](https://plasq.com/apps/comiclife4/why-upgrade-mac/)
-- [Blambot Comic Book Grammar & Tradition](https://blambot.com/pages/comic-book-grammar-tradition) — examples of visual lettering conventions and editorial practices; not mandatory style rules.
-- [Clip Studio Paint Frames and Panels manual](https://help.clip-studio.com/en-us/manual_en/540_comic/Frames_and_Panels.htm) — reference workflows for frame borders, masks, frame division and editing.
-- [Clip Studio Tips: How to Panel Comics for WEBTOON and Print](https://tips.clip-studio.com/en-us/articles/9420) — creator examples of page-wide background bleeds, open panels and layout/lettering in gutters, plus vertical-scroll and hybrid formatting workflows.
-- [WEBTOON CANVAS announcement: Uploading Long Episode Images](https://www.webtoons.com/en/notice/detail?noticeNo=1766) — official description of slicing oversized uploads.
-- [Tapas: How to Publish a Comic Episode](https://help.tapas.io/hc/en-us/articles/1260802028970-Series-Basics-How-to-publish-a-comic-episode-on-Tapas) — official upload dimensions and file-format guidance.
-- [MediBang Paint: Settings for Comic Guidelines](https://medibangpaint.com/en/use/2023/11/setting-draft/) — reference for print trim, safe area and bleed guides.
+- [x] English will be the language used to start with, but there needs to be a language file approach allowing us to add more languages in the future when required.
