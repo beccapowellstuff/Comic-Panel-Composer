@@ -2,6 +2,19 @@
 
 > **A suggested route, not a promised roadmap.** This is an easy-to-read outline of how we might investigate and build Comic Panel Composer. The stages, features, technology and release dates are **not yet agreed commitments**. We can change course or stop if the results do not meet expectations.
 
+## The journey at a glance
+
+| Stage | What we want to achieve | What we'll have to judge |
+|---|---|---|
+| **1. Prove the technology** | Test whether the graphics, text and Windows tools can do the difficult things we need. | Working experiments and evidence to choose a technology — or rethink it. |
+| **2. Choose the first phase** | Use what we learned to prioritise a practical first set of features. | An agreed first-phase scope and success criteria. |
+| **3. Build solid foundations** | Set up the real project, editing model, saving and tests. | A small, dependable base to build on. |
+| **4. Make one comic page** | Bring panels, artwork, balloons, text and export together. | A complete, editable page that survives save and reopen. |
+| **5. Make a usable editor** | Expand into a straightforward multi-page comic workflow. | Something we can properly use and test. |
+| **6. Review and decide** | Judge the quality and experience before making further promises. | Continue, improve, change course, pause or stop. |
+
+*These are proposed milestones, not promised versions or delivery dates. Suggestions are welcome throughout.*
+
 ## The idea
 
 We want an enjoyable way to **build comics from existing artwork**: arrange pages and panels, place images, add balloons and lettering, and export finished comics. We're **not** trying to build a drawing or painting application.
@@ -10,25 +23,29 @@ Rather than building hundreds of features at once, we'll work towards **a few me
 
 ## The proposed journey
 
-### 1. Decide what matters first
+### 1. Prove the technology before choosing it
 
-**Goal:** Agree what a useful first version needs — and what can wait.
+**Goal:** Find out whether Rust and possible graphics, interface and text tools are capable of supporting the application we want — before committing to a production framework.
 
-Pick a small set of realistic comic-creation tasks to use for testing. Identify the hardest technical questions and agree what a convincing result would look like.
+Take a **small selection of difficult requirements** as a test brief. We don't need to prioritise the whole product yet; we just need realistic tasks to expose problems early.
 
-**We finish this step with:** A proposed first-phase scope, sample comic material and clear ways to judge success.
+Build small, working experiments and compare a Rust-based option with a credible alternative, such as C++/Qt, against the **same comic-editing challenge**.
 
-### 2. Test the technology before committing to it
+Try an irregular panel, an image clipped to it, artwork extending beyond the panel border, an editable balloon and tail, readable text, smooth zooming and movement, and an export that matches the canvas. Investigate Windows display scaling and representative hardware as well.
 
-**Goal:** Find out whether Rust and the proposed graphics and interface tools are actually right for this application.
+**We finish this step with:** Evidence about what works, where the risks are and which technology is worth considering for the real application. **Rust is a candidate, not a decision.**
 
-Make small, working experiments. Compare a Rust-based option with a credible alternative, such as C++/Qt, using the **same comic-editing challenge**.
+A pretty interface mockup does **not** count as a successful technical test. If the choices fail a fundamental need, we change our approach before investing further.
 
-The challenge should exercise real requirements: an irregular panel, an image clipped to the panel, artwork extending outside the border, an editable balloon and tail, readable text, smooth zooming and movement, and an export that looks like the canvas. Test Windows display scaling and relevant hardware too.
+### 2. Decide what to build first
 
-**We finish this step with:** Evidence about what works, what does not, and which technology is worth building on. **Rust is a candidate, not a decision.**
+**Goal:** Turn the full requirements collection into manageable, purposeful feature builds **using what the technology tests taught us**.
 
-A pretty interface mockup does **not** count as a successful technical test.
+Choose which everyday comic-creation workflows matter for the first usable version, what can come later and what should be deferred. Agree some realistic comic material for testing and decide what successful behaviour looks and feels like.
+
+Each planned build should produce something meaningful, not just another tiny setting or button. No feature is automatically promised just because it appears in the requirements.
+
+**We finish this step with:** A proposed set of feature phases, a clearly agreed first-phase scope and practical acceptance criteria.
 
 ### 3. Build the application's foundations
 
