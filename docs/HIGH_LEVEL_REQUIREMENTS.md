@@ -44,8 +44,7 @@ Requirements that are ticked have been validate as required.
 - [x] Create a new page using the current page's panel layout.
 - [x] Navigate and reorder pages by moving thumbnails up or down in the Pages panel, with visible page numbers, scrolling while moving pages and a clear selected-page highlight. The new sequence must determine document and export order.
 - [x] Use preset or custom page sizes.
-- [x] Choose page orientation.
-- [x] Allow multiple orientations in the comic.
+- [x] Choose page orientation independently for each page, including mixed orientations within one comic.
 - [x] Allow for double page displays (full open pages)
 - [x] Set a default page format.
 - [x] Set left, right, top and bottom margins.
@@ -88,24 +87,25 @@ Requirements that are ticked have been validate as required.
 
 ## Templates, panel layouts and automatic composition
 
+### Page templates
+
 - [x] Browse a visual collection of comic templates.
 - [x] Start from a blank template with or without predefined styles.
 - [x] Use complete template pages with panels, balloons, captions and lettering.
 - [x] Edit the content and styles supplied by a template.
 - [x] Use templates with predefined image filters.
-- [x] Create reusable comic templates.
-- [x] Export templates for reuse on other machines
-- [x] Load templates from saved file
+- [x] Create, save, load and export reusable comic templates as files, including reuse on other machines.
+### Panel layout presets
+
 - [x] Keep full-page templates, panel-only layouts and appearance presets as separate reusable concepts.
-- [x] Use separate panel-only layout presets.
-- [x] Create Separate panel-only layout presets.
-- [x] Save Seperate panel-only layout presets.
-- [x] Load Seperate panel-only layout presets
+- [x] Create, save, load and reuse panel-only layout presets separately from full-page templates and appearance presets.
 - [x] Browse built-in panel layouts by category.
 - [x] Provide panel layouts with different counts, sizes and proportions, alongside saved user layouts.
 - [x] Save the current panel arrangement and browse it as a reusable layout.
 - [x] Resize layouts automatically to fit page margins.
 - [x] Generate a grid page from row, column and gutter settings.
+### Automatic composition
+
 - [x] Automatically compose a comic from an album using a layout collection, random page arrangements, a stylesheet, page format and orientation.
 
 ## Workspace and navigation
@@ -133,6 +133,8 @@ Requirements that are ticked have been validate as required.
 
 ## Selecting, arranging and transforming objects
 
+### Selecting and transforming
+
 - [x] Select several elements for common editing actions.
 - [x] Select the intended object reliably when objects overlap.
 - [x] Copy, paste, duplicate and delete selected elements.
@@ -145,12 +147,16 @@ Requirements that are ticked have been validate as required.
 - [x] Lock elements or pin them to the page.
 - [x] Group elements, resize groups and duplicate groups.
 - [x] Overlap panels and page elements.
+### Layers, grouping and stacking
+
 - [x] Control stacking order: front, back, forward and backward, with keyboard shortcuts.
 - [x] Provide a Layers panel for each page that shows panels, images, balloons, captions, lettering and effects in their stacking order.
 - [x] Reorder objects by dragging in the Layers panel; select, show, hide, lock and unlock individual entries.
 - [x] Group objects in the Layers panel with expandable/collapsible groups, retaining independent editing where appropriate.
 - [x] Allow balloons, text, imagery and effects to be deliberately arranged in front of or behind each other, including balloons behind characters or other artwork.
 - [x] Preserve object stacking, grouping, visibility and locking when saving/reopening, and render visible objects in the same order on export.
+### Alignment and guides
+
 - [x] Align elements relative to a page or panel.
 - [x] Use rulers, ruler guides, smart alignment guides and spacing guides.
 - [x] Offer optional lettering placement guides for speech-tail aiming and near-touching visual tangents between balloons, text, panel borders and other objects, without imposing the suggested layout.
@@ -159,6 +165,8 @@ Requirements that are ticked have been validate as required.
 - [x] Resize selected elements using a trackpad pinch.
 
 ## Panels and custom shapes
+
+### Geometry, shapes and Boolean operations
 
 - [x] Add empty image panels.
 - [x] Use predefined smart shapes.
@@ -177,16 +185,21 @@ Requirements that are ticked have been validate as required.
 - [x] Allow the combined result to be moved and transformed as a single page object, while retaining independent access to its constituent shapes and their relative positions.
 - [x] Update the compound shape's outline, fills, cut-outs and borders as component shapes or operations change, consistently in the canvas, saved project and export.
 - [x] Save and reuse custom shape presets.
-- [x] Move a panel and its contents as a unit.
-- [x] Provide explicit editing modes to move, resize, rotate and otherwise transform the panel frame alone, its contained artwork alone, or the frame and contents together; preserve the chosen content crop and placement when editing the frame only.
+### Panel content and independent editing
+
+- [x] Provide explicit editing modes to move, resize, rotate and otherwise transform a panel frame alone, its contained artwork alone, or the frame and contents together as a unit; preserve the chosen content crop and placement when editing the frame only.
 - [x] Associate each panel with an editable collection of images and other page objects, allowing selection and editing of its contents independently, per-object clipping to the panel shape, and deliberate overflow beyond the frame while retaining the panel relationship.
 - [x] Remove a panel frame or border without deleting its associated artwork and other objects, keeping that content editable on the page; alternatively allow intentional deletion of both the panel and its contents, with undo/redo support.
 - [x] Place smaller inset panels, framed images and other editable objects above a larger background panel or page background without merging their artwork; preserve independent crops, borders, clipping and stacking order.
 - [x] Leave panel gutters and other unoccupied page areas transparent to underlying page artwork when desired, with no forced white fill; allow captions, balloons, sound effects and other objects to occupy or cross gutter space.
 - [x] Support page-edge, borderless and full-bleed/open panels which can extend into a configured bleed area, with predictable trimming and clipping in print and digital exports.
+### Dividing panels and managing gutters
+
 - [x] Divide an existing editable panel into two or more independently editable panels using straight or angled cuts, with adjustable gutters; preserve the existing placed image and allow its assignment/crop in the resulting panels to be edited without data loss.
 - [x] Offer equal row/column division and manual cuts, with a clear choice to start resulting panels empty, duplicate existing content, or reuse the original source artwork with independently editable positioning and crops; do not silently discard or flatten content.
 - [x] Adjust horizontal, vertical and irregular gutters between adjacent panels, including zero gaps; optionally keep adjoining frame boundaries aligned when resizing, without preventing deliberate overlaps or unusual spacing.
+### Clipping and breaking panel boundaries
+
 - [x] Control clipping to panel boundaries per element and by default; allow elements to extend outside panels.
 - [x] Let images, characters, props, leaves, particles and other artwork or effects remain associated with a panel while selected portions extend beyond its frame, without requiring a destructive cut-out of the panel image.
 - [x] Render a panel's border behind selected breakout artwork while retaining visible border segments elsewhere, including where an element crosses the border into the gutter.
@@ -235,42 +248,48 @@ Requirements that are ticked have been validate as required.
 
 ## Balloons and dialogue
 
+### Balloon types and conventions
+
 - [x] Create speech, thought and whisper balloons.
 - [x] Offer editable presets for comic-lettering conventions including burst/shout balloons, wavy or distressed speech balloons, telepathic balloons and radio/electric/broadcast balloons; allow the user to override the preset shape and styling.
+### Thought and telepathic balloons
+
 - [x] Provide thought-balloon tails with an editable default chain of spaced, decreasing-size circles, and whispered-dialogue styles including dashed or muted outlines.
 - [x] Independently edit every thought-tail bubble's size, shape (including circles, ovals and custom outlines), position, fill and stroke; add, remove and reorder bubbles without regenerating the entire tail.
 - [x] Adjust the gaps, direction and progression between individual thought-tail bubbles, allowing uneven spacing or irregular arrangements without automatically changing neighbouring bubbles.
 - [x] Keep individually edited thought-tail bubbles associated with the parent balloon while allowing independent selection and editing, with their appearance and relationships retained after save/reopen and export.
 - [x] Insert, position and style editable breath marks (small dash clusters) around dialogue or as standalone closing marks, including use in distressed and telepathic lettering.
 - [x] Create tail-free telepathic balloons with independently adjustable irregular or overlapping wavy outlines, optional additional contours and editable breath marks on selected sides or corners; retain full shape and decoration editing after applying a preset.
+### Additional styles and outlines
+
 - [x] Provide electric/radio balloon tail styles, including editable lightning-bolt paths, and small burst accents where a shout balloon tail joins the body.
 - [x] Create double-outline balloons with independently adjustable outline spacing, colours, weights and choice of which outline the tail joins.
-- [x] Create Exclamation and Exclamation 2 balloons.
-- [x] Create Rough and Rough 2 balloons.
-- [x] Create Robot, Square, Buzz and Space balloons.
+- [x] Provide editable Exclamation, Exclamation 2, Rough, Rough 2, Robot, Square, Buzz and Space balloon styles.
+### Balloon body and assemblies
+
 - [x] Create, save and reuse custom balloon shapes.
 - [x] Change balloon kind without losing its text.
 - [x] Adjust balloon shape using the Variety control.
 - [x] Reshape balloon bodies interactively by inserting, moving and removing outline points and editing straight or curved sections, without losing their text or tail connections.
 - [x] Add connected extension bubbles, allowing different kinds within an assembly.
 - [x] Join adjacent balloons directly as a visually continuous assembly or link them with editable curved/straight connectors; independently reposition component balloons and connectors without unwanted internal outlines.
-- [x] Connect bubbles with bendable tails.
-- [x] Add multiple tails.
-- [x] Draw, add and remove custom tails or point/curve-defined extensions on balloons, captions and other suitable shape-based objects, rather than being limited to predefined tails.
+### Tail geometry and attachments
+
+- [x] Connect bubbles using bendable tails and allow multiple tails where needed.
+- [x] Draw, add, remove and customise the designs of custom tails or point/curve-defined extensions on balloons, captions and other suitable shape-based objects, rather than being limited to predefined tails.
 - [x] Join an added tail or extension seamlessly to its parent shape without an internal outline at the attachment, while retaining independent editing of the extension's points, curves and attachment.
 - [x] Adjust tail attachment points and tip positions precisely.
 - [x] Adjust a balloon tail's width at the attachment, along its length and at its tip independently of its stroke thickness, with point/curve controls for its taper; narrowing the tail must not unintentionally collapse it into a single thin line.
 - [x] Shape and resize tails with independently movable edges or equivalent width controls, including asymmetric tapers and curves, without breaking the seamless join to the balloon.
 - [x] Attach editable squinks (small multi-pointed bursts), breath-mark-inspired bursts and other origin markers to tail endpoints; let users move, resize and reshape the marker and connected tail independently.
 - [x] Make off-panel dialogue tails terminate at a panel border or an off-panel origin using editable straight, curved, arcing or S-shaped paths.
-- [x] Choose curved, straight, jagged or automatic tails.
-- [x] Enable automatic tail curvature.
+- [x] Choose curved, straight, jagged or automatic tails, including an option for automatic tail curvature.
 - [x] Choose thin, medium or thick tails.
-- [x] Customise balloon tail designs.
 - [x] Use a stroke-style balloon tail.
 - [x] Reverse tail connections in multi-bubble assemblies.
-- [x] Wrap a bubble around lettering using Envelop.
-- [x] Envelop or reshape balloon bodies around selected lettering, sound effects and other page objects while keeping the balloon, contained text and affected objects editable.
+### Enveloping, movement and panel borders
+
+- [x] Use Envelop to wrap or reshape balloon bodies around selected lettering, sound effects and other page objects while keeping the balloon, contained text and affected objects editable.
 - [x] Move a balloon body while leaving its tail tip anchored.
 - [x] Move a balloon and its tails together using a separate handle.
 - [x] Keep balloon bodies, tails and text editable after save/reopen, with clean joins between bodies and tails.
@@ -289,9 +308,10 @@ Requirements that are ticked have been validate as required.
 - [x] Connect captions into threads across a page.
 - [x] Offset text inside balloons and captions.
 - [x] Wrap text around captions and bubbles.
-- [x] Insert manual line breaks to shape dialogue inside a balloon.
 
 ## Fonts and ordinary text formatting
+
+### Font sources and capabilities
 
 - [x] Provide a collection of comic and creative fonts (this is a "if possible" because I can not supply fonts which are not okay ok to share)
 - [x] Discover and offer the installed Windows font library.
@@ -299,6 +319,8 @@ Requirements that are ticked have been validate as required.
 - [x] Support advanced font capabilities; confirm coverage of variable font axes, OpenType features, ligatures and kerning.
 - [x] Browse font families and typefaces.
 - [x] Preview the selected font.
+### Typography and text layout
+
 - [x] Choose preset or custom font sizes.
 - [x] Apply or revert font-panel changes.
 - [x] Increase or decrease text size with quick toolbar actions.
@@ -316,8 +338,10 @@ Requirements that are ticked have been validate as required.
 - [x] Find and replace text in scripts and across comic pages.
 - [x] Paste text while matching the destination style.
 - [x] Allow authors to enter and edit comic-lettering punctuation and notation, including double dashes, ellipses, combined question/exclamation marks, editorial asterisks, quotation marks, foreign-language delimiters and musical notes, without automatic rewriting to another convention.
-- [x] Control manual line breaks, word spacing and hyphenation in balloon and caption text, with the option to avoid unwanted automatic word splits.
+- [x] Control manual line breaks (including to shape dialogue inside balloons), word spacing and hyphenation in balloon and caption text, with the option to avoid unwanted automatic word splits.
 - [x] Support editable music/singing notation and placing selected ordinary dialogue text along a curved or wavy baseline inside balloons.
+### Spelling and character support
+
 - [x] Check spelling while typing.
 - [x] Offer spelling suggestions and replacement actions for misspelt words in balloons, captions, ordinary text and scripts.
 - [x] Allow adding words to a custom spelling dictionary, including character names and invented terms.
@@ -329,11 +353,15 @@ Requirements that are ticked have been validate as required.
 
 ## Decorative titles and sound effects
 
+### SFX library and editable lettering
+
 - [x] Create titles and sound-effect lettering.
 - [x] Provide a categorised SFX library with visual previews of ready-to-place sound-effect wording and editable lettering/effect presets.
 - [x] Drag an SFX entry from the library onto a comic page as editable lettering, allowing changes to its wording, font, shape and effects after placement.
 - [x] Create and save custom SFX entries, and organise them into reusable library categories.
 - [x] Edit the wording and font of lettering.
+### Lettering transforms
+
 - [x] Bend and warp lettering using Bezier controls.
 - [x] Scale lettering separately from warping it.
 - [x] Retain lettering distortion when changing its wording.
@@ -344,6 +372,8 @@ Requirements that are ticked have been validate as required.
 - [x] Adjust glyph stagger.
 - [x] Tilt glyphs.
 - [x] Join glyphs for a combined appearance.
+### Lettering fills and effects
+
 - [x] Fill individual glyphs or joined lettering with gradients.
 - [x] Apply 3D lettering with a selectable extrusion colour.
 - [x] Enable or disable 3D lighting and adjust its angle.
@@ -357,9 +387,7 @@ Requirements that are ticked have been validate as required.
 
 - [x] Enable or disable solid-colour fills.
 - [x] Use gradient fills.
-- [x] Use image, tinted-image and colourised-image fills.
-- [x] Control fill-image size and proportions.
-- [x] Import a custom image as a fill.
+- [x] Import and use custom images as ordinary, tinted-image or colourised-image fills, with controls for fill-image size and proportions.
 - [x] Use speedline fills.
 - [x] Use monochrome or full-colour halftone fills.
 - [x] Use texture and tiled fills.
@@ -374,17 +402,12 @@ Requirements that are ticked have been validate as required.
 
 ## Borders, outlines and shadows
 
-- [x] Enable or disable strokes.
-- [x] Choose from multiple clean or hand-drawn/brush-like stroke styles.
-- [x] Set stroke colour and width.
+- [x] Enable or disable strokes, choose among clean or hand-drawn/brush-like styles, and set stroke colour and width.
 - [x] Apply multiple outlines, controlling count and alternating colours, including on lettering.
 - [x] Use the Compact outline option; its precise behaviour still needs inspection.
 - [x] Customise line endpoints, including arrows and circles.
 - [x] Adjust the stroke miter limit.
-- [x] Enable or disable shadows.
-- [x] Set shadow colour.
-- [x] Position shadows with a visual pad or numeric X/Y offsets.
-- [x] Adjust shadow blur and opacity.
+- [x] Enable or disable shadows and adjust their colour, position (with a visual pad or numeric X/Y offsets), blur and opacity.
 
 ## Reusable styles
 
@@ -411,11 +434,12 @@ Requirements that are ticked have been validate as required.
 - [x] Drop script text onto an existing caption to replace its text.
 - [x] Begin page composition without losing the existing script.
 - [x] Print a script.
-- [x] Export script to standard formats that can be loaded by other systems.
-- [x] Import script from standard formats that can be loaded from other systems.
+- [x] Import and export scripts in standard formats usable by other systems.
 - [x] When a script is changed (for example dialogue) include functionality to update dialogue in the comic.
 
 ## Exporting, printing and sharing
+
+### Comic export formats and settings
 
 - [x] Export a PDF with selectable DPI.
 - [x] Export high-resolution page images with selectable DPI.
@@ -426,11 +450,15 @@ Requirements that are ticked have been validate as required.
 - [x] Preserve DPI information in JPEG export.
 - [x] Preserve page order, dimensions, crops, text, shapes and effects consistently in output.
 - [x] Configure export image formats, quality, naming and packaging; final options are to be specified.
+### Webcomic exports
+
 - [x] Export vertical-scroll webcomic episodes as a continuous image where supported or as an ordered set of sequential images, with selectable output width, format, quality and naming.
 - [x] Automatically split a scrolling composition into consecutive image slices according to configurable maximum dimensions and file-size limits, keeping adjacent slices visually seamless and in the intended reading order.
 - [x] Preview and, where possible, adjust proposed webcomic export slice boundaries to avoid awkward cuts through dialogue or important artwork, with clear warnings when destination limits prevent a preferred split.
 - [x] Offer editable publishing-format presets for common webcomic services, including WEBTOON CANVAS and Tapas, and allow custom profiles; validate exported dimensions, formats and file sizes against the selected profile without hard-coding a platform's rules into the document.
 - [x] Preview webcomic export at its intended display width so creators can assess text readability, panel spacing and visual continuity before generating publishing files.
+### Printing and presentations
+
 - [x] Print comics with page-range, copy-count and two-sided options.
 - ~~[ ] Print using AirPrint.~~
 - [x] Print a low-resolution proof.
