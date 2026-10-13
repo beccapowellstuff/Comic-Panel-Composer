@@ -66,12 +66,16 @@ Requirements that are ticked have been validate as required.
 - [x] Increase or decrease all balloon/caption text on a page at once.
 - [x] Clear all balloon/caption text on a page.
 
-## Creator notes (editor-only)
+## Creator notes and optional annotated output
 
 - [ ] Attach editable private creator notes to individual pages and panels, separate from captions, dialogue, script text and editorial notes intended to appear in the comic.
-- [ ] Create, view, edit and remove page and panel notes from the editing workspace, with a clear way to find which pages or panels contain notes without covering the finished artwork; allow any notes indicators to be hidden.
-- [ ] Preserve creator notes and their associations with pages and panels through save/reopen, page and panel rearrangement, and duplication, without silently losing or detaching notes.
-- [ ] Exclude creator notes and their editor-only indicators from all published, printed and exported comic output, including rendered pages, webcomic images and embedded publication metadata.
+- [ ] Show unobtrusive note markers directly over the relevant page or panel while editing (such as a quotation-mark or speech-bubble symbol); select a marker to read, edit or remove its note without changing the comic artwork.
+- [ ] Provide a clear Show/Hide Notes toggle that hides both the on-page markers and any expanded notes when off, without deleting notes or affecting the underlying page, panel or export.
+- [ ] Allow note markers to be repositioned to avoid covering important artwork while remaining associated with their page or panel.
+- [ ] Preserve creator notes, marker positions and page/panel associations through project save/reopen, page and panel rearrangement, and duplication, without silently losing or detaching notes.
+- [ ] Always save creator notes inside the editable project; exclude their text, markers and metadata from ordinary print, export and publishing output unless the creator explicitly requests an annotated copy.
+- [ ] Offer a clearly labelled Include Notes option for printing and supported saved/exported output formats; leave it unticked by default for each output operation, so publishing a comic never accidentally reveals private notes.
+- [ ] When Include Notes is selected, preview an annotated output showing readable notes as well as their markers, with suitable placement to limit obstruction of comic artwork; preserve the normal artwork-only output as a separate choice.
 
 ## Webcomics and vertical-scroll composition
 
