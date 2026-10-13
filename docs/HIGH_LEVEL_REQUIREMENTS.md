@@ -45,6 +45,9 @@ Requirements that are ticked have been validate as required.
 - [x] Detect missing, renamed or relocated artwork and provide ways to relink individual files or repair multiple references by choosing a replacement folder, without discarding the page layout, image placement or non-destructive edits.
 - [x] Keep the JSON project format documented and versioned, with validation and a safe approach to opening or migrating older project versions; retain the existing safe-save and recovery requirements.
 - [x] Load and cache previews or full-resolution artwork as needed instead of automatically decoding every linked image into memory, while preserving the original image quality for export. Verify actual memory and performance benefits with representative projects.
+- [x] Create a shareable single-file project package, using ZIP compression or an equivalent container, that bundles the editable JSON-based comic project and copies of all required artwork and other project assets, including files that are normally linked from external folders; leave the original files untouched.
+- [x] Open or import a packaged project on another computer into an editable local project folder, restoring usable project-relative asset references without requiring access to the sender's original file locations.
+- [x] Check project packages for missing or unreadable assets and report problems clearly rather than silently omitting artwork; keep packaged editable project sharing distinct from flattened PDF, image and webcomic publication exports.
 - [ ] Consider an explicit Move into Project option for artwork, in addition to linking and copying. If adopted, require confirmation and verify each managed copy and saved reference before removing an original, with clear warnings that other projects may depend on that original location.
 
 ## Pages and document layout
