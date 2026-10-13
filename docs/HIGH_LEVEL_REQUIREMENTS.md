@@ -54,6 +54,8 @@ Requirements that are ticked have been validate as required.
 - [x] Continue page numbering or specify a starting number.
 - [x] Position and style page numbers, including inset and a caption-style backdrop.
 - [x] Apply built-in or custom page textures.
+- [ ] Set a full-page background image or fill independently of individual comic panels, with editable positioning, sizing, cropping and appearance; the background remains visible in any uncovered areas or gutters.
+- [ ] Show optional, non-exported print-layout guides for safe/live area, trim boundaries and bleed, with configurable bleed dimensions distinct from ordinary page margins.
 - [x] Use a master page for repeating elements, with a per-page visibility setting.
 - [x] Increase or decrease all balloon/caption text on a page at once.
 - [x] Clear all balloon/caption text on a page.
@@ -150,6 +152,11 @@ Requirements that are ticked have been validate as required.
 - [ ] Update the compound shape's outline, fills, cut-outs and borders as component shapes or operations change, consistently in the canvas, saved project and export.
 - [ ] Save and reuse custom shape presets.
 - [ ] Move a panel and its contents as a unit.
+- [ ] Place smaller inset panels, framed images and other editable objects above a larger background panel or page background without merging their artwork; preserve independent crops, borders, clipping and stacking order.
+- [ ] Leave panel gutters and other unoccupied page areas transparent to underlying page artwork when desired, with no forced white fill; allow captions, balloons, sound effects and other objects to occupy or cross gutter space.
+- [ ] Support page-edge, borderless and full-bleed/open panels which can extend into a configured bleed area, with predictable trimming and clipping in print and digital exports.
+- [ ] Divide an existing editable panel into two or more independently editable panels using straight or angled cuts, with adjustable gutters; preserve the existing placed image and allow its assignment/crop in the resulting panels to be edited without data loss.
+- [ ] Adjust horizontal, vertical and irregular gutters between adjacent panels, including zero gaps; optionally keep adjoining frame boundaries aligned when resizing, without preventing deliberate overlaps or unusual spacing.
 - [ ] Control clipping to panel boundaries per element and by default; allow elements to extend outside panels.
 - [ ] Allow balloons to overlap panel borders and protrude beyond a panel while remaining editable.
 - [ ] Support fully visible balloons, panel-clipped balloons and balloons partially cut off at panel or page edges for intentional off-panel dialogue effects.
@@ -414,11 +421,14 @@ Requirements that are ticked have been validate as required.
 - Validate floating, docking and workspace restoration behaviour, including mixed-DPI multi-monitor setups, against candidate Windows GUI frameworks.
 - Define the theme system, the interface elements and button states it can style, and the format for sharing theme presets.
 - Define Layers panel semantics for grouping, selection, clipping, object ownership and stacking order.
+- Decide how page-wide background artwork is represented and edited relative to full-page panels, ordinary layers, panel frames and page textures; both workflows must remain possible.
+- Specify frame division, gutter alignment and content-preservation behaviour when panels are split, moved or resized.
 
 ### Shapes, balloons and effects
 
 - Define the custom-shape editing workflow and preset geometry, including inserting/removing outline points and mixing straight and curved sections across shape-based objects.
 - Define how reshaping affects contained text, image clipping, balloon tails, fills and effects.
+- Define frame border visibility and transparent-gutter behaviour for inset panels, borderless/open panels and panels extending beyond the page.
 - Define the editing workflow and operation ordering for non-destructive Combine/Union, Subtract, Intersect and Exclude, including component selection, nested/compound shapes, cut-outs and shared outline rendering.
 - Specify balloon Variety and automatic tail behaviour.
 - Define selection, movement and association rules for independently editable thought-tail bubbles, including when the parent balloon moves or changes shape.
@@ -442,6 +452,7 @@ Requirements that are ticked have been validate as required.
 - Select input/output formats and the final filter/preset catalogues.
 - Specify image-adjustment ranges, units and Reset scope.
 - Specify EPUB layout and reader targets, CBZ packaging, and PDF font/vector handling.
+- Define print export behaviour for live/safe area, trim and bleed, including whether page-edge artwork is cropped or extended for the output format.
 - Establish compatibility before retaining external sharing services.
 
 ## Proposed delivery sequence
@@ -459,6 +470,8 @@ This sequence is a proposal, not a reduction of the target scope.
 - Compose a multi-page comic, move pages up and down in the Pages panel, and confirm that the document sequence follows the new order. Save, reopen and export it; retain that order and the editable page content.
 - Save a custom panel layout and a styled page template; reuse both in another page without losing their intended geometry or appearance.
 - Overlap differently shaped panels, adjust their image crops, and select/edit the intended object reliably.
+- Place an adjustable full-page background image, overlay independently cropped and bordered inset panels, and place narration captions in the visible background/gutters; confirm panel moves, background adjustments and layering remain editable after save/reopen and render correctly in export.
+- Split an existing panel with an angled cut, modify the resulting gutters and panel crops independently, and create a borderless image extending into a bleed area; verify saved content, on-screen preview and final trimmed output.
 - Create speech and thought balloons, customise a shape, add and move tails, and edit the text afterwards.
 - Draw a custom curved tail, join it to a balloon without a visible line across the connection, then reshape or detach it; verify that the editability and seamless appearance survive save/reopen and export.
 - Resize the wide base, taper and tip of a balloon tail independently without reducing it to a thin stroke; add a squink at the tail tip, move its off-panel origin and verify the joins remain correct on export.
@@ -490,3 +503,6 @@ This sequence is a proposal, not a reduction of the target scope.
 - [Comic Life 4 product page](https://plasq.com/apps/comiclife4/mac/)
 - [Comic Life version comparison](https://plasq.com/apps/comiclife4/why-upgrade-mac/)
 - [Blambot Comic Book Grammar & Tradition](https://blambot.com/pages/comic-book-grammar-tradition) — examples of visual lettering conventions and editorial practices; not mandatory style rules.
+- [Clip Studio Paint Frames and Panels manual](https://help.clip-studio.com/en-us/manual_en/540_comic/Frames_and_Panels.htm) — reference workflows for frame borders, masks, frame division and editing.
+- [Clip Studio Tips: How to Panel Comics for WEBTOON and Print](https://tips.clip-studio.com/en-us/articles/9420) — creator examples of page-wide background bleeds, open panels and layout/lettering in gutters.
+- [MediBang Paint: Settings for Comic Guidelines](https://medibangpaint.com/en/use/2023/11/setting-draft/) — reference for print trim, safe area and bleed guides.
