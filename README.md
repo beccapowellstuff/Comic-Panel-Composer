@@ -73,5 +73,6 @@ A convincing interface or a large amount of AI-generated code is not proof of a 
 
 ## Project documents
 
+- [Development Direction (DRAFT)](docs/DEVELOPMENT_DIRECTION_DRAFT.md) — a friendly overview of the proposed investigation and development stages. This is a direction for discussion, not a release promise.
 - [High-Level Requirements](docs/HIGH_LEVEL_REQUIREMENTS.md) — the detailed product requirements and intended capabilities. Ticked requirements have been validated as wanted; they are **not** completed features or first-release promises.
 - [Project Planning (DRAFT)](docs/PROJECT_PLANNING_DRAFT.md) — captured questions, provisional sequencing ideas and example acceptance scenarios. This is **not** an approved delivery plan.
