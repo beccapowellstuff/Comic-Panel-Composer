@@ -66,6 +66,13 @@ Requirements that are ticked have been validate as required.
 - [x] Increase or decrease all balloon/caption text on a page at once.
 - [x] Clear all balloon/caption text on a page.
 
+## Creator notes (editor-only)
+
+- [ ] Attach editable private creator notes to individual pages and panels, separate from captions, dialogue, script text and editorial notes intended to appear in the comic.
+- [ ] Create, view, edit and remove page and panel notes from the editing workspace, with a clear way to find which pages or panels contain notes without covering the finished artwork; allow any notes indicators to be hidden.
+- [ ] Preserve creator notes and their associations with pages and panels through save/reopen, page and panel rearrangement, and duplication, without silently losing or detaching notes.
+- [ ] Exclude creator notes and their editor-only indicators from all published, printed and exported comic output, including rendered pages, webcomic images and embedded publication metadata.
+
 ## Webcomics and vertical-scroll composition
 
 - [ ] Create and edit vertical-scrolling webcomics as a native document format alongside conventional fixed-page comics, without forcing the scrolling composition into fixed print-page boundaries.
