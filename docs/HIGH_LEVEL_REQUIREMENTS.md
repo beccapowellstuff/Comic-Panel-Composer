@@ -36,6 +36,17 @@ Requirements that are ticked have been validate as required.
 - [x] Store document keywords.
 - [x] Check for application updates on launch.
 
+## Project file format and asset management
+
+- [x] Use a readable, JSON-based and versioned project data format for editable comic structure, including pages, panels, objects, text, layers, transforms, styles, adjustment settings and references to artwork. Keep this storage representation separate from the in-memory editing model; validate the exact project packaging through foundation prototypes.
+- [x] Keep original artwork as separate referenced files rather than embedding full-resolution images into the project data by default, so projects do not grow merely from placing or reusing artwork.
+- [x] Offer a choice when bringing artwork into a project: link to the files at their existing locations without duplicating them, or copy them into a managed assets folder alongside the comic's project data while retaining the originals.
+- [x] Store managed asset references using project-relative paths, so the whole comic project folder and its managed artwork can be copied or moved together and reopened at a different location.
+- [x] Detect missing, renamed or relocated artwork and provide ways to relink individual files or repair multiple references by choosing a replacement folder, without discarding the page layout, image placement or non-destructive edits.
+- [x] Keep the JSON project format documented and versioned, with validation and a safe approach to opening or migrating older project versions; retain the existing safe-save and recovery requirements.
+- [x] Load and cache previews or full-resolution artwork as needed instead of automatically decoding every linked image into memory, while preserving the original image quality for export. Verify actual memory and performance benefits with representative projects.
+- [ ] Consider an explicit Move into Project option for artwork, in addition to linking and copying. If adopted, require confirmation and verify each managed copy and saved reference before removing an original, with clear warnings that other projects may depend on that original location.
+
 ## Pages and document layout
 
 - [x] Add, insert and duplicate pages in a multi-page comic.
