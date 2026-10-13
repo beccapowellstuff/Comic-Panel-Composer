@@ -29,7 +29,7 @@ The aim is not to settle for something that merely looks impressive or is "good 
 *Directly vision of how we are going to approach development, and direction*
 *More details of the plan can be found at [Development Direction](docs/DEVELOPMENT_DIRECTION_DRAFT.md)*
 
-## Welcome suggestions throughout — without making promises
+## Welcome suggestions throughout but not making promises
 
 Ideas, feedback and feature suggestions are welcome at any stage, especially from people who create comics. Suggestions will be considered against the product's purpose, priorities, complexity and technical findings.
 
