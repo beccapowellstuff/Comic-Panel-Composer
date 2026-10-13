@@ -53,6 +53,12 @@ Requirements that are ticked have been validate as required.
 - [x] Show two pages side by side.
 - [x] Continue page numbering or specify a starting number.
 - [x] Position and style page numbers, including inset and a caption-style backdrop.
+- [ ] Assign an explicit reading order to panels on each page, independently of their position, size and stacking order; allow background-only and decorative panels to be excluded from that sequence.
+- [ ] Provide a Reading Order mode where users can click panels in the intended sequence or reorder them in a simple list, without moving the actual panels.
+- [ ] Allow left-to-right and right-to-left reading-direction preferences, with optional automatically suggested ordering for conventional layouts and manual override for unconventional compositions.
+- [ ] Show optional editor-only numbered panel overlays and connecting guides/arrows to review reading flow; do not include them in normal comic exports.
+- [ ] Allow creators to place optional editable numbered shapes/markers on the page for readers to see, with custom positioning and styles and an option to use the assigned panel order for their numbers; unlike editing guides, these markers are exportable page objects.
+- [ ] Preserve panel reading order and the distinction between editing-only guides and printed markers through save/reopen and export.
 - [x] Apply built-in or custom page textures.
 - [ ] Set a full-page background image or fill independently of individual comic panels, with editable positioning, sizing, cropping and appearance; the background remains visible in any uncovered areas or gutters.
 - [ ] Show optional, non-exported print-layout guides for safe/live area, trim boundaries and bleed, with configurable bleed dimensions distinct from ordinary page margins.
@@ -416,6 +422,8 @@ Requirements that are ticked have been validate as required.
 ### Pages, templates and the workspace
 
 - Specify facing-page margins, spread behaviour and master-page editing.
+- Define reading-order behaviour for overlapping, nested, borderless, split and decorative/background panels, including spread layouts; keep reading order distinct from layer stacking order.
+- Define how reading-order suggestions, direction preferences, manual reordering and optional exported numbered markers interact, particularly after adding, removing or rearranging panels.
 - Specify texture management and document-keyword editing.
 - Confirm click, placement-tool and drag interactions for the element palette, including the plus-marked balloon control.
 - Validate floating, docking and workspace restoration behaviour, including mixed-DPI multi-monitor setups, against candidate Windows GUI frameworks.
@@ -472,6 +480,7 @@ This sequence is a proposal, not a reduction of the target scope.
 - Overlap differently shaped panels, adjust their image crops, and select/edit the intended object reliably.
 - Place an adjustable full-page background image, overlay independently cropped and bordered inset panels, and place narration captions in the visible background/gutters; confirm panel moves, background adjustments and layering remain editable after save/reopen and render correctly in export.
 - Split an existing panel with an angled cut, modify the resulting gutters and panel crops independently, and create a borderless image extending into a bleed area; verify saved content, on-screen preview and final trimmed output.
+- Assign a reading sequence to irregular, overlapping panels over a full-page background by clicking them or reordering a list; review optional numbered/arrows overlays, add a styled reader-visible number marker, then confirm the reading sequence survives save/reopen and only intentionally placed markers appear in export.
 - Create speech and thought balloons, customise a shape, add and move tails, and edit the text afterwards.
 - Draw a custom curved tail, join it to a balloon without a visible line across the connection, then reshape or detach it; verify that the editability and seamless appearance survive save/reopen and export.
 - Resize the wide base, taper and tip of a balloon tail independently without reducing it to a thin stroke; add a squink at the tail tip, move its off-panel origin and verify the joins remain correct on export.
