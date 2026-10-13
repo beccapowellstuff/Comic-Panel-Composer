@@ -2,9 +2,9 @@
 
 *Comic page layout and lettering — an experimental project.*
 
-Comic Panel Composer is a proposed Windows desktop application for **building comics from existing artwork**. The aim is to retain the straightforward comic-creation experience of tools such as Comic Life while offering more control over pages, panels, image placement, layers, speech and thought balloons, captions, lettering, effects and publishing formats, including vertical-scroll webcomics.
+**In plain English:** Bring your existing artwork, arrange it into comic panels, add speech bubbles, captions and sound effects, then turn it into comic pages or a scrolling webcomic. Think of it as putting a comic together, **not** drawing or painting the pictures.
 
-This is a **comic composition tool**, not a drawing, painting or inking application.
+Comic Panel Composer aims to make that process easy and enjoyable on Windows, while giving creators room to customise their layouts and lettering.
 
 ## The vision
 
@@ -13,15 +13,24 @@ This is a **comic composition tool**, not a drawing, painting or inking applicat
 *Product-vision illustration, not a screenshot of working software. The features shown are ideas and requirements, not promises of what will be delivered.*
 *More details of the requirements can be found at [High-Level Requirements](docs/HIGH_LEVEL_REQUIREMENTS.md)*
 
-## Current status: research and requirements
+## Current work item — Stage 1 of 6
 
-**There is no working application or release to download yet.**
+### 🧪 Prove the technology
 
-This project is an experiment to discover whether a carefully directed, AI-assisted software development approach can produce an application that meets the product owner's expectations for usability, functionality and engineering quality.
+| | |
+|---|---|
+| **Status** | **Preparing the technical evaluation** — no working application or tested prototype yet |
+| **Goal** | Find out whether Rust and the available graphics, interface and text tools can support the comic editor we want. |
+| **What we'll test** | Custom panel shapes, images inside and beyond panel borders, speech balloons, text, smooth editing and accurate export. |
+| **Next stage** | Use what we've learnt to choose the features for the first build. |
 
-**There is no guaranteed release, delivery date or commitment to implement every requirement.** This will take time. A feature being recorded or approved as desirable does not mean it belongs in the first phase or will necessarily be built.
+**What needs to happen before this stage is complete:**
 
-The aim is not to settle for something that merely looks impressive or is "good enough". Progress will be assessed against agreed behaviour and quality expectations. If the results do not meet those expectations, work may be rethought, repeated, paused or stopped.
+- [ ] Build small working experiments, including a Rust option and a credible alternative.
+- [ ] Check the difficult editing, rendering, text, Windows scaling and export behaviours.
+- [ ] Record the results and decide whether to proceed with a technology, investigate further or change direction.
+
+**This is an experiment, not a release promise.** Nothing is available to download yet, and there is no guaranteed delivery date or commitment to build every requested feature. If the results don't meet our expectations, we'll improve the approach, change direction, pause or stop.
 
 ## How the project will be approached
 
