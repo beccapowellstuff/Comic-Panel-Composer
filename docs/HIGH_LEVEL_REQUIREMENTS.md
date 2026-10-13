@@ -98,6 +98,10 @@ Requirements that are ticked have been validate as required.
 - [x] Open multiple inspectors for document, page, script, graphic, shape, image, lettering, metrics and text settings.
 - [x] Use full-screen mode.
 - [x] Use dark mode.
+- [ ] Choose from a built-in collection of application colour themes, with previews of the overall workspace appearance.
+- [ ] Customise the colours of application windows, workspace panels, menus, toolbars and other interface controls.
+- [ ] Apply and customise button themes/styles, including their normal, hovered, pressed, selected and disabled appearances, either as part of an application theme or independently.
+- [ ] Save, load, import and export custom application and button themes so people can reuse and share them.
 
 ## Selecting, arranging and transforming objects
 
@@ -131,6 +135,9 @@ Requirements that are ticked have been validate as required.
 - [ ] Use predefined smart shapes.
 - [ ] Use freeform shapes.
 - [ ] Create and edit custom panel shapes with dynamically adjustable geometry.
+- [ ] Freely reshape the outlines of all shape-based page objects, including panels, balloons, captions, text boxes, image frames, decorative shapes and other editable boxes; do not restrict customisation to a small set of fixed outlines or corner-radius options.
+- [ ] Insert, remove and move outline points independently, with no fixed limit of three to eight corners for custom shapes; support both straight edges and Bézier curves with editable handles.
+- [ ] Preserve editable text, images, fills, borders, effects, clipping and balloon tails as their enclosing shapes are changed, saved, reopened and exported.
 - [ ] Make polygon panels with three to eight independently movable corners.
 - [ ] Convert an irregular panel back to a bounding rectangle.
 - [ ] Use frame-free or invisible panel styles.
@@ -172,6 +179,7 @@ Requirements that are ticked have been validate as required.
 - [ ] Adjust brightness, exposure, saturation, sharpness, contrast and blur.
 - [ ] Adjust colour balance.
 - [ ] Provide image-adjustment sliders, numeric inputs and step controls.
+- [ ] Provide a dedicated Image Adjustment window or dockable/floating panel that brings image-adjustment and filter controls together, consistent with customisable workspace behaviour.
 - [ ] Reset image adjustments.
 - [ ] Keep image adjustments non-destructive and editable, retaining original image data while using suitable editing previews.
 - [ ] Invert image colours.
@@ -189,7 +197,7 @@ Requirements that are ticked have been validate as required.
 - [ ] Create, save and reuse custom balloon shapes.
 - [ ] Change balloon kind without losing its text.
 - [ ] Adjust balloon shape using the Variety control.
-- [ ] Reshape balloon bodies interactively using editable control points or equivalent handles, without losing their text or tail connections.
+- [ ] Reshape balloon bodies interactively by inserting, moving and removing outline points and editing straight or curved sections, without losing their text or tail connections.
 - [ ] Add connected extension bubbles, allowing different kinds within an assembly.
 - [ ] Connect bubbles with bendable tails.
 - [ ] Add multiple tails.
@@ -209,7 +217,7 @@ Requirements that are ticked have been validate as required.
 ## Captions and text flow
 
 - [ ] Add caption boxes.
-- [ ] Edit caption shapes and appearance.
+- [ ] Edit caption and text-box shapes and appearance, including inserting and removing outline points to create irregular and curved boxes rather than only rectangles or preset rounded corners.
 - [ ] Edit balloon and caption text in place.
 - [ ] Grow balloons/captions to accommodate entered text.
 - [ ] Add decorative initial capitals to captions.
@@ -252,6 +260,9 @@ Requirements that are ticked have been validate as required.
 ## Decorative titles and sound effects
 
 - [ ] Create titles and sound-effect lettering.
+- [ ] Provide a categorised SFX library with visual previews of ready-to-place sound-effect wording and editable lettering/effect presets.
+- [ ] Drag an SFX entry from the library onto a comic page as editable lettering, allowing changes to its wording, font, shape and effects after placement.
+- [ ] Create and save custom SFX entries, and organise them into reusable library categories.
 - [ ] Edit the wording and font of lettering.
 - [ ] Bend and warp lettering using Bezier controls.
 - [ ] Scale lettering separately from warping it.
@@ -369,11 +380,13 @@ Requirements that are ticked have been validate as required.
 - Specify texture management and document-keyword editing.
 - Confirm click, placement-tool and drag interactions for the element palette, including the plus-marked balloon control.
 - Validate floating, docking and workspace restoration behaviour, including mixed-DPI multi-monitor setups, against candidate Windows GUI frameworks.
+- Define the theme system, the interface elements and button states it can style, and the format for sharing theme presets.
 - Define Layers panel semantics for grouping, selection, clipping, object ownership and stacking order.
 
 ### Shapes, balloons and effects
 
-- Define the custom-shape editing workflow and preset geometry.
+- Define the custom-shape editing workflow and preset geometry, including inserting/removing outline points and mixing straight and curved sections across shape-based objects.
+- Define how reshaping affects contained text, image clipping, balloon tails, fills and effects.
 - Specify balloon Variety and automatic tail behaviour.
 - Define whether balloon clipping follows the panel shape, page bounds or a user-adjustable mask, and how enveloping interacts with other objects.
 - Define the Compact outline option and the three unlabeled stroke controls.
@@ -383,6 +396,7 @@ Requirements that are ticked have been validate as required.
 
 - Confirm examples and exact coverage of dynamic fonts, variable axes and OpenType features.
 - Specify text layout and formatting preservation when applying styles or changing decorative lettering.
+- Define the SFX library's built-in categories and how custom entries are saved and organised.
 
 ### Images and output
 
@@ -407,6 +421,9 @@ This sequence is a proposal, not a reduction of the target scope.
 - Save a custom panel layout and a styled page template; reuse both in another page without losing their intended geometry or appearance.
 - Overlap differently shaped panels, adjust their image crops, and select/edit the intended object reliably.
 - Create speech and thought balloons, customise a shape, add and move tails, and edit the text afterwards.
+- Insert and remove points on a balloon and an irregular caption/text box, mix straight and curved edges, and confirm that contained content and balloon tails remain editable after save/reopen and export.
+- Drag a categorised SFX preset onto a page, customise its wording and effects, then save it as a reusable library entry.
+- Customise application and button colours, save and export a theme, and restore the same appearance after importing it.
 - Place a balloon behind an image while another balloon crosses a panel boundary; reorder them in the Layers panel, save/reopen and verify the same appearance in export.
 - Detach an inspector, move it to a monitor with a different display scaling setting and restore the workspace without inaccessible or incorrectly scaled controls.
 - Correct a misspelling, add a fictional character name to the user dictionary and verify it is recognised in later text editing.
