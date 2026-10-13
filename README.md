@@ -25,27 +25,11 @@ The aim is not to settle for something that merely looks impressive or is "good 
 
 ## How the project will be approached
 
-### 1. Prove the technology can meet our needs
+![Comic Panel Composer direction infographic illustrating the planned delivery approach](docs/Comic%20Panel%20Composer%20Direction%20Infograph.png)
+*Directly vision of how we are going to approach development, and direction*
+*More details of the plan can be found at [Development Direction](docs/DEVELOPMENT_DIRECTION_DRAFT.md)*
 
-Use a few challenging requirements to test the possible graphics, interface, text and export technologies through small, purposeful prototypes. Investigate Rust alongside credible alternatives before choosing a technology stack. These are technical experiments, not the application framework or finished features.
-
-### 2. Decide the first feature phase and establish the foundations
-
-Use the investigation results to prioritise a manageable first set of features, with clear success criteria; defer the rest rather than promising everything at once.
-
-Then establish the real application foundation, keeping the document model, editing operations, rendering, persistence and interface clearly separated. Use the simplest maintainable design that meets the proven needs, and verify it through tests rather than appearance alone.
-
-### 3. Build the first phase and test it
-
-Implement the agreed first phase in manageable increments. Review the code and design, use appropriate automated tests, and perform manual workflow testing. Check that the application behaves correctly with realistic comic projects, not just demonstration examples.
-
-A feature is not accepted merely because it appears to work. It must meet the agreed requirements and the product owner's quality expectations.
-
-### 4. Review the results and decide what comes next
-
-Assess what has actually been achieved, what works well, what needs improvement and whether continuing makes sense. The outcome may be another phase, rework, a change of direction, a pause **or a decision to stop**. No future phase is guaranteed.
-
-### 5. Welcome suggestions throughout — without making promises
+## Welcome suggestions throughout — without making promises
 
 Ideas, feedback and feature suggestions are welcome at any stage, especially from people who create comics. Suggestions will be considered against the product's purpose, priorities, complexity and technical findings.
 
