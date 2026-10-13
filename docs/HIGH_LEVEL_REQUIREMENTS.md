@@ -197,8 +197,12 @@ Requirements that are ticked have been validate as required.
 
 - [ ] Create speech, thought and whisper balloons.
 - [ ] Offer editable presets for comic-lettering conventions including burst/shout balloons, wavy or distressed speech balloons, telepathic balloons and radio/electric/broadcast balloons; allow the user to override the preset shape and styling.
-- [ ] Provide thought-balloon tails made from editable, spaced circles of decreasing size, and whispered-dialogue styles including dashed or muted outlines.
+- [ ] Provide thought-balloon tails with an editable default chain of spaced, decreasing-size circles, and whispered-dialogue styles including dashed or muted outlines.
+- [ ] Independently edit every thought-tail bubble's size, shape (including circles, ovals and custom outlines), position, fill and stroke; add, remove and reorder bubbles without regenerating the entire tail.
+- [ ] Adjust the gaps, direction and progression between individual thought-tail bubbles, allowing uneven spacing or irregular arrangements without automatically changing neighbouring bubbles.
+- [ ] Keep individually edited thought-tail bubbles associated with the parent balloon while allowing independent selection and editing, with their appearance and relationships retained after save/reopen and export.
 - [ ] Insert, position and style editable breath marks (small dash clusters) around dialogue or as standalone closing marks, including use in distressed and telepathic lettering.
+- [ ] Create tail-free telepathic balloons with independently adjustable irregular or overlapping wavy outlines, optional additional contours and editable breath marks on selected sides or corners; retain full shape and decoration editing after applying a preset.
 - [ ] Provide electric/radio balloon tail styles, including editable lightning-bolt paths, and small burst accents where a shout balloon tail joins the body.
 - [ ] Create double-outline balloons with independently adjustable outline spacing, colours, weights and choice of which outline the tail joins.
 - [ ] Create Exclamation and Exclamation 2 balloons.
@@ -417,6 +421,8 @@ Requirements that are ticked have been validate as required.
 - Define how reshaping affects contained text, image clipping, balloon tails, fills and effects.
 - Define the editing workflow and operation ordering for non-destructive Combine/Union, Subtract, Intersect and Exclude, including component selection, nested/compound shapes, cut-outs and shared outline rendering.
 - Specify balloon Variety and automatic tail behaviour.
+- Define selection, movement and association rules for independently editable thought-tail bubbles, including when the parent balloon moves or changes shape.
+- Define how telepathic preset contours and breath marks remain separately editable and whether their relative positions follow balloon reshaping.
 - Define independently adjustable tail-width/taper controls, attachment and terminal squink geometry, including connections to off-panel origins and shape combinations.
 - Define editing and rendering for conventional balloon styles, flat butting, border breaking, multi-outline balloons and directly joined versus connector-joined balloon assemblies.
 - Define whether balloon clipping follows the panel shape, page bounds or a user-adjustable mask, and how enveloping interacts with other objects.
@@ -456,6 +462,8 @@ This sequence is a proposal, not a reduction of the target scope.
 - Create speech and thought balloons, customise a shape, add and move tails, and edit the text afterwards.
 - Draw a custom curved tail, join it to a balloon without a visible line across the connection, then reshape or detach it; verify that the editability and seamless appearance survive save/reopen and export.
 - Resize the wide base, taper and tip of a balloon tail independently without reducing it to a thin stroke; add a squink at the tail tip, move its off-panel origin and verify the joins remain correct on export.
+- Create a thought balloon with several tail bubbles; resize, reshape and reposition each independently, change the gaps, add and remove bubbles, then move the parent balloon and confirm the custom arrangement survives save/reopen and export.
+- Create a tail-free telepathic balloon with overlapping editable wavy contours and repositionable breath marks, customise its appearance and confirm the parts remain editable after save/reopen and export.
 - Construct a burst balloon, a double-outline balloon and a radio/electric balloon; directly join two balloons, create a separate editable connector, and butt/break a balloon into a panel border while preserving independent editing.
 - Use styled editorial captions, emphasis and alternate comic glyphs, music notes/wavy dialogue, hollow and distressed SFX lettering, then check that unusual lettering remains editable after save/reopen and export.
 - Create custom shapes and exercise Combine/Union, Subtract, Intersect and Exclude; move and reshape the source shapes after each operation, transform the result as a whole, and verify that the intended appearance and independent editing survive save/reopen and export.
