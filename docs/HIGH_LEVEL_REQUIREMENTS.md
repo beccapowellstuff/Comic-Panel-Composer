@@ -198,6 +198,7 @@ Requirements that are ticked have been validate as required.
 - [ ] Create speech, thought and whisper balloons.
 - [ ] Offer editable presets for comic-lettering conventions including burst/shout balloons, wavy or distressed speech balloons, telepathic balloons and radio/electric/broadcast balloons; allow the user to override the preset shape and styling.
 - [ ] Provide thought-balloon tails made from editable, spaced circles of decreasing size, and whispered-dialogue styles including dashed or muted outlines.
+- [ ] Insert, position and style editable breath marks (small dash clusters) around dialogue or as standalone closing marks, including use in distressed and telepathic lettering.
 - [ ] Provide electric/radio balloon tail styles, including editable lightning-bolt paths, and small burst accents where a shout balloon tail joins the body.
 - [ ] Create double-outline balloons with independently adjustable outline spacing, colours, weights and choice of which outline the tail joins.
 - [ ] Create Exclamation and Exclamation 2 balloons.
