@@ -143,8 +143,10 @@ Requirements that are ticked have been validate as required.
 - [ ] Use frame-free or invisible panel styles.
 - [ ] Apply caption/panel shape effects with adjustable strength (Factor).
 - [ ] Combine and edit shapes to customise panel, balloon and caption outlines.
-- [ ] Combine overlapping vector shape components using a union/add path operation to create one seamless visible outline, without strokes crossing the joined area.
-- [ ] Keep the original points, curves and components independently editable after combining shapes, rather than permanently flattening or merging away their structure.
+- [ ] Apply non-destructive vector Boolean operations to user-created shapes: Combine/Union (including seamless visual merging), Subtract, Intersect and Exclude, producing correct visible outlines without unwanted internal strokes.
+- [ ] Retain the original shapes as editable components of a compound shape; move, rotate, resize and reshape each component, add or remove components, and change the operation without destroying the original geometry.
+- [ ] Allow the combined result to be moved and transformed as a single page object, while retaining independent access to its constituent shapes and their relative positions.
+- [ ] Update the compound shape's outline, fills, cut-outs and borders as component shapes or operations change, consistently in the canvas, saved project and export.
 - [ ] Save and reuse custom shape presets.
 - [ ] Move a panel and its contents as a unit.
 - [ ] Control clipping to panel boundaries per element and by default; allow elements to extend outside panels.
@@ -391,7 +393,7 @@ Requirements that are ticked have been validate as required.
 
 - Define the custom-shape editing workflow and preset geometry, including inserting/removing outline points and mixing straight and curved sections across shape-based objects.
 - Define how reshaping affects contained text, image clipping, balloon tails, fills and effects.
-- Define non-destructive path-combination behaviour, including component editing, shared outlines and stroke rendering; assess whether Boolean operations beyond union are needed.
+- Define the editing workflow and operation ordering for non-destructive Combine/Union, Subtract, Intersect and Exclude, including component selection, nested/compound shapes, cut-outs and shared outline rendering.
 - Specify balloon Variety and automatic tail behaviour.
 - Define whether balloon clipping follows the panel shape, page bounds or a user-adjustable mask, and how enveloping interacts with other objects.
 - Define the Compact outline option and the three unlabeled stroke controls.
@@ -427,6 +429,7 @@ This sequence is a proposal, not a reduction of the target scope.
 - Overlap differently shaped panels, adjust their image crops, and select/edit the intended object reliably.
 - Create speech and thought balloons, customise a shape, add and move tails, and edit the text afterwards.
 - Draw a custom curved tail, join it to a balloon without a visible line across the connection, then reshape or detach it; verify that the editability and seamless appearance survive save/reopen and export.
+- Create custom shapes and exercise Combine/Union, Subtract, Intersect and Exclude; move and reshape the source shapes after each operation, transform the result as a whole, and verify that the intended appearance and independent editing survive save/reopen and export.
 - Insert and remove points on a balloon and an irregular caption/text box, mix straight and curved edges, and confirm that contained content and balloon tails remain editable after save/reopen and export.
 - Drag a categorised SFX preset onto a page, customise its wording and effects, then save it as a reusable library entry.
 - Customise application and button colours, save and export a theme, and restore the same appearance after importing it.
