@@ -24,15 +24,15 @@ The aim is not to settle for something that merely looks impressive or is "good 
 
 ## How the project will be approached
 
-### 1. Break the requirements into phases
+### 1. Prove the technology can meet our needs
 
-Review and prioritise the requirements into manageable delivery phases. Identify what is essential for a useful first phase, what can come later, and what should be deferred or excluded. Agree the scope and success criteria before treating any phase as a delivery commitment.
+Use a few challenging requirements to test the possible graphics, interface, text and export technologies through small, purposeful prototypes. Investigate Rust alongside credible alternatives before choosing a technology stack. These are technical experiments, not the application framework or finished features.
 
-### 2. Investigate and establish the application foundations
+### 2. Decide the first feature phase and establish the foundations
 
-Research the technology and prove the difficult foundations through small, purposeful prototypes before building out the application.
+Use the investigation results to prioritise a manageable first set of features, with clear success criteria; defer the rest rather than promising everything at once.
 
-Establish a maintainable structure with clear boundaries between the document model, editing operations, rendering, persistence and user interface. Test practical needs such as editable panels, lettering, image handling, save/reopen, export and responsiveness. Choose technologies on evidence rather than enthusiasm, and avoid speculative frameworks or unnecessary complexity.
+Then establish the real application foundation, keeping the document model, editing operations, rendering, persistence and interface clearly separated. Use the simplest maintainable design that meets the proven needs, and verify it through tests rather than appearance alone.
 
 ### 3. Build the first phase and test it
 
