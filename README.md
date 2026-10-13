@@ -6,6 +6,12 @@ A planned local Windows desktop application for arranging existing pictures into
 
 The focus is comic composition rather than drawing or a full painting application.
 
+## Comic Panel Composer at a glance
+
+![Comic Panel Composer infographic showing the planned comic creation workflow and features](docs/Comic%20Panel%20Composer%20Infographic.png)
+
+*Concept illustration of the product vision. Features shown are planned, not implemented.*
+
 ## Project status
 
 Requirements and design stage. No application implementation has been added yet.
