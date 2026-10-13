@@ -172,10 +172,14 @@ Requirements that are ticked have been validate as required.
 - [ ] Update the compound shape's outline, fills, cut-outs and borders as component shapes or operations change, consistently in the canvas, saved project and export.
 - [ ] Save and reuse custom shape presets.
 - [ ] Move a panel and its contents as a unit.
+- [ ] Provide explicit editing modes to move, resize, rotate and otherwise transform the panel frame alone, its contained artwork alone, or the frame and contents together; preserve the chosen content crop and placement when editing the frame only.
+- [ ] Associate each panel with an editable collection of images and other page objects, allowing selection and editing of its contents independently, per-object clipping to the panel shape, and deliberate overflow beyond the frame while retaining the panel relationship.
+- [ ] Remove a panel frame or border without deleting its associated artwork and other objects, keeping that content editable on the page; alternatively allow intentional deletion of both the panel and its contents, with undo/redo support.
 - [ ] Place smaller inset panels, framed images and other editable objects above a larger background panel or page background without merging their artwork; preserve independent crops, borders, clipping and stacking order.
 - [ ] Leave panel gutters and other unoccupied page areas transparent to underlying page artwork when desired, with no forced white fill; allow captions, balloons, sound effects and other objects to occupy or cross gutter space.
 - [ ] Support page-edge, borderless and full-bleed/open panels which can extend into a configured bleed area, with predictable trimming and clipping in print and digital exports.
 - [ ] Divide an existing editable panel into two or more independently editable panels using straight or angled cuts, with adjustable gutters; preserve the existing placed image and allow its assignment/crop in the resulting panels to be edited without data loss.
+- [ ] Offer equal row/column division and manual cuts, with a clear choice to start resulting panels empty, duplicate existing content, or reuse the original source artwork with independently editable positioning and crops; do not silently discard or flatten content.
 - [ ] Adjust horizontal, vertical and irregular gutters between adjacent panels, including zero gaps; optionally keep adjoining frame boundaries aligned when resizing, without preventing deliberate overlaps or unusual spacing.
 - [ ] Control clipping to panel boundaries per element and by default; allow elements to extend outside panels.
 - [ ] Let images, characters, props, leaves, particles and other artwork or effects remain associated with a panel while selected portions extend beyond its frame, without requiring a destructive cut-out of the panel image.
@@ -464,6 +468,8 @@ Requirements that are ticked have been validate as required.
 - Define Layers panel semantics for grouping, selection, clipping, object ownership and stacking order.
 - Decide how page-wide background artwork is represented and edited relative to full-page panels, ordinary layers, panel frames and page textures; both workflows must remain possible.
 - Specify frame division, gutter alignment and content-preservation behaviour when panels are split, moved or resized.
+- Define how panel-owned content is retained or reassigned when a frame is removed, split or combined, including independent frame/content transforms and how the operation is undone.
+- Determine whether combining panel frame outlines also combines their associated content collections, or only their geometry; keep the clipping and layer behaviour explicit and avoid assuming Clip Studio's folder architecture.
 
 ### Shapes, balloons and effects
 
@@ -517,6 +523,8 @@ This sequence is a proposal, not a reduction of the target scope.
 - Place leaves, particles and a partially cut-out character/animal so they extend beyond their panel while the frame line appears behind them and remains visible elsewhere; alter the breakout positions and clipping, save/reopen and check that the intended layering appears on export.
 - Apply an editable top-to-bottom transparency fade to a background or placed image, reveal underlying artwork, adjust the fade endpoints and softness, then save/reopen and export with the fade and original artwork preserved.
 - Split an existing panel with an angled cut, modify the resulting gutters and panel crops independently, and create a borderless image extending into a bleed area; verify saved content, on-screen preview and final trimmed output.
+- Move and resize a frame without altering its image crop, reposition its artwork without moving the frame, then move both together; split the frame into equal and custom divisions with different content-handling choices, and remove its border without losing artwork. Verify undo/redo, panel associations, save/reopen and exported appearance.
+- Combine two panel outlines while retaining their independently editable images and clipping, then confirm that merging frame geometry does not silently merge or delete the associated artwork.
 - Assign a reading sequence to irregular, overlapping panels over a full-page background by clicking them or reordering a list; review optional numbered/arrows overlays, add a styled reader-visible number marker, then confirm the reading sequence survives save/reopen and only intentionally placed markers appear in export.
 - Create speech and thought balloons, customise a shape, add and move tails, and edit the text afterwards.
 - Draw a custom curved tail, join it to a balloon without a visible line across the connection, then reshape or detach it; verify that the editability and seamless appearance survive save/reopen and export.
