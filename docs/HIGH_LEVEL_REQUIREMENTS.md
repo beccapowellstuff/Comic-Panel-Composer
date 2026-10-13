@@ -273,166 +273,166 @@ Requirements that are ticked have been validate as required.
 
 ## Captions and text flow
 
-- [ ] Add caption boxes.
-- [ ] Offer optional caption style presets for location/time, internal monologue, off-panel spoken dialogue and editorial notes, with independently editable wording, typography and shape.
-- [ ] Create editable caption notes or editorial references marked with asterisks, including placement of their related note text elsewhere on the page.
-- [ ] Edit caption and text-box shapes and appearance, including inserting and removing outline points to create irregular and curved boxes rather than only rectangles or preset rounded corners.
-- [ ] Edit balloon and caption text in place.
-- [ ] Grow balloons/captions to accommodate entered text.
-- [ ] Add decorative initial capitals to captions.
-- [ ] Connect captions into threads across a page.
-- [ ] Offset text inside balloons and captions.
-- [ ] Wrap text around captions and bubbles.
-- [ ] Insert manual line breaks to shape dialogue inside a balloon.
+- [x] Add caption boxes.
+- [x] Offer optional caption style presets for location/time, internal monologue, off-panel spoken dialogue and editorial notes, with independently editable wording, typography and shape.
+- [x] Create editable caption notes or editorial references marked with asterisks, including placement of their related note text elsewhere on the page.
+- [x] Edit caption and text-box shapes and appearance, including inserting and removing outline points to create irregular and curved boxes rather than only rectangles or preset rounded corners.
+- [x] Edit balloon and caption text in place.
+- [x] Grow balloons/captions to accommodate entered text.
+- [x] Add decorative initial capitals to captions.
+- [x] Connect captions into threads across a page.
+- [x] Offset text inside balloons and captions.
+- [x] Wrap text around captions and bubbles.
+- [x] Insert manual line breaks to shape dialogue inside a balloon.
 
 ## Fonts and ordinary text formatting
 
-- [ ] Provide a collection of comic and creative fonts.
-- [ ] Discover and offer the installed Windows font library.
-- [ ] Maintain an application-only font library without system-wide installation.
-- [ ] Support advanced font capabilities; confirm coverage of variable font axes, OpenType features, ligatures and kerning.
-- [ ] Browse font families and typefaces.
-- [ ] Preview the selected font.
-- [ ] Choose preset or custom font sizes.
-- [ ] Apply or revert font-panel changes.
-- [ ] Increase or decrease text size with quick toolbar actions.
-- [ ] Mix fonts and formatting within an editable text object, with dependable text selection and wrapping.
-- [ ] Apply bold italic, italics, emphasis, underlining, mixed type sizes and other character-level formatting within a balloon or caption, including oversized emphasis words and deliberately small dialogue inside a large balloon.
-- [ ] Select comic-font glyph alternatives where available, including the crossbar capital I used as a personal pronoun, without forcing an automatic substitution where the font or lettering style differs.
-- [ ] Set text colour.
-- [ ] Align text left, centre, right or justified.
-- [ ] Align text vertically at the top, middle or bottom.
-- [ ] Adjust character spacing.
-- [ ] Adjust line spacing, including dialogue and captions.
-- [ ] Adjust text inset margins.
-- [ ] Apply strikethrough to text.
-- [ ] Outline text glyphs.
-- [ ] Find and replace text in scripts and across comic pages.
-- [ ] Paste text while matching the destination style.
-- [ ] Allow authors to enter and edit comic-lettering punctuation and notation, including double dashes, ellipses, combined question/exclamation marks, editorial asterisks, quotation marks, foreign-language delimiters and musical notes, without automatic rewriting to another convention.
-- [ ] Control manual line breaks, word spacing and hyphenation in balloon and caption text, with the option to avoid unwanted automatic word splits.
-- [ ] Support editable music/singing notation and placing selected ordinary dialogue text along a curved or wavy baseline inside balloons.
-- [ ] Check spelling while typing.
-- [ ] Offer spelling suggestions and replacement actions for misspelt words in balloons, captions, ordinary text and scripts.
-- [ ] Allow adding words to a custom spelling dictionary, including character names and invented terms.
-- [ ] Allow ignoring a spelling suggestion once or for the current document, and managing entries in the custom dictionary.
-- [ ] Use accented letters and umlauts in decorative lettering.
-- [ ] Paste characters from Windows Character Map.
-- [ ] Preserve text layout consistently between editing, save/reopen and export.
-- [ ] Report missing fonts and offer a clear replacement choice.
+- [x] Provide a collection of comic and creative fonts (this is a "if possible" because I can not supply fonts which are not okay ok to share)
+- [x] Discover and offer the installed Windows font library.
+- [x] Maintain an application-only font library without system-wide installation.
+- [x] Support advanced font capabilities; confirm coverage of variable font axes, OpenType features, ligatures and kerning.
+- [x] Browse font families and typefaces.
+- [x] Preview the selected font.
+- [x] Choose preset or custom font sizes.
+- [x] Apply or revert font-panel changes.
+- [x] Increase or decrease text size with quick toolbar actions.
+- [x] Mix fonts and formatting within an editable text object, with dependable text selection and wrapping.
+- [x] Apply bold italic, italics, emphasis, underlining, mixed type sizes and other character-level formatting within a balloon or caption, including oversized emphasis words and deliberately small dialogue inside a large balloon.
+- [x] Select comic-font glyph alternatives where available, including the crossbar capital I used as a personal pronoun, without forcing an automatic substitution where the font or lettering style differs.
+- [x] Set text colour.
+- [x] Align text left, centre, right or justified.
+- [x] Align text vertically at the top, middle or bottom.
+- [x] Adjust character spacing.
+- [x] Adjust line spacing, including dialogue and captions.
+- [x] Adjust text inset margins.
+- [x] Apply strikethrough to text.
+- [x] Outline text glyphs.
+- [x] Find and replace text in scripts and across comic pages.
+- [x] Paste text while matching the destination style.
+- [x] Allow authors to enter and edit comic-lettering punctuation and notation, including double dashes, ellipses, combined question/exclamation marks, editorial asterisks, quotation marks, foreign-language delimiters and musical notes, without automatic rewriting to another convention.
+- [x] Control manual line breaks, word spacing and hyphenation in balloon and caption text, with the option to avoid unwanted automatic word splits.
+- [x] Support editable music/singing notation and placing selected ordinary dialogue text along a curved or wavy baseline inside balloons.
+- [x] Check spelling while typing.
+- [x] Offer spelling suggestions and replacement actions for misspelt words in balloons, captions, ordinary text and scripts.
+- [x] Allow adding words to a custom spelling dictionary, including character names and invented terms.
+- [x] Allow ignoring a spelling suggestion once or for the current document, and managing entries in the custom dictionary.
+- [x] Use accented letters and umlauts in decorative lettering.
+- [x] Paste characters from Windows Character Map.
+- [x] Preserve text layout consistently between editing, save/reopen and export.
+- [x] Report missing fonts and offer a clear replacement choice.
 
 ## Decorative titles and sound effects
 
-- [ ] Create titles and sound-effect lettering.
-- [ ] Provide a categorised SFX library with visual previews of ready-to-place sound-effect wording and editable lettering/effect presets.
-- [ ] Drag an SFX entry from the library onto a comic page as editable lettering, allowing changes to its wording, font, shape and effects after placement.
-- [ ] Create and save custom SFX entries, and organise them into reusable library categories.
-- [ ] Edit the wording and font of lettering.
-- [ ] Bend and warp lettering using Bezier controls.
-- [ ] Scale lettering separately from warping it.
-- [ ] Retain lettering distortion when changing its wording.
-- [ ] Create multiline lettering with adjustable vertical spread.
-- [ ] Place lettering along a path with adjustable horizontal shear.
-- [ ] Adjust glyph spread.
-- [ ] Adjust glyph skew.
-- [ ] Adjust glyph stagger.
-- [ ] Tilt glyphs.
-- [ ] Join glyphs for a combined appearance.
-- [ ] Fill individual glyphs or joined lettering with gradients.
-- [ ] Apply 3D lettering with a selectable extrusion colour.
-- [ ] Enable or disable 3D lighting and adjust its angle.
-- [ ] Adjust 3D horizontal and vertical offset.
-- [ ] Adjust 3D perspective and depth.
-- [ ] Apply reusable lettering presets from a visual gallery that previews actual outlined, gradient and dimensional effects.
-- [ ] Create hollow sound-effect lettering with an outlined glyph and transparent interior, allowing underlying artwork to remain visible.
-- [ ] Apply adjustable non-destructive distressed/eroded details to decorative letters and sound effects (including the comic-lettering 'roach chew' look) without losing the editable wording and styling.
+- [x] Create titles and sound-effect lettering.
+- [x] Provide a categorised SFX library with visual previews of ready-to-place sound-effect wording and editable lettering/effect presets.
+- [x] Drag an SFX entry from the library onto a comic page as editable lettering, allowing changes to its wording, font, shape and effects after placement.
+- [x] Create and save custom SFX entries, and organise them into reusable library categories.
+- [x] Edit the wording and font of lettering.
+- [x] Bend and warp lettering using Bezier controls.
+- [x] Scale lettering separately from warping it.
+- [x] Retain lettering distortion when changing its wording.
+- [x] Create multiline lettering with adjustable vertical spread.
+- [x] Place lettering along a path with adjustable horizontal shear.
+- [x] Adjust glyph spread.
+- [x] Adjust glyph skew.
+- [x] Adjust glyph stagger.
+- [x] Tilt glyphs.
+- [x] Join glyphs for a combined appearance.
+- [x] Fill individual glyphs or joined lettering with gradients.
+- [x] Apply 3D lettering with a selectable extrusion colour.
+- [x] Enable or disable 3D lighting and adjust its angle.
+- [x] Adjust 3D horizontal and vertical offset.
+- [x] Adjust 3D perspective and depth.
+- [x] Apply reusable lettering presets from a visual gallery that previews actual outlined, gradient and dimensional effects.
+- [x] Create hollow sound-effect lettering with an outlined glyph and transparent interior, allowing underlying artwork to remain visible.
+- [x] Apply adjustable non-destructive distressed/eroded details to decorative letters and sound effects (including the comic-lettering 'roach chew' look) without losing the editable wording and styling.
 
 ## Fills, colour and compositing
 
-- [ ] Enable or disable solid-colour fills.
-- [ ] Use gradient fills.
-- [ ] Use image, tinted-image and colourised-image fills.
-- [ ] Control fill-image size and proportions.
-- [ ] Import a custom image as a fill.
-- [ ] Use speedline fills.
-- [ ] Use monochrome or full-colour halftone fills.
-- [ ] Use texture and tiled fills.
-- [ ] Control fill opacity.
-- [ ] Apply a non-destructive gradient transparency/alpha mask (or equivalent editable fade) to images, page backgrounds, fills and other suitable visual objects, revealing underlying layers progressively instead of using only uniform opacity.
-- [ ] Edit gradient transparency direction, start/end positions, opacity stops and transition softness/feathering, including top-to-bottom and bottom-to-top fades; combine the fade with object clipping, layers and existing compositing without flattening its source.
-- [ ] Save, reopen and export gradient transparency with the same visual result while retaining editable fade controls in the project.
-- [ ] Choose colours using a colour wheel and brightness control, with numeric opacity.
-- [ ] Control overall object opacity separately from fill and shadow opacity, including balloons and captions.
-- [ ] Use composite blending.
-- [ ] Apply shared fill, border, shadow and opacity controls to panels and shapes.
+- [x] Enable or disable solid-colour fills.
+- [x] Use gradient fills.
+- [x] Use image, tinted-image and colourised-image fills.
+- [x] Control fill-image size and proportions.
+- [x] Import a custom image as a fill.
+- [x] Use speedline fills.
+- [x] Use monochrome or full-colour halftone fills.
+- [x] Use texture and tiled fills.
+- [x] Control fill opacity.
+- [x] Apply a non-destructive gradient transparency/alpha mask (or equivalent editable fade) to images, page backgrounds, fills and other suitable visual objects, revealing underlying layers progressively instead of using only uniform opacity.
+- [x] Edit gradient transparency direction, start/end positions, opacity stops and transition softness/feathering, including top-to-bottom and bottom-to-top fades; combine the fade with object clipping, layers and existing compositing without flattening its source.
+- [x] Save, reopen and export gradient transparency with the same visual result while retaining editable fade controls in the project.
+- [x] Choose colours using a colour wheel and brightness control, with numeric opacity.
+- [x] Control overall object opacity separately from fill and shadow opacity, including balloons and captions.
+- [x] Use composite blending.
+- [x] Apply shared fill, border, shadow and opacity controls to panels and shapes.
 
 ## Borders, outlines and shadows
 
-- [ ] Enable or disable strokes.
-- [ ] Choose clean or hand-drawn/brush-like stroke styles.
-- [ ] Set stroke colour and width.
-- [ ] Apply multiple outlines, controlling count and alternating colours, including on lettering.
-- [ ] Use the Compact outline option; its precise behaviour still needs inspection.
-- [ ] Customise line endpoints, including arrows and circles.
-- [ ] Adjust the stroke miter limit.
-- [ ] Enable or disable shadows.
-- [ ] Set shadow colour.
-- [ ] Position shadows with a visual pad or numeric X/Y offsets.
-- [ ] Adjust shadow blur and opacity.
+- [x] Enable or disable strokes.
+- [x] Choose from multiple clean or hand-drawn/brush-like stroke styles.
+- [x] Set stroke colour and width.
+- [x] Apply multiple outlines, controlling count and alternating colours, including on lettering.
+- [x] Use the Compact outline option; its precise behaviour still needs inspection.
+- [x] Customise line endpoints, including arrows and circles.
+- [x] Adjust the stroke miter limit.
+- [x] Enable or disable shadows.
+- [x] Set shadow colour.
+- [x] Position shadows with a visual pad or numeric X/Y offsets.
+- [x] Adjust shadow blur and opacity.
 
 ## Reusable styles
 
-- [ ] Choose predefined styles or create custom element styles.
-- [ ] Use styles consistently across pages.
-- [ ] Copy and paste element styles.
-- [ ] Update a named style and propagate changes to elements using it.
-- [ ] Revert an element's style overrides.
-- [ ] Save and load complete stylesheets independently of a comic.
-- [ ] Set a default stylesheet for new comics.
-- [ ] Define reusable default panel appearance, including fills, borders and other supported effects.
+- [x] Choose predefined styles or create custom element styles.
+- [x] Use styles consistently across pages, but can be changed at individual pages if needed.
+- [x] Copy and paste element styles.
+- [x] Update a named style and propagate changes to elements using it.
+- [x] Revert an element's style overrides.
+- [x] Save and load complete stylesheets independently of a comic.
+- [x] Set a default stylesheet for new comics.
+- [x] Define reusable default panel appearance, including fills, borders and other supported effects.
 
 ## Script writing and page composition
 
-- [ ] Start with a blank script or a sample/tutorial script.
-- [ ] Write, import or paste scripts in an integrated editor.
-- [ ] Save a script-only document as a template.
-- [ ] Recognise page, panel, caption, title, sound-effect and balloon keywords in scripts.
-- [ ] Add, edit and remove script keywords.
-- [ ] Map matching dialogue to a balloon kind.
-- [ ] Assign an element style through the script.
-- [ ] Show recognised element icons beside script text.
-- [ ] Drag recognised script elements onto a page to create objects populated with the script text.
-- [ ] Drop script text onto an existing caption to replace its text.
-- [ ] Begin page composition without losing the existing script.
-- [ ] Print a script.
+- [x] Start with a blank script or a sample/tutorial script.
+- [x] Write, import or paste scripts in an integrated editor.
+- [x] Save a script-only document as a template.
+- [x] Recognise page, panel, caption, title, sound-effect and balloon keywords in scripts.
+- [x] Add, edit and remove script keywords.
+- [x] Map matching dialogue to a balloon kind.
+- [x] Assign an element style through the script.
+- [x] Show recognised element icons beside script text.
+- [x] Drag recognised script elements onto a page to create objects populated with the script text.
+- [x] Drop script text onto an existing caption to replace its text.
+- [x] Begin page composition without losing the existing script.
+- [x] Print a script.
+- [x] Export script to standard formats that can be loaded by other systems.
+- [x] Import script from standard formats that can be loaded from other systems.
+- [x] When a script is changed (for example dialogue) include functionality to update dialogue in the comic.
 
 ## Exporting, printing and sharing
 
-- [ ] Export a PDF.
-- [ ] Export high-resolution page images.
-- [ ] Export EPUB.
-- [ ] Export CBZ.
-- [ ] Limit PDF image resolution.
-- [ ] Export all pages or a selected page range.
-- [ ] Preview the first and last pages of an export range.
-- [ ] Preserve DPI information in JPEG export.
-- [ ] Preserve page order, dimensions, crops, text, shapes and effects consistently in output.
-- [ ] Configure export image formats, quality, naming and packaging; final options are to be specified.
-- [ ] Export vertical-scroll webcomic episodes as a continuous image where supported or as an ordered set of sequential images, with selectable output width, format, quality and naming.
-- [ ] Automatically split a scrolling composition into consecutive image slices according to configurable maximum dimensions and file-size limits, keeping adjacent slices visually seamless and in the intended reading order.
-- [ ] Preview and, where possible, adjust proposed webcomic export slice boundaries to avoid awkward cuts through dialogue or important artwork, with clear warnings when destination limits prevent a preferred split.
-- [ ] Offer editable publishing-format presets for common webcomic services, including WEBTOON CANVAS and Tapas, and allow custom profiles; validate exported dimensions, formats and file sizes against the selected profile without hard-coding a platform's rules into the document.
-- [ ] Preview webcomic export at its intended display width so creators can assess text readability, panel spacing and visual continuity before generating publishing files.
-- [ ] Print comics with page-range, copy-count and two-sided options.
-- [ ] Print using AirPrint.
-- [ ] Print a low-resolution proof.
-- [ ] Export an HTML comic presentation with a frame theme and JPEG-quality setting.
-- [ ] Share by email.
-- [ ] Share to Facebook; integration compatibility remains to be established.
+- [x] Export a PDF with selectable DPI.
+- [x] Export high-resolution page images with selectable DPI.
+- [x] Export EPUB with selectable DPI.
+- [x] Export CBZ with selectable DPI.
+- [x] Export all pages or a selected page range.
+- [x] Preview the first and last pages of an export range.
+- [x] Preserve DPI information in JPEG export.
+- [x] Preserve page order, dimensions, crops, text, shapes and effects consistently in output.
+- [x] Configure export image formats, quality, naming and packaging; final options are to be specified.
+- [x] Export vertical-scroll webcomic episodes as a continuous image where supported or as an ordered set of sequential images, with selectable output width, format, quality and naming.
+- [x] Automatically split a scrolling composition into consecutive image slices according to configurable maximum dimensions and file-size limits, keeping adjacent slices visually seamless and in the intended reading order.
+- [x] Preview and, where possible, adjust proposed webcomic export slice boundaries to avoid awkward cuts through dialogue or important artwork, with clear warnings when destination limits prevent a preferred split.
+- [x] Offer editable publishing-format presets for common webcomic services, including WEBTOON CANVAS and Tapas, and allow custom profiles; validate exported dimensions, formats and file sizes against the selected profile without hard-coding a platform's rules into the document.
+- [x] Preview webcomic export at its intended display width so creators can assess text readability, panel spacing and visual continuity before generating publishing files.
+- [x] Print comics with page-range, copy-count and two-sided options.
+- ~~[ ] Print using AirPrint.~~
+- [x] Print a low-resolution proof.
+- [x] Export an HTML comic presentation with a frame theme and JPEG-quality setting.
 
 ## Interface languages
 
-- [ ] Provide Dutch, French, German, Italian, Spanish and Portuguese localisation.
+- ~~[ ] Provide Dutch, French, German, Italian, Spanish and Portuguese localisation.~~
 
 ## References
 
