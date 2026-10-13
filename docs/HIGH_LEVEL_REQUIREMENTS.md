@@ -125,6 +125,7 @@ Requirements that are ticked have been validate as required.
 - [ ] Preserve object stacking, grouping, visibility and locking when saving/reopening, and render visible objects in the same order on export.
 - [ ] Align elements relative to a page or panel.
 - [ ] Use rulers, ruler guides, smart alignment guides and spacing guides.
+- [ ] Offer optional lettering placement guides for speech-tail aiming and near-touching visual tangents between balloons, text, panel borders and other objects, without imposing the suggested layout.
 - [ ] Snap to a grid.
 - [ ] Distribute elements evenly horizontally or vertically.
 - [ ] Resize selected elements using a trackpad pinch.
@@ -195,6 +196,10 @@ Requirements that are ticked have been validate as required.
 ## Balloons and dialogue
 
 - [ ] Create speech, thought and whisper balloons.
+- [ ] Offer editable presets for comic-lettering conventions including burst/shout balloons, wavy or distressed speech balloons, telepathic balloons and radio/electric/broadcast balloons; allow the user to override the preset shape and styling.
+- [ ] Provide thought-balloon tails made from editable, spaced circles of decreasing size, and whispered-dialogue styles including dashed or muted outlines.
+- [ ] Provide electric/radio balloon tail styles, including editable lightning-bolt paths, and small burst accents where a shout balloon tail joins the body.
+- [ ] Create double-outline balloons with independently adjustable outline spacing, colours, weights and choice of which outline the tail joins.
 - [ ] Create Exclamation and Exclamation 2 balloons.
 - [ ] Create Rough and Rough 2 balloons.
 - [ ] Create Robot, Square, Buzz and Space balloons.
@@ -203,11 +208,16 @@ Requirements that are ticked have been validate as required.
 - [ ] Adjust balloon shape using the Variety control.
 - [ ] Reshape balloon bodies interactively by inserting, moving and removing outline points and editing straight or curved sections, without losing their text or tail connections.
 - [ ] Add connected extension bubbles, allowing different kinds within an assembly.
+- [ ] Join adjacent balloons directly as a visually continuous assembly or link them with editable curved/straight connectors; independently reposition component balloons and connectors without unwanted internal outlines.
 - [ ] Connect bubbles with bendable tails.
 - [ ] Add multiple tails.
 - [ ] Draw, add and remove custom tails or point/curve-defined extensions on balloons, captions and other suitable shape-based objects, rather than being limited to predefined tails.
 - [ ] Join an added tail or extension seamlessly to its parent shape without an internal outline at the attachment, while retaining independent editing of the extension's points, curves and attachment.
 - [ ] Adjust tail attachment points and tip positions precisely.
+- [ ] Adjust a balloon tail's width at the attachment, along its length and at its tip independently of its stroke thickness, with point/curve controls for its taper; narrowing the tail must not unintentionally collapse it into a single thin line.
+- [ ] Shape and resize tails with independently movable edges or equivalent width controls, including asymmetric tapers and curves, without breaking the seamless join to the balloon.
+- [ ] Attach editable squinks (small multi-pointed bursts), breath-mark-inspired bursts and other origin markers to tail endpoints; let users move, resize and reshape the marker and connected tail independently.
+- [ ] Make off-panel dialogue tails terminate at a panel border or an off-panel origin using editable straight, curved, arcing or S-shaped paths.
 - [ ] Choose curved, straight, jagged or automatic tails.
 - [ ] Enable automatic tail curvature.
 - [ ] Choose thin, medium or thick tails.
@@ -219,10 +229,14 @@ Requirements that are ticked have been validate as required.
 - [ ] Move a balloon body while leaving its tail tip anchored.
 - [ ] Move a balloon and its tails together using a separate handle.
 - [ ] Keep balloon bodies, tails and text editable after save/reopen, with clean joins between bodies and tails.
+- [ ] Butt balloons flat against panel/page borders with selectable edge alignment and clipping, rather than only overlapping or hiding part of a rounded balloon.
+- [ ] Support breaking panel borders, where a balloon's fill visually continues into a gutter or interrupts a panel border, while keeping the relevant shapes, fills and clipping editable.
 
 ## Captions and text flow
 
 - [ ] Add caption boxes.
+- [ ] Offer optional caption style presets for location/time, internal monologue, off-panel spoken dialogue and editorial notes, with independently editable wording, typography and shape.
+- [ ] Create editable caption notes or editorial references marked with asterisks, including placement of their related note text elsewhere on the page.
 - [ ] Edit caption and text-box shapes and appearance, including inserting and removing outline points to create irregular and curved boxes rather than only rectangles or preset rounded corners.
 - [ ] Edit balloon and caption text in place.
 - [ ] Grow balloons/captions to accommodate entered text.
@@ -244,6 +258,8 @@ Requirements that are ticked have been validate as required.
 - [ ] Apply or revert font-panel changes.
 - [ ] Increase or decrease text size with quick toolbar actions.
 - [ ] Mix fonts and formatting within an editable text object, with dependable text selection and wrapping.
+- [ ] Apply bold italic, italics, emphasis, underlining, mixed type sizes and other character-level formatting within a balloon or caption, including oversized emphasis words and deliberately small dialogue inside a large balloon.
+- [ ] Select comic-font glyph alternatives where available, including the crossbar capital I used as a personal pronoun, without forcing an automatic substitution where the font or lettering style differs.
 - [ ] Set text colour.
 - [ ] Align text left, centre, right or justified.
 - [ ] Align text vertically at the top, middle or bottom.
@@ -254,6 +270,9 @@ Requirements that are ticked have been validate as required.
 - [ ] Outline text glyphs.
 - [ ] Find and replace text in scripts and across comic pages.
 - [ ] Paste text while matching the destination style.
+- [ ] Allow authors to enter and edit comic-lettering punctuation and notation, including double dashes, ellipses, combined question/exclamation marks, editorial asterisks, quotation marks, foreign-language delimiters and musical notes, without automatic rewriting to another convention.
+- [ ] Control manual line breaks, word spacing and hyphenation in balloon and caption text, with the option to avoid unwanted automatic word splits.
+- [ ] Support editable music/singing notation and placing selected ordinary dialogue text along a curved or wavy baseline inside balloons.
 - [ ] Check spelling while typing.
 - [ ] Offer spelling suggestions and replacement actions for misspelt words in balloons, captions, ordinary text and scripts.
 - [ ] Allow adding words to a custom spelling dictionary, including character names and invented terms.
@@ -286,6 +305,8 @@ Requirements that are ticked have been validate as required.
 - [ ] Adjust 3D horizontal and vertical offset.
 - [ ] Adjust 3D perspective and depth.
 - [ ] Apply reusable lettering presets from a visual gallery that previews actual outlined, gradient and dimensional effects.
+- [ ] Create hollow sound-effect lettering with an outlined glyph and transparent interior, allowing underlying artwork to remain visible.
+- [ ] Apply adjustable non-destructive distressed/eroded details to decorative letters and sound effects (including the comic-lettering 'roach chew' look) without losing the editable wording and styling.
 
 ## Fills, colour and compositing
 
@@ -395,6 +416,8 @@ Requirements that are ticked have been validate as required.
 - Define how reshaping affects contained text, image clipping, balloon tails, fills and effects.
 - Define the editing workflow and operation ordering for non-destructive Combine/Union, Subtract, Intersect and Exclude, including component selection, nested/compound shapes, cut-outs and shared outline rendering.
 - Specify balloon Variety and automatic tail behaviour.
+- Define independently adjustable tail-width/taper controls, attachment and terminal squink geometry, including connections to off-panel origins and shape combinations.
+- Define editing and rendering for conventional balloon styles, flat butting, border breaking, multi-outline balloons and directly joined versus connector-joined balloon assemblies.
 - Define whether balloon clipping follows the panel shape, page bounds or a user-adjustable mask, and how enveloping interacts with other objects.
 - Define the Compact outline option and the three unlabeled stroke controls.
 - Factor represents caption/panel effect strength. Filter Level represents filter strength; detailed parameter behaviour still needs defining.
@@ -403,6 +426,8 @@ Requirements that are ticked have been validate as required.
 
 - Confirm examples and exact coverage of dynamic fonts, variable axes and OpenType features.
 - Specify text layout and formatting preservation when applying styles or changing decorative lettering.
+- Use Blambot's Comic Book Grammar & Tradition as a reference catalogue for supported comic-lettering conventions; treat its editorial rules as optional guidance, not enforced restrictions on creators.
+- Validate character-level emphasis, alternate glyphs, punctuation, caption notes and music/singing text against the selected fonts and text engine.
 - Define the SFX library's built-in categories and how custom entries are saved and organised.
 
 ### Images and output
@@ -429,6 +454,9 @@ This sequence is a proposal, not a reduction of the target scope.
 - Overlap differently shaped panels, adjust their image crops, and select/edit the intended object reliably.
 - Create speech and thought balloons, customise a shape, add and move tails, and edit the text afterwards.
 - Draw a custom curved tail, join it to a balloon without a visible line across the connection, then reshape or detach it; verify that the editability and seamless appearance survive save/reopen and export.
+- Resize the wide base, taper and tip of a balloon tail independently without reducing it to a thin stroke; add a squink at the tail tip, move its off-panel origin and verify the joins remain correct on export.
+- Construct a burst balloon, a double-outline balloon and a radio/electric balloon; directly join two balloons, create a separate editable connector, and butt/break a balloon into a panel border while preserving independent editing.
+- Use styled editorial captions, emphasis and alternate comic glyphs, music notes/wavy dialogue, hollow and distressed SFX lettering, then check that unusual lettering remains editable after save/reopen and export.
 - Create custom shapes and exercise Combine/Union, Subtract, Intersect and Exclude; move and reshape the source shapes after each operation, transform the result as a whole, and verify that the intended appearance and independent editing survive save/reopen and export.
 - Insert and remove points on a balloon and an irregular caption/text box, mix straight and curved edges, and confirm that contained content and balloon tails remain editable after save/reopen and export.
 - Drag a categorised SFX preset onto a page, customise its wording and effects, then save it as a reusable library entry.
@@ -452,3 +480,4 @@ This sequence is a proposal, not a reduction of the target scope.
 - [Comic Life 3 Mac release history](https://plasq.com/downloads/comiclife3/mac/history/)
 - [Comic Life 4 product page](https://plasq.com/apps/comiclife4/mac/)
 - [Comic Life version comparison](https://plasq.com/apps/comiclife4/why-upgrade-mac/)
+- [Blambot Comic Book Grammar & Tradition](https://blambot.com/pages/comic-book-grammar-tradition) — examples of visual lettering conventions and editorial practices; not mandatory style rules.
