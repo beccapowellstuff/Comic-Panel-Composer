@@ -178,6 +178,9 @@ Requirements that are ticked have been validate as required.
 - [ ] Divide an existing editable panel into two or more independently editable panels using straight or angled cuts, with adjustable gutters; preserve the existing placed image and allow its assignment/crop in the resulting panels to be edited without data loss.
 - [ ] Adjust horizontal, vertical and irregular gutters between adjacent panels, including zero gaps; optionally keep adjoining frame boundaries aligned when resizing, without preventing deliberate overlaps or unusual spacing.
 - [ ] Control clipping to panel boundaries per element and by default; allow elements to extend outside panels.
+- [ ] Let images, characters, props, leaves, particles and other artwork or effects remain associated with a panel while selected portions extend beyond its frame, without requiring a destructive cut-out of the panel image.
+- [ ] Render a panel's border behind selected breakout artwork while retaining visible border segments elsewhere, including where an element crosses the border into the gutter.
+- [ ] Control panel-border breakout behaviour for individual objects or edges without disabling the entire frame, and retain independent editing, clipping and stacking of the panel, border and breakout objects.
 - [ ] Allow balloons to overlap panel borders and protrude beyond a panel while remaining editable.
 - [ ] Support fully visible balloons, panel-clipped balloons and balloons partially cut off at panel or page edges for intentional off-panel dialogue effects.
 
@@ -351,6 +354,9 @@ Requirements that are ticked have been validate as required.
 - [ ] Use monochrome or full-colour halftone fills.
 - [ ] Use texture and tiled fills.
 - [ ] Control fill opacity.
+- [ ] Apply a non-destructive gradient transparency/alpha mask (or equivalent editable fade) to images, page backgrounds, fills and other suitable visual objects, revealing underlying layers progressively instead of using only uniform opacity.
+- [ ] Edit gradient transparency direction, start/end positions, opacity stops and transition softness/feathering, including top-to-bottom and bottom-to-top fades; combine the fade with object clipping, layers and existing compositing without flattening its source.
+- [ ] Save, reopen and export gradient transparency with the same visual result while retaining editable fade controls in the project.
 - [ ] Choose colours using a colour wheel and brightness control, with numeric opacity.
 - [ ] Control overall object opacity separately from fill and shadow opacity, including balloons and captions.
 - [ ] Use composite blending.
@@ -464,6 +470,8 @@ Requirements that are ticked have been validate as required.
 - Define the custom-shape editing workflow and preset geometry, including inserting/removing outline points and mixing straight and curved sections across shape-based objects.
 - Define how reshaping affects contained text, image clipping, balloon tails, fills and effects.
 - Define frame border visibility and transparent-gutter behaviour for inset panels, borderless/open panels and panels extending beyond the page.
+- Define per-object panel breakout and border stacking behaviour, including association with a panel, selective clipping, and how borders are hidden behind extending artwork.
+- Define where editable gradient transparency is applied relative to fills, image adjustments, clipping masks, borders and object-level opacity.
 - Define the editing workflow and operation ordering for non-destructive Combine/Union, Subtract, Intersect and Exclude, including component selection, nested/compound shapes, cut-outs and shared outline rendering.
 - Specify balloon Variety and automatic tail behaviour.
 - Define selection, movement and association rules for independently editable thought-tail bubbles, including when the parent balloon moves or changes shape.
@@ -506,6 +514,8 @@ This sequence is a proposal, not a reduction of the target scope.
 - Save a custom panel layout and a styled page template; reuse both in another page without losing their intended geometry or appearance.
 - Overlap differently shaped panels, adjust their image crops, and select/edit the intended object reliably.
 - Place an adjustable full-page background image, overlay independently cropped and bordered inset panels, and place narration captions in the visible background/gutters; confirm panel moves, background adjustments and layering remain editable after save/reopen and render correctly in export.
+- Place leaves, particles and a partially cut-out character/animal so they extend beyond their panel while the frame line appears behind them and remains visible elsewhere; alter the breakout positions and clipping, save/reopen and check that the intended layering appears on export.
+- Apply an editable top-to-bottom transparency fade to a background or placed image, reveal underlying artwork, adjust the fade endpoints and softness, then save/reopen and export with the fade and original artwork preserved.
 - Split an existing panel with an angled cut, modify the resulting gutters and panel crops independently, and create a borderless image extending into a bleed area; verify saved content, on-screen preview and final trimmed output.
 - Assign a reading sequence to irregular, overlapping panels over a full-page background by clicking them or reordering a list; review optional numbered/arrows overlays, add a styled reader-visible number marker, then confirm the reading sequence survives save/reopen and only intentionally placed markers appear in export.
 - Create speech and thought balloons, customise a shape, add and move tails, and edit the text afterwards.
