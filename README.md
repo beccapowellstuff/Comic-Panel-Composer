@@ -56,4 +56,6 @@ Suggestions remain proposals until agreed. Once an implementation increment is a
 
 ## Requirements
 
-See [High-Level Requirements](docs/HIGH_LEVEL_REQUIREMENTS.md) for the full scope, open questions and proposed delivery sequence.
+See [High-Level Requirements](docs/HIGH_LEVEL_REQUIREMENTS.md) for the product scope and capability requirements.
+
+Unresolved questions, provisional delivery ideas and example acceptance scenarios are captured separately in [Project Planning (DRAFT)](docs/PROJECT_PLANNING_DRAFT.md). That document is for information capture only; it is not an approved plan.
