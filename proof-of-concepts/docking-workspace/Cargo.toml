@@ -10,3 +10,14 @@ egui = { version = "=0.36.2", features = ["serde"] }
 egui_dock = { version = "=0.21.1", features = ["serde"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+
+# TEMPORARY TECHNOLOGY EVALUATION ONLY:
+# Test the Windows 11 mixed-DPI dragging fix from winit PR #4341,
+# backported to winit 0.30.13 (which eframe 0.36.2 requires).
+# Pinned to the exact reviewed commit, not a moving Git branch.
+# Do not adopt this fork for product development without review.
+# https://github.com/rust-windowing/winit/pull/4341
+# https://github.com/rust-windowing/winit/issues/4600
+# https://github.com/bigtree108-dmytro/winit/commit/42b2007c000ff854ce43486f650190791067c890
+[patch.crates-io]
+winit = { git = "https://github.com/bigtree108-dmytro/winit.git", rev = "42b2007c000ff854ce43486f650190791067c890" }
