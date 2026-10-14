@@ -8,7 +8,7 @@
 
 #[cfg(windows)]
 pub fn raise_tool_windows_without_focus() -> usize {
-    use windows_sys::Win32::Foundation::{BOOL, HWND, LPARAM};
+    use windows_sys::Win32::Foundation::{HWND, LPARAM};
     use windows_sys::Win32::UI::WindowsAndMessaging::{
         EnumWindows, GetWindowTextW, GetWindowThreadProcessId, HWND_TOP, IsWindowVisible,
         SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SetWindowPos,
@@ -19,7 +19,7 @@ pub fn raise_tool_windows_without_focus() -> usize {
         process_id: u32,
     }
 
-    unsafe extern "system" fn collect(hwnd: HWND, arg: LPARAM) -> BOOL {
+    unsafe extern "system" fn collect(hwnd: HWND, arg: LPARAM) -> i32 {
         // SAFETY: The pointer refers to a live stack value for the entire
         // synchronous EnumWindows call. No pointer escapes the callback.
         let found = unsafe { &mut *(arg as *mut Found) };
