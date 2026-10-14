@@ -60,6 +60,56 @@ impl Default for SavedWorkspace {
     }
 }
 
+
+// egui_dock creates new nodes with egui::Rect::NOTHING (infinite
+// coordinates). serde_json writes those as null, which cannot deserialize
+// into f32. Serialise a COPY with neutral rectangles instead, leaving the
+// live, as-yet-unlaid-out nodes unchanged for egui_dock to draw normally.
+fn finite_rect(rect: egui::Rect) -> bool {
+    [rect.min.x, rect.min.y, rect.max.x, rect.max.y]
+        .into_iter()
+        .all(f32::is_finite)
+}
+
+fn serialisable_dock(dock: &mut DockState<Panel>) {
+    let neutral = egui::Rect::from_min_size(egui::Pos2::ZERO, egui::Vec2::ZERO);
+    for (_, node) in dock.iter_all_nodes_mut() {
+        match node {
+            egui_dock::Node::Leaf(leaf) => {
+                if !finite_rect(leaf.rect) {
+                    leaf.rect = neutral;
+                }
+                if !finite_rect(leaf.viewport) {
+                    leaf.viewport = neutral;
+                }
+                if !leaf.scroll.is_finite() {
+                    leaf.scroll = 0.0;
+                }
+            }
+            egui_dock::Node::Vertical(split) | egui_dock::Node::Horizontal(split) => {
+                if !finite_rect(split.rect) {
+                    split.rect = neutral;
+                }
+                if !split.fraction.is_finite() {
+                    split.fraction = 0.5;
+                }
+            }
+            egui_dock::Node::Empty => {}
+        }
+    }
+}
+
+impl SavedWorkspace {
+    fn to_json(&self) -> Result<String, serde_json::Error> {
+        let mut copy = self.clone();
+        serialisable_dock(&mut copy.dock);
+        for dock in copy.native_docks.iter_mut().flatten() {
+            serialisable_dock(dock);
+        }
+        serde_json::to_string_pretty(&copy)
+    }
+}
+
 fn state_path() -> PathBuf {
     let root = std::env::var_os("LOCALAPPDATA")
         .map(PathBuf::from)
@@ -116,7 +166,7 @@ impl WorkspaceApp {
         let path = state_path();
         let parent = path.parent().ok_or("Missing settings directory")?;
         fs::create_dir_all(parent).map_err(|error| error.to_string())?;
-        let contents = serde_json::to_string_pretty(&self.workspace)
+        let contents = self.workspace.to_json()
             .map_err(|error| error.to_string())?;
         fs::write(&path, contents).map_err(|error| error.to_string())
     }
@@ -607,7 +657,7 @@ mod grouping_tests {
             Panel::Inspector, Panel::Pages,
         ]));
         saved.native_position_px[2] = Some([4102, 568]);
-        let json = serde_json::to_string(&saved).unwrap();
+        let json = saved.to_json().unwrap();
         let restored: SavedWorkspace = serde_json::from_str(&json).unwrap();
 
         let group = restored.native_docks[2].as_ref().unwrap();
@@ -619,7 +669,7 @@ mod grouping_tests {
     #[test]
     fn legacy_workspace_without_native_docks_remains_readable() {
         let old = SavedWorkspace::default();
-        let mut value = serde_json::to_value(old).unwrap();
+        let mut value: serde_json::Value = serde_json::from_str(&old.to_json().unwrap()).unwrap();
         value.as_object_mut().unwrap().remove("native_docks");
         let restored: SavedWorkspace = serde_json::from_value(value).unwrap();
         assert!(restored.native_docks.iter().all(Option::is_none));
