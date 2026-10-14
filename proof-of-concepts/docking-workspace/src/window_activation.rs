@@ -35,7 +35,7 @@ pub fn raise_tool_windows_without_focus() -> usize {
         let n = unsafe { GetWindowTextW(hwnd, buffer.as_mut_ptr(), buffer.len() as i32) };
         if n > 0 {
             let title = String::from_utf16_lossy(&buffer[..n as usize]);
-            if ["Pages", "Layers", "Inspector"].iter().any(|name| {
+            if ["Pages", "Layers", "Inspector"].iter().any(|&name| {
                 title.starts_with(name) && title.ends_with(" — native Windows window")
             }) {
                 found.handles.push(hwnd);
