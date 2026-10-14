@@ -1,10 +1,55 @@
 # PoC 2 — Docking, native windows and DPI
 
-**Status: user testing confirms that patched winit corrected the mixed-DPI native window dragging failure. Internal tab docking/grouping, layout save/restore and the detached Inspector's shared state were also confirmed working. Native windows retaining their separate monitor positions on restart failed in the previous version; this branch implements a one-time restore for Windows testing. Cross-native-window drag docking is not implemented.**
+**Status: user testing confirms patched winit resolved mixed-DPI dragging, and internal docking, layout persistence and shared state work. A subsequent test found native position restoration can strand windows off-screen. This branch implements an explicit physical-coordinate restore and on-screen recovery action; Windows validation is pending. Cross-native-window tab docking remains unimplemented.**
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
-## Window-position restoration follow-up — this branch
+## Safe physical window placement — current branch
+
+**Branch:** `poc/native-window-position-safe` (based on `poc/native-window-position-restore`, retaining the same experimental patched winit dependency).
+
+**Observed user result before this change:** detached panels restored to the left monitor but a panel saved on the right became invisible and Windows keyboard monitor-moving shortcuts did not recover it. The saved value reported for one native window was `position: [4102.0, 568.0]` and `inner_size: [319.0, 328.0]`.
+
+**Cause under investigation:** in egui 0.36.2, `ViewportInfo.outer_rect` is stored in egui points (physical coordinates divided by the current viewport's pixels per point), but `ViewportBuilder.with_position` goes through winit logical coordinates at the newly created window's initial DPI. This can place a right-monitor window off-screen when it starts on the 150%-scaled primary monitor. The correction below still requires Windows testing.
+
+**Changes in this branch:**
+
+- New saved field `native_position_px`: virtual-desktop **physical pixel positions** for detached windows. The original `native_bounds` field remains, retaining layout compatibility and window-size information; its historical *position* values are ignored because their scaling is ambiguous.
+- A native window is initially created with its remembered size but **without an initial position**. Only in its first native callback, the saved pixel location is converted into egui points using that particular viewport's actual pixels-per-point and applied **once** using `ViewportCommand::OuterPosition`. Subsequent frames never send more positioning commands.
+- On Windows, the target position is checked against the nearest connected monitor's actual working area through `MonitorFromRect` and `GetMonitorInfoW`. The upper-left part of the title bar is clamped to a reachable part of that monitor; a disconnected monitor's position therefore falls back to the nearest connected one. If the Windows API fails, no saved positioning command is sent.
+- **Recover floating panels** in the main application's toolbar redocks all native panels and clears their saved OS bounds. It intentionally keeps document state. **Save workspace** afterwards if you want the recovered layout persisted.
+- Four pure geometry tests cover left/negative positions, valid right positions, extreme off-screen restoration and an off-top/left window. They do **not** establish that Windows positioning works; use the manual checks.
+
+### Run the current test
+
+From the repository's PowerShell terminal, preserve local modifications if any:
+
+```powershell
+git status --short
+git fetch origin
+git switch --track origin/poc/native-window-position-safe
+cargo test --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+cargo run --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+```
+
+If the branch is already checked out locally, use `git switch poc/native-window-position-safe` instead of `git switch --track`.
+
+**Important on the first run:** Your existing JSON was saved by the previous version, so it does **not** contain `native_position_px`. The old dock configuration and native-detached flags should still load, but the native windows may start on the primary display. Position them on the desired monitors and click **Save workspace** to create physical-coordinate records.
+
+1. Detach Pages and Inspector; place one on **monitor 2 (left, 100%)** and the other on **monitor 1 (right, 100%)**, with the main workspace on **monitor 3 (150%)**.
+2. Change both floating-window sizes; save the workspace, close the app, reopen. **Both should return to their correct monitors** and usable positions and sizes, and neither should shimmer.
+3. Repeat the save/restart test after swapping the two tool windows between monitors.
+4. Check **Win + Shift + Arrow**, snapping and mouse hit targets still work.
+5. Test **Recover floating panels** while one or more native tool windows are open (even if one is off-screen): they should return to docked tabs in the main application. Click Save workspace, restart and verify none reopen off-screen.
+6. Optional resilience check: while the app is closed, disconnect or disable a secondary display that held a native window, restart, and verify the panel appears on a connected display. Reconnect and restore the arrangement afterwards.
+
+**Criteria:** No lost/off-screen windows on a stable three-monitor setup. At least a draggable title-bar section remains on a connected monitor when the layout changes. Recover must be available independently of the native windows. Display/DPI behaviour must remain stable using the patched winit dependency.
+
+**Verification:** The GitHub source changes and API signatures were inspected, but the new code has **not** yet been compiled or exercised on the user's Windows hardware. Treat the behaviour as unverified until the test is run. A successful test still does not solve native cross-window dock-and-merge.
+
+---
+
+## Previous position-restoration experiment (historical)
 
 This branch, `poc/native-window-position-restore`, builds on the experimental patched-winit branch without altering the successful mixed-DPI dependency fix. **The new source change restores each floating native window's saved outer position and inner size only when that window is first created**, never repeatedly during dragging. This is intended to restore detached panels to their previous monitors and dimensions.
 
