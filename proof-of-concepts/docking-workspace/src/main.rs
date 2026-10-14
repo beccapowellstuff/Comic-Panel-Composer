@@ -462,6 +462,7 @@ impl eframe::App for WorkspaceApp {
         let mut save_requested = false;
         let mut reset_requested = false;
         let mut recover_requested = false;
+        let mut bring_requested = false;
         let mut detach_requests = Vec::new();
 
         egui::CentralPanel::default().show(ui, |ui| {
@@ -475,6 +476,9 @@ impl eframe::App for WorkspaceApp {
                 }
                 if ui.button("Recover floating panels").clicked() {
                     recover_requested = true;
+                }
+                if ui.button("Bring tool windows forward").clicked() {
+                    bring_requested = true;
                 }
             });
             ui.label("Dragging a dock tab out creates an IN-APP egui window, not an OS window.");
@@ -504,6 +508,10 @@ impl eframe::App for WorkspaceApp {
             let _raised = window_activation::raise_tool_windows_without_focus();
         }
         self.main_was_focused = main_focused;
+        if bring_requested {
+            let count = window_activation::raise_tool_windows_without_focus();
+            self.status = format!("Requested nonactivating raise for {count} native tool window(s)");
+        }
 
         if recover_requested {
             self.recover_all_windows(&ctx);
