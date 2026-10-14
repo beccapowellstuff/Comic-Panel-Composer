@@ -4,7 +4,38 @@
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
-## Experimental winit fix — this branch only
+## Window-position restoration follow-up — this branch
+
+This branch, `poc/native-window-position-restore`, builds on the experimental patched-winit branch without altering the successful mixed-DPI dependency fix. **The new source change restores each floating native window's saved outer position and inner size only when that window is first created**, never repeatedly during dragging. This is intended to restore detached panels to their previous monitors and dimensions.
+
+### Windows test (not yet verified)
+
+From the repository root, check `git status --short` and preserve local changes before switching branches.
+
+```powershell
+git fetch origin
+git switch --track origin/poc/native-window-position-restore
+cargo test --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+cargo run --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+```
+
+If you've already switched to this branch before, use `git switch poc/native-window-position-restore` instead.
+
+1. **Detach** Pages, Layers and Inspector into native windows.
+2. Move one floating window to monitor 2 (left; 100% scaling) and another to monitor 1 (right; 100% scaling). Keep the main workspace on monitor 3 (150%). Resize the floating windows.
+3. Click **Save workspace** and exit the application.
+4. Start the app again. Check that the detached panels return to their respective monitors and approximate previous positions and sizes.
+5. Drag them between monitors again; check for DPI bouncing, runaway resizing, blurry text and incorrect mouse hit targets.
+6. Try **Win + Shift + Left/Right** and **Win + Left/Right**. These must remain stable.
+7. Test the Reset button, remembering it resets *in-memory* layout only. To make the default layout the newly saved layout, press **Save workspace** after Reset.
+
+**Known limitations:** Window positions and sizes are currently stored in egui UI points, not a monitor-independent Windows physical-coordinate representation. Saved placement may need further work if DPI conversion alters the result, monitors are unplugged, or the monitor arrangement changes. A failed restore is **a result to report**, not evidence of a completed feature. The code is not yet compiled in this session; user testing on Windows is required.
+
+**Next separate experiment:** provide tabbed `egui_dock` containers inside native viewports and investigate *real* drag-and-drop between independent Windows windows. This is **not implemented by the position-restore change**. Internal floating-tab grouping is already confirmed working and must not be mistaken for cross-OS-window docking.
+
+---
+
+## Experimental winit fix — pinned dependency used by this branch
 
 This branch, `poc/docking-workspace-winit-fix`, tests **exactly the same application** as `poc/docking-workspace` using a [winit 0.30.13 backport of upstream DPI fix #4341](https://github.com/bigtree108-dmytro/winit/commit/42b2007c000ff854ce43486f650190791067c890). The dependency is pinned to that exact commit in `Cargo.toml` using Cargo's `[patch.crates-io]` mechanism.
 
@@ -78,7 +109,7 @@ egui/eframe supports genuine native desktop windows through viewports. However, 
 - **Inspector**: change layer opacity and visibility.
 - **DockArea**: rearrange and resize tabs; dragging a tab out creates an **in-application floating egui window**.
 - **Native Windows**: click **Detach as a REAL Windows window** inside Pages, Layers or Inspector to create a separate OS-level viewport. Click **Dock back into main workspace** to return that panel to the docking tree.
-- **Save workspace**: saves dock layout, detached panel flags, sample state and observed native window bounds as JSON under `%LOCALAPPDATA%\ComicPanelComposerPoCs\docking-workspace.json` (uses the system temporary directory if `LOCALAPPDATA` is unavailable). The file is read on restart. **Diagnostic limitation:** saved native window positions and sizes are currently *recorded but not reapplied*. This is intentional while we isolate the mixed-DPI feedback loop. Other state/layout restoration is still under test.
+- **Save workspace**: saves dock layout, detached panel flags, sample state and observed native window bounds as JSON under `%LOCALAPPDATA%\ComicPanelComposerPoCs\docking-workspace.json` (uses the system temporary directory if `LOCALAPPDATA` is unavailable). The file is read on restart. **On this branch:** saved native-window placement is reapplied only once when opening a window. Multi-monitor restore is awaiting real Windows verification.
 - **Reset workspace**: restores the default layout in memory; it does not delete the saved layout file.
 
 This uses **egui/eframe 0.36.2 and egui_dock 0.21.1** to evaluate currently available features, independent of the earlier egui 0.27.2 polygon experiment.
@@ -110,7 +141,7 @@ The first build will download and compile new dependencies, so it will take long
 | Second monitor | Move each native window outside the main application's boundaries onto another monitor. | Not tested |
 | Mixed DPI | Move a window between monitors set to different scaling (e.g. 100% and 150%); assess sizes, text sharpness and hit targets. | **Failed original and unpatched diagnostic tests:** jumping/resizing/shimmering and mouse mismatch moving to left monitor; patched dependency awaiting re-test. |
 | Window management | Focus another application, minimise/restore the main window, close a floating window; check unexpected focus/visibility issues. | Not tested |
-| Save/restore | Arrange and detach panels, **Save workspace**, close application, restart; inspect dock placement, native windows and bounds. | Not tested |
+| Save/restore | Arrange and detach panels, **Save workspace**, close application, restart; inspect dock placement, native windows and bounds. | Internal dock layout already confirmed by user; **native monitor/position restoration awaiting testing on this branch**. |
 | Native drag-out | **Drag a docked tab directly into a NEW OS-level window without pressing a button.** | **Not implemented** |
 | Native drag-back | **Drag a native OS window's panel back into a dock target.** | **Not implemented** |
 
@@ -118,7 +149,7 @@ The first build will download and compile new dependencies, so it will take long
 
 - **The two direct drag-to-native behaviours are mandatory requirements, but are not implemented here.** In this version, native detach/redock are buttons. This is *partial evidence only*, not a pass against the full requirement.
 - The implementation uses `show_viewport_immediate` for simpler shared state. egui documents additional repaint costs with multiple immediate viewports. Responsiveness and CPU usage need real measurement; evaluate `show_viewport_deferred` if necessary.
-- Native window bounds are still observed and serialised, but no longer fed back into the live viewport builder on every frame. This isolates a likely DPI-dependent position/size feedback loop; **restoring saved native-window placement is temporarily disabled**. We must assess both DPI movement and placement persistence separately before approving the approach.
+- Native window bounds are observed and serialised, and are applied once at window creation. This avoids repeated per-frame position commands. Behaviour across mixed-DPI monitors, display changes and keyboard snapping still needs manual verification.
 - `egui_dock` floating surfaces are internal egui windows; they are intentionally not presented as an alternative satisfying independent native window requirements.
 - This experiment does not evaluate multi-document windows, production workspace theming, accessibility, or robust failure recovery.
 - If the implementation proves difficult to make reliable, run an equivalent C++/Qt docking experiment rather than lowering the requirements.
