@@ -82,7 +82,7 @@ impl WorkspaceApp {
         Self { workspace, status }
     }
 
-    fn save(&self) -> Result<(), String> {
+    fn save_workspace_to_file(&self) -> Result<(), String> {
         let path = state_path();
         let parent = path.parent().ok_or("Missing settings directory")?;
         fs::create_dir_all(parent).map_err(|error| error.to_string())?;
@@ -157,7 +157,7 @@ impl WorkspaceApp {
                                 "NOT a native window: the backend embedded this viewport",
                             );
                         } else {
-                            ui.label(format!("Viewport class: {class:?}"));
+                            ui.label("Native viewport requested — verify independent window behaviour");
                         }
                         if ui.button("Dock back into main workspace").clicked() {
                             request_redock = true;
@@ -326,7 +326,7 @@ impl eframe::App for WorkspaceApp {
             self.status = "Workspace reset in memory (saved layout is unchanged).".to_owned();
         }
         if save_requested {
-            self.status = match self.save() {
+            self.status = match self.save_workspace_to_file() {
                 Ok(()) => format!("Workspace saved to {}", state_path().display()),
                 Err(error) => format!("Save failed: {error}"),
             };
