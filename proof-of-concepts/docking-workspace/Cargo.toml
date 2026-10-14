@@ -11,6 +11,10 @@ egui_dock = { version = "=0.21.1", features = ["serde"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
+# Read a saved floating window's nearest visible monitor/work area. Windows only.
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61.2", features = ["Win32_Foundation", "Win32_Graphics_Gdi"] }
+
 # TEMPORARY TECHNOLOGY EVALUATION ONLY:
 # Test the Windows 11 mixed-DPI dragging fix from winit PR #4341,
 # backported to winit 0.30.13 (which eframe 0.36.2 requires).
