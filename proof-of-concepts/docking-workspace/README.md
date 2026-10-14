@@ -4,6 +4,66 @@
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
+## Experimental winit fix — this branch only
+
+This branch, `poc/docking-workspace-winit-fix`, tests **exactly the same application** as `poc/docking-workspace` using a [winit 0.30.13 backport of upstream DPI fix #4341](https://github.com/bigtree108-dmytro/winit/commit/42b2007c000ff854ce43486f650190791067c890). The dependency is pinned to that exact commit in `Cargo.toml` using Cargo's `[patch.crates-io]` mechanism.
+
+**Purpose:** determine whether the mixed-DPI bouncing, repeated resize, shimmering and bad pointer interaction observed on the user's three monitors originate in winit's Windows 11 DPI handling. This is not a permanent dependency recommendation; the code comes from a third-party fork. Review and official upstream support would be necessary before product use.
+
+From the existing repository folder, first check for local changes, then switch to this experimental branch:
+
+```powershell
+git status --short
+git fetch origin
+git switch --track origin/poc/docking-workspace-winit-fix
+```
+
+If the experimental branch is already present locally, use `git switch poc/docking-workspace-winit-fix` instead of `git switch --track`.
+
+Confirm that Cargo has selected the patched dependency:
+
+```powershell
+cargo tree --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml -i winit
+```
+
+The output should identify `winit v0.30.13` from `github.com/bigtree108-dmytro/winit`, with commit `42b2007c...`. If it instead shows the registry copy, **stop and report that**, rather than attributing the result to the patch.
+
+Then run:
+
+```powershell
+cargo test --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+cargo run --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+```
+
+### Comparison acceptance checks
+
+Compare with the previous unpatched branch on the **same Windows setup**: monitor 3 (primary, 3840 × 2160 at 150%) in the middle; monitors 2 and 1 (1440 × 2560 at 100%) to the left and right.
+
+1. Detach Inspector as a genuine native window on monitor 3.
+2. Drag it to monitor **2 (left)** and back several times, checking for shimmer, jumping, runaway resizing, mismatched text size and incorrect pointer input.
+3. Drag it to monitor **1 (right)** and back; compare.
+4. Try **Windows + Shift + Left/Right** while the floating window is active.
+5. Try Windows snapping with **Windows + Left/Right**; inspect window size and final placement.
+6. Move the Inspector and use its opacity slider on each monitor. Confirm the canvas updates without incorrect mouse targeting.
+7. Re-dock the Inspector via the existing button. Note any focus or visibility problems.
+
+**Pass for this narrowly scoped patch test:** independent floating windows traverse all three monitors with no DPI bounce, growth or pointer problems, including keyboard movement and snapping. Direct drag-to-native undocking/redocking is still not implemented and cannot be marked passed. Restoring native-window coordinates is temporarily disabled in both variants and is not covered by this test.
+
+To return to the unpatched experiment:
+
+```powershell
+git switch poc/docking-workspace
+cargo run --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+```
+
+Cargo may refresh the local `Cargo.lock` when switching dependency sources. Preserve unrelated local work. Do not commit generated changes unless agreed.
+
+**Current verification:** the pinned patch is configured in GitHub; the Windows compiler and interactive result are **not yet verified**. If the patched variant fails to build, capture the exact error and do not treat it as a graphics-framework finding until the dependency issue is resolved.
+
+---
+
+
+
 ## Why we are testing this
 
 The [high-level requirements](../../docs/HIGH_LEVEL_REQUIREMENTS.md) call for customisable dockable panels that can be pulled into independent Windows windows, moved to other monitors, redocked, and restored on reopening, including monitors with different display scaling.
