@@ -9,6 +9,7 @@ use egui_dock::{DockArea, DockState, NodeIndex, TabViewer};
 use serde::{Deserialize, Serialize};
 
 mod window_placement;
+mod window_activation;
 
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 struct WindowBounds {
@@ -21,6 +22,10 @@ struct SavedWorkspace {
     dock: DockState<Panel>,
     document: DocumentState,
     native_open: [bool; 3],
+    // Each independent OS viewport hosts its own egui_dock tab hierarchy.
+    // New field is optional so older saved PoC workspaces still load.
+    #[serde(default)]
+    native_docks: [Option<DockState<Panel>>; 3],
     native_bounds: [Option<WindowBounds>; 3],
     // Version 2: monitor-independent physical virtual-desktop coordinates.
     // Old saves omit this field. Their ambiguous logical positions are never
@@ -48,6 +53,7 @@ impl Default for SavedWorkspace {
             dock,
             document: DocumentState::default(),
             native_open: [false; 3],
+            native_docks: [None, None, None],
             native_bounds: [None; 3],
             native_position_px: [None; 3],
         }
@@ -67,12 +73,13 @@ struct WorkspaceApp {
     status: String,
     // Runtime-only: apply saved window placement on creation, never during movement.
     native_initialised: [bool; 3],
+    main_was_focused: bool,
 }
 
 impl WorkspaceApp {
     fn new() -> Self {
         let path = state_path();
-        let (workspace, status) = match fs::read_to_string(&path) {
+        let (mut workspace, status) = match fs::read_to_string(&path) {
             Ok(contents) => match serde_json::from_str::<SavedWorkspace>(&contents) {
                 Ok(saved) => (saved, format!("Loaded workspace from {}", path.display())),
                 Err(error) => (
@@ -89,10 +96,19 @@ impl WorkspaceApp {
                 format!("Could not read saved layout ({error}); using defaults"),
             ),
         };
+        // Migrate old PoC layouts: previous releases saved one panel per
+        // native OS viewport without a DockState of their own.
+        for panel in Panel::FLOATABLE {
+            let slot = panel.native_slot().unwrap();
+            if workspace.native_open[slot] && workspace.native_docks[slot].is_none() {
+                workspace.native_docks[slot] = Some(DockState::new(vec![panel]));
+            }
+        }
         Self {
             workspace,
             status,
             native_initialised: [false; 3],
+            main_was_focused: false,
         }
     }
 
@@ -116,6 +132,7 @@ impl WorkspaceApp {
         if let Some(path) = self.workspace.dock.find_tab(&panel) {
             if self.workspace.dock.remove_tab(path).is_some() {
                 self.workspace.native_open[slot] = true;
+                self.workspace.native_docks[slot] = Some(DockState::new(vec![panel]));
                 self.native_initialised[slot] = false;
             }
         }
@@ -125,12 +142,45 @@ impl WorkspaceApp {
         let Some(slot) = panel.native_slot() else {
             return;
         };
-        if self.workspace.native_open[slot] {
-            self.workspace.native_open[slot] = false;
-            self.native_initialised[slot] = false;
-            self.workspace.dock.push_to_focused_leaf(panel);
-            ctx.send_viewport_cmd_to(panel_viewport_id(panel), egui::ViewportCommand::Close);
+        if !self.workspace.native_open[slot] {
+            return;
         }
+        self.workspace.native_open[slot] = false;
+        self.native_initialised[slot] = false;
+        if let Some(group) = self.workspace.native_docks[slot].take() {
+            for tab in Panel::FLOATABLE {
+                if group.find_tab(&tab).is_some() {
+                    self.workspace.dock.push_to_focused_leaf(tab);
+                }
+            }
+        }
+        ctx.send_viewport_cmd_to(panel_viewport_id(panel), egui::ViewportCommand::Close);
+    }
+
+    fn merge_native_groups(&mut self, from: usize, to: usize, ctx: &egui::Context) {
+        if from == to || !self.workspace.native_open[from] || !self.workspace.native_open[to] {
+            return;
+        }
+        let Some(source) = self.workspace.native_docks[from].take() else {
+            return;
+        };
+        let Some(target) = self.workspace.native_docks[to].as_mut() else {
+            self.workspace.native_docks[from] = Some(source);
+            return;
+        };
+        for tab in Panel::FLOATABLE {
+            if source.find_tab(&tab).is_some() {
+                target.push_to_focused_leaf(tab);
+            }
+        }
+        self.workspace.native_open[from] = false;
+        self.native_initialised[from] = false;
+        // Closing the empty source viewport must not discard its former
+        // screen placement; reopening another panel may reuse that position.
+        ctx.send_viewport_cmd_to(
+            panel_viewport_id(Panel::FLOATABLE[from]),
+            egui::ViewportCommand::Close,
+        );
     }
 
     fn recover_all_windows(&mut self, ctx: &egui::Context) {
@@ -146,6 +196,7 @@ impl WorkspaceApp {
 
     fn native_windows(&mut self, ctx: &egui::Context) {
         let mut redock_requests = Vec::new();
+        let mut merge_requests = Vec::new();
 
         for panel in Panel::FLOATABLE {
             let slot = panel.native_slot().expect("tool panel has a native slot");
@@ -177,7 +228,16 @@ impl WorkspaceApp {
                 None
             };
 
+            let available_merge_targets: Vec<_> = Panel::FLOATABLE
+                .iter()
+                .copied()
+                .filter(|other| {
+                    let other_slot = other.native_slot().unwrap();
+                    other_slot != slot && self.workspace.native_open[other_slot]
+                })
+                .collect();
             let mut request_redock = false;
+            let mut request_merge = None;
             let mut observed_bounds = None;
             let mut observed_position_px = None;
             ctx.show_viewport_immediate(
@@ -213,11 +273,36 @@ impl WorkspaceApp {
                         } else {
                             ui.label("Native viewport requested — verify independent window behaviour");
                         }
-                        if ui.button("Dock back into main workspace").clicked() {
-                            request_redock = true;
-                        }
+                        ui.horizontal_wrapped(|ui| {
+                            if ui.button("Dock all tabs in main workspace").clicked() {
+                                request_redock = true;
+                            }
+                            ui.menu_button("Merge this window into...", |menu| {
+                                if available_merge_targets.is_empty() {
+                                    menu.label("Detach another native window first");
+                                }
+                                for destination in &available_merge_targets {
+                                    if menu.button(destination.title()).clicked() {
+                                        request_merge = destination.native_slot();
+                                        menu.close();
+                                    }
+                                }
+                            });
+                        });
+                        ui.small("Native window group: tabs below can be rearranged and stacked.");
+                        ui.small("Cross-OS-window DRAG is not implemented; Merge uses a menu for this test.");
                         ui.separator();
-                        draw_panel_contents(ui, panel, &mut self.workspace.document);
+                        let mut unused_detach = Vec::new();
+                        if let Some(dock) = self.workspace.native_docks[slot].as_mut() {
+                            let mut viewer = DockedTabViewer {
+                                document: &mut self.workspace.document,
+                                detach_requests: &mut unused_detach,
+                                is_native: true,
+                            };
+                            DockArea::new(dock)
+                                .id(egui::Id::new(("native-dock", slot)))
+                                .show_inside(ui, &mut viewer);
+                        }
                         ui.separator();
                         show_dpi_information(ui);
                     });
@@ -266,8 +351,15 @@ impl WorkspaceApp {
             if request_redock {
                 redock_requests.push(panel);
             }
+            if let Some(destination) = request_merge {
+                merge_requests.push((slot, destination));
+            }
         }
 
+        // Process after painting; mutating docking trees mid-callback is unsafe.
+        for (source, target) in merge_requests {
+            self.merge_native_groups(source, target, ctx);
+        }
         for panel in redock_requests {
             self.redock(panel, ctx);
         }
@@ -340,6 +432,7 @@ fn draw_panel_contents(ui: &mut egui::Ui, panel: Panel, document: &mut DocumentS
 struct DockedTabViewer<'a> {
     document: &'a mut DocumentState,
     detach_requests: &'a mut Vec<Panel>,
+    is_native: bool,
 }
 
 impl TabViewer for DockedTabViewer<'_> {
@@ -354,7 +447,7 @@ impl TabViewer for DockedTabViewer<'_> {
     }
 
     fn ui(&mut self, ui: &mut egui::Ui, tab: &mut Panel) {
-        if tab.native_slot().is_some() {
+        if !self.is_native && tab.native_slot().is_some() {
             if ui.button("Detach as a REAL Windows window").clicked() {
                 self.detach_requests.push(*tab);
             }
@@ -392,6 +485,7 @@ impl eframe::App for WorkspaceApp {
             let mut viewer = DockedTabViewer {
                 document: &mut self.workspace.document,
                 detach_requests: &mut detach_requests,
+                is_native: false,
             };
             DockArea::new(&mut self.workspace.dock).show_inside(ui, &mut viewer);
         });
@@ -401,6 +495,15 @@ impl eframe::App for WorkspaceApp {
         }
         let ctx = ui.ctx().clone();
         self.native_windows(&ctx);
+
+        // Only on a transition back to MAIN window focus; don't continuously
+        // reorder windows and don't force focus onto an Inspector. Windows
+        // handles the change in z-order without an always-on-top flag.
+        let main_focused = ui.input(|input| input.viewport().focused.unwrap_or(false));
+        if main_focused && !self.main_was_focused {
+            let _raised = window_activation::raise_tool_windows_without_focus();
+        }
+        self.main_was_focused = main_focused;
 
         if recover_requested {
             self.recover_all_windows(&ctx);
