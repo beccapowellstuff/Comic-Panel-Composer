@@ -54,9 +54,10 @@ pub struct PointerSnapshot {
 #[cfg(windows)]
 pub fn pointer_snapshot() -> Option<PointerSnapshot> {
     use windows_sys::Win32::Foundation::{POINT, RECT};
+    use windows_sys::Win32::Graphics::Gdi::ClientToScreen;
     use windows_sys::Win32::UI::Input::KeyboardAndMouse::GetAsyncKeyState;
     use windows_sys::Win32::UI::WindowsAndMessaging::{
-        ClientToScreen, GA_ROOT, GetAncestor, GetClientRect, GetCursorPos,
+        GA_ROOT, GetAncestor, GetClientRect, GetCursorPos,
         GetWindowTextW, GetWindowThreadProcessId, WindowFromPoint,
     };
 
