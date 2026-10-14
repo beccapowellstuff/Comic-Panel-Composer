@@ -126,18 +126,13 @@ impl WorkspaceApp {
                 continue;
             }
 
-            let mut builder = egui::ViewportBuilder::default()
+            // DPI diagnostic: do not feed observed native window bounds back
+            // into the viewport builder on every frame. Windows must own the
+            // position and size while a window crosses monitors with different DPI.
+            // Restoring saved native bounds is intentionally deferred.
+            let builder = egui::ViewportBuilder::default()
                 .with_title(format!("{} — native Windows window", panel.title()))
                 .with_inner_size([320.0, 330.0]);
-
-            if let Some(bounds) = self.workspace.native_bounds[slot] {
-                builder = builder
-                    .with_position(egui::pos2(
-                        bounds.position[0],
-                        bounds.position[1],
-                    ))
-                    .with_inner_size(bounds.inner_size);
-            }
 
             let mut request_redock = false;
             let mut observed_bounds = None;
