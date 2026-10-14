@@ -1,6 +1,6 @@
 # PoC 2 — Docking, native windows and DPI
 
-**Status: user testing confirms pinned winit fixes mixed-DPI motion and that native groups can merge via menu, restore positions, and come forward with the main window. This branch explores direct mouse dragging of egui_dock tabs between genuine OS windows, including tab grouping and split drop targets. Windows CI and physical cross-window mouse behaviour are undergoing verification; the tab-close defect and main window position persistence remain open.**
+**Status: user testing confirms pinned winit fixes mixed-DPI motion and native windows can merge via menu, restore positions and come forward with the main window. This branch explores direct mouse dragging of egui_dock tabs between genuine OS windows, including tab grouping and split drop targets. Windows CI passed 20 model tests and built the application successfully on commit f8b2c80; the real cross-window mouse gesture still requires testing. The tab-close defect and main window position persistence remain open.**
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
@@ -44,6 +44,8 @@ Use `git switch poc/cross-window-tab-drag` if the branch already exists locally.
 5. **Cancel behaviour:** Drop over another application or the desktop; the original panel should remain recoverable (do not count an internal egui float as success). Repeat with a quick movement.
 6. **Mixed DPI and persistence:** Try left portrait 100% and right portrait 100% versus central landscape 150%, saving and restarting after successful drops. Verify grouped/split layouts, physical locations and interactions.
 7. **Focus/recovery regression:** Clicking the main application should raise floating tools without permanently marking them always-on-top. **Recover floating panels** should still return all tabs to the main workspace.
+
+**Verified CI:** [Windows workflow for commit f8b2c80](https://github.com/becciStuff/Comic-Panel-Composer/actions/runs/38536077620): 4 library tests, 16 binary tests, and native Windows build succeeded. No GUI session was launched in CI; native mouse dragging and cross-monitor input remain unverified.
 
 **Interpretation:** Automated model tests can prove that moving a `Panel` between `DockState`s is correct, but **cannot prove the real cross-window mouse gesture** survives native Windows/egui event routing. Only user testing does that. If the pointer never highlights the other native viewport, or release doesn't cause a transfer, the interaction is **not passed**. That is important evidence for comparing egui with Qt's docking ecosystem.
 
