@@ -1,6 +1,6 @@
 # PoC 2 — Docking, native windows and DPI
 
-**Status: user testing confirms the pinned winit patch resolves mixed-DPI dragging, internal docking and shared state work, and the follow-up safe positioning test restores native windows to their monitors. This branch adds native tab groups, controlled group merging and nonactivating workspace focus handling. Automated Windows build and GUI verification are pending; true cross-OS-window tab dragging remains unimplemented.**
+**Status: user testing confirms the pinned winit patch resolves mixed-DPI dragging, internal docking and shared state work, and the follow-up safe positioning test restores native windows to their monitors. This branch adds native tab groups, controlled group merging and nonactivating workspace focus handling. Windows CI confirms 12 automated tests passed and a Windows build succeeded; interactive GUI behaviour remains unverified; true cross-OS-window tab dragging remains unimplemented.**
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
@@ -47,7 +47,7 @@ Manual checks, with main monitor 3 (150%) and secondary monitors 2/1 (100%):
 8. **Focus troubleshooting:** If automatic bring-to-front fails, click **Bring tool windows forward** and note its reported count. If this works while automatic activation fails, the issue is the focus-transition detection; if the count is zero, the Win32 handle discovery is suspect.
 9. **Regression:** Drag grouped windows across monitors in both directions, use Win+Shift+Arrows, resize, restart and recover to verify the previous DPI and window-position fixes remain sound.
 
-The Windows workflow builds/tests the code, but **GUI behaviour must still be tested manually**. Record whether the interface follows the expected rules rather than assuming it does because it compiles.
+The Windows workflow passed **12 tests (4 library, 8 binary)** and completed a Windows build on [commit 1a7325a](https://github.com/becciStuff/Comic-Panel-Composer/actions/runs/38531481061). The tests also exposed an upstream `egui_dock` persistence hazard: a fresh layout uses non-finite `Rect::NOTHING` bounds that JSON cannot round-trip. The PoC now sanitises a **copy** of its tab layout before saving, preserving the live layout. **GUI behaviour must still be tested manually**. Record whether the interface follows the expected rules rather than assuming it does because it compiles.
 
 ---
 
