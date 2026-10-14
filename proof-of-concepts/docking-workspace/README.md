@@ -1,6 +1,6 @@
 # PoC 2 — Docking, native windows and DPI
 
-**Status: the unpatched app launched on Windows, but moving a native floating panel from monitor 3 (150%) to monitor 2 (100%) caused jumping, resizing, shimmering and incorrect interaction. Removing the window-bounds feedback in the app did not fix it. This branch now tries a pinned winit 0.30.13 backport; patched Windows behaviour and automated test results are awaiting verification.**
+**Status: user testing confirms that patched winit corrected the mixed-DPI native window dragging failure. Internal tab docking/grouping, layout save/restore and the detached Inspector's shared state were also confirmed working. Native windows retaining their separate monitor positions on restart failed in the previous version; this branch implements a one-time restore for Windows testing. Cross-native-window drag docking is not implemented.**
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
