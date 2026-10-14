@@ -1,6 +1,6 @@
 # PoC 2 — Docking, native windows and DPI
 
-**Status: the app launched on Windows, but moving a native floating panel between monitors with different DPI caused jumping, resizing, control/pointer problems and shimmering. A diagnostic change is awaiting re-test; unit test results have not yet been supplied.**
+**Status: the unpatched app launched on Windows, but moving a native floating panel from monitor 3 (150%) to monitor 2 (100%) caused jumping, resizing, shimmering and incorrect interaction. Removing the window-bounds feedback in the app did not fix it. This branch now tries a pinned winit 0.30.13 backport; patched Windows behaviour and automated test results are awaiting verification.**
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
@@ -108,7 +108,7 @@ The first build will download and compile new dependencies, so it will take long
 | Native redocking | Click **Dock back into main workspace**, or close the native window. Verify Inspector becomes a dock tab again. | Not tested |
 | Multiple native windows | Detach Pages, Layers and Inspector simultaneously; use controls in each. | Not tested |
 | Second monitor | Move each native window outside the main application's boundaries onto another monitor. | Not tested |
-| Mixed DPI | Move a window between monitors set to different scaling (e.g. 100% and 150%); assess sizes, text sharpness and hit targets. | **Failed initial test:** window jumped/resized, text/controls and pointer interaction misbehaved, and it shimmered. Re-test needed after diagnostic fix. |
+| Mixed DPI | Move a window between monitors set to different scaling (e.g. 100% and 150%); assess sizes, text sharpness and hit targets. | **Failed original and unpatched diagnostic tests:** jumping/resizing/shimmering and mouse mismatch moving to left monitor; patched dependency awaiting re-test. |
 | Window management | Focus another application, minimise/restore the main window, close a floating window; check unexpected focus/visibility issues. | Not tested |
 | Save/restore | Arrange and detach panels, **Save workspace**, close application, restart; inspect dock placement, native windows and bounds. | Not tested |
 | Native drag-out | **Drag a docked tab directly into a NEW OS-level window without pressing a button.** | **Not implemented** |
