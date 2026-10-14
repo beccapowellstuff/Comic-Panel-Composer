@@ -852,6 +852,80 @@ mod grouping_tests {
     }
 
     #[test]
+    fn cross_native_drag_merges_a_single_real_tab() {
+        let mut app = test_workspace();
+        app.workspace.native_open[0] = true;
+        app.workspace.native_open[1] = true;
+        app.workspace.native_docks[0] = Some(DockState::new(vec![Panel::Pages, Panel::Inspector]));
+        app.workspace.native_docks[1] = Some(DockState::new(vec![Panel::Layers]));
+        let moved = app.transfer_panel(
+            Panel::Inspector,
+            WindowArea::Native(0),
+            DropTarget { window: WindowArea::Native(1), edge: DropEdge::Centre },
+            &egui::Context::default(),
+        );
+        assert!(moved);
+        assert!(app.workspace.native_open[0]);
+        assert!(app.workspace.native_docks[0].as_ref().unwrap().find_tab(&Panel::Pages).is_some());
+        assert!(app.workspace.native_docks[0].as_ref().unwrap().find_tab(&Panel::Inspector).is_none());
+        let destination = app.workspace.native_docks[1].as_ref().unwrap();
+        assert!(destination.find_tab(&Panel::Inspector).is_some());
+        assert!(destination.find_tab(&Panel::Layers).is_some());
+    }
+
+    #[test]
+    fn cross_native_drag_splits_destination_and_closes_empty_source() {
+        let mut app = test_workspace();
+        app.workspace.native_open[0] = true;
+        app.workspace.native_open[1] = true;
+        app.workspace.native_docks[0] = Some(DockState::new(vec![Panel::Pages]));
+        app.workspace.native_docks[1] = Some(DockState::new(vec![Panel::Layers]));
+        let moved = app.transfer_panel(
+            Panel::Pages,
+            WindowArea::Native(0),
+            DropTarget { window: WindowArea::Native(1), edge: DropEdge::Below },
+            &egui::Context::default(),
+        );
+        assert!(moved);
+        assert!(!app.workspace.native_open[0]);
+        assert!(app.workspace.native_docks[0].is_none());
+        let destination = app.workspace.native_docks[1].as_ref().unwrap();
+        assert!(destination.find_tab(&Panel::Pages).is_some());
+        assert!(destination.find_tab(&Panel::Layers).is_some());
+        assert!(destination.main_surface().iter().filter(|n| n.is_leaf()).count() >= 2);
+    }
+
+    #[test]
+    fn cross_native_drag_to_main_returns_tab_without_duplication() {
+        let mut app = test_workspace();
+        app.workspace.native_open[1] = true;
+        app.workspace.native_docks[1] = Some(DockState::new(vec![Panel::Layers]));
+        let moved = app.transfer_panel(
+            Panel::Layers,
+            WindowArea::Native(1),
+            DropTarget { window: WindowArea::Main, edge: DropEdge::Right },
+            &egui::Context::default(),
+        );
+        assert!(moved);
+        assert!(app.workspace.dock.find_tab(&Panel::Layers).is_some());
+        assert!(app.workspace.native_docks[1].is_none());
+    }
+
+    #[test]
+    fn drop_outside_a_different_window_does_not_modify_source() {
+        let mut app = test_workspace();
+        app.workspace.native_open[0] = true;
+        app.workspace.native_docks[0] = Some(DockState::new(vec![Panel::Pages]));
+        assert!(!app.transfer_panel(
+            Panel::Pages,
+            WindowArea::Native(0),
+            DropTarget { window: WindowArea::Native(0), edge: DropEdge::Left },
+            &egui::Context::default(),
+        ));
+        assert!(app.workspace.native_docks[0].as_ref().unwrap().find_tab(&Panel::Pages).is_some());
+    }
+
+    #[test]
     fn legacy_workspace_without_native_docks_remains_readable() {
         let old = SavedWorkspace::default();
         let mut value: serde_json::Value = serde_json::from_str(&old.to_json().unwrap()).unwrap();
