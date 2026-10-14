@@ -302,7 +302,7 @@ impl eframe::App for WorkspaceApp {
             });
             ui.label("Dragging a dock tab out creates an IN-APP egui window, not an OS window.");
             ui.label("To test REAL Windows windows, use 'Detach as a REAL Windows window' in a tool panel.");
-            ui.small(&self.status);
+            ui.small(self.status.as_str());
             ui.separator();
 
             let mut viewer = DockedTabViewer {
