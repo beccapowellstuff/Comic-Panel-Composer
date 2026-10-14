@@ -540,3 +540,80 @@ fn main() -> eframe::Result {
         Box::new(|_cc| Ok(Box::new(WorkspaceApp::new()))),
     )
 }
+
+#[cfg(test)]
+mod grouping_tests {
+    use super::*;
+
+    fn test_workspace() -> WorkspaceApp {
+        WorkspaceApp {
+            workspace: SavedWorkspace::default(),
+            status: String::new(),
+            native_initialised: [false; 3],
+            main_was_focused: false,
+        }
+    }
+
+    #[test]
+    fn merges_two_native_window_tab_groups_without_duplication() {
+        let mut app = test_workspace();
+        app.workspace.native_open[0] = true;
+        app.workspace.native_open[1] = true;
+        app.workspace.native_docks[0] = Some(DockState::new(vec![Panel::Pages]));
+        app.workspace.native_docks[1] = Some(DockState::new(vec![Panel::Layers]));
+
+        app.merge_native_groups(0, 1, &egui::Context::default());
+
+        assert!(!app.workspace.native_open[0]);
+        assert!(app.workspace.native_docks[0].is_none());
+        assert!(app.workspace.native_open[1]);
+        let merged = app.workspace.native_docks[1].as_ref().unwrap();
+        assert!(merged.find_tab(&Panel::Pages).is_some());
+        assert!(merged.find_tab(&Panel::Layers).is_some());
+        assert!(merged.find_tab(&Panel::Inspector).is_none());
+        // Main canvas remains in its own docking tree.
+        assert!(app.workspace.dock.find_tab(&Panel::Canvas).is_some());
+    }
+
+    #[test]
+    fn redocking_a_group_returns_all_its_tabs_to_main() {
+        let mut app = test_workspace();
+        app.workspace.native_open[0] = true;
+        app.workspace.native_docks[0] = Some(DockState::new(vec![
+            Panel::Pages, Panel::Layers,
+        ]));
+
+        app.redock(Panel::Pages, &egui::Context::default());
+
+        assert!(!app.workspace.native_open[0]);
+        assert!(app.workspace.native_docks[0].is_none());
+        assert!(app.workspace.dock.find_tab(&Panel::Pages).is_some());
+        assert!(app.workspace.dock.find_tab(&Panel::Layers).is_some());
+    }
+
+    #[test]
+    fn native_group_layout_survives_json_round_trip() {
+        let mut saved = SavedWorkspace::default();
+        saved.native_open[2] = true;
+        saved.native_docks[2] = Some(DockState::new(vec![
+            Panel::Inspector, Panel::Pages,
+        ]));
+        saved.native_position_px[2] = Some([4102, 568]);
+        let json = serde_json::to_string(&saved).unwrap();
+        let restored: SavedWorkspace = serde_json::from_str(&json).unwrap();
+
+        let group = restored.native_docks[2].as_ref().unwrap();
+        assert!(group.find_tab(&Panel::Inspector).is_some());
+        assert!(group.find_tab(&Panel::Pages).is_some());
+        assert_eq!(restored.native_position_px[2], Some([4102, 568]));
+    }
+
+    #[test]
+    fn legacy_workspace_without_native_docks_remains_readable() {
+        let old = SavedWorkspace::default();
+        let mut value = serde_json::to_value(old).unwrap();
+        value.as_object_mut().unwrap().remove("native_docks");
+        let restored: SavedWorkspace = serde_json::from_value(value).unwrap();
+        assert!(restored.native_docks.iter().all(Option::is_none));
+    }
+}
