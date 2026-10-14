@@ -898,6 +898,9 @@ mod grouping_tests {
     #[test]
     fn cross_native_drag_to_main_returns_tab_without_duplication() {
         let mut app = test_workspace();
+        // Native and main docking trees must never both own the same panel.
+        let path = app.workspace.dock.find_tab(&Panel::Layers).unwrap();
+        app.workspace.dock.remove_tab(path);
         app.workspace.native_open[1] = true;
         app.workspace.native_docks[1] = Some(DockState::new(vec![Panel::Layers]));
         let moved = app.transfer_panel(
