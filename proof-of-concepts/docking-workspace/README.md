@@ -1,6 +1,6 @@
 # PoC 2 — Docking, native windows and DPI
 
-**Status: implementation uploaded, not yet compiled or manually tested on Windows.**
+**Status: the app launched on Windows, but moving a native floating panel between monitors with different DPI caused jumping, resizing, control/pointer problems and shimmering. A diagnostic change is awaiting re-test; unit test results have not yet been supplied.**
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
@@ -18,7 +18,7 @@ egui/eframe supports genuine native desktop windows through viewports. However, 
 - **Inspector**: change layer opacity and visibility.
 - **DockArea**: rearrange and resize tabs; dragging a tab out creates an **in-application floating egui window**.
 - **Native Windows**: click **Detach as a REAL Windows window** inside Pages, Layers or Inspector to create a separate OS-level viewport. Click **Dock back into main workspace** to return that panel to the docking tree.
-- **Save workspace**: saves dock layout, detached panel flags, sample state and observed native window bounds as JSON under `%LOCALAPPDATA%\ComicPanelComposerPoCs\docking-workspace.json` (uses the system temporary directory if `LOCALAPPDATA` is unavailable). The file is read on restart.
+- **Save workspace**: saves dock layout, detached panel flags, sample state and observed native window bounds as JSON under `%LOCALAPPDATA%\ComicPanelComposerPoCs\docking-workspace.json` (uses the system temporary directory if `LOCALAPPDATA` is unavailable). The file is read on restart. **Diagnostic limitation:** saved native window positions and sizes are currently *recorded but not reapplied*. This is intentional while we isolate the mixed-DPI feedback loop. Other state/layout restoration is still under test.
 - **Reset workspace**: restores the default layout in memory; it does not delete the saved layout file.
 
 This uses **egui/eframe 0.36.2 and egui_dock 0.21.1** to evaluate currently available features, independent of the earlier egui 0.27.2 polygon experiment.
@@ -48,7 +48,7 @@ The first build will download and compile new dependencies, so it will take long
 | Native redocking | Click **Dock back into main workspace**, or close the native window. Verify Inspector becomes a dock tab again. | Not tested |
 | Multiple native windows | Detach Pages, Layers and Inspector simultaneously; use controls in each. | Not tested |
 | Second monitor | Move each native window outside the main application's boundaries onto another monitor. | Not tested |
-| Mixed DPI | Move a window between monitors set to different scaling (e.g. 100% and 150%); assess sizes, text sharpness and hit targets. | Not tested |
+| Mixed DPI | Move a window between monitors set to different scaling (e.g. 100% and 150%); assess sizes, text sharpness and hit targets. | **Failed initial test:** window jumped/resized, text/controls and pointer interaction misbehaved, and it shimmered. Re-test needed after diagnostic fix. |
 | Window management | Focus another application, minimise/restore the main window, close a floating window; check unexpected focus/visibility issues. | Not tested |
 | Save/restore | Arrange and detach panels, **Save workspace**, close application, restart; inspect dock placement, native windows and bounds. | Not tested |
 | Native drag-out | **Drag a docked tab directly into a NEW OS-level window without pressing a button.** | **Not implemented** |
@@ -58,7 +58,7 @@ The first build will download and compile new dependencies, so it will take long
 
 - **The two direct drag-to-native behaviours are mandatory requirements, but are not implemented here.** In this version, native detach/redock are buttons. This is *partial evidence only*, not a pass against the full requirement.
 - The implementation uses `show_viewport_immediate` for simpler shared state. egui documents additional repaint costs with multiple immediate viewports. Responsiveness and CPU usage need real measurement; evaluate `show_viewport_deferred` if necessary.
-- Native window bounds are sampled in egui logical points and may not round-trip correctly across mixed-DPI monitors or unusual monitor arrangements. We must assess this behaviour before approving a layout persistence approach.
+- Native window bounds are still observed and serialised, but no longer fed back into the live viewport builder on every frame. This isolates a likely DPI-dependent position/size feedback loop; **restoring saved native-window placement is temporarily disabled**. We must assess both DPI movement and placement persistence separately before approving the approach.
 - `egui_dock` floating surfaces are internal egui windows; they are intentionally not presented as an alternative satisfying independent native window requirements.
 - This experiment does not evaluate multi-document windows, production workspace theming, accessibility, or robust failure recovery.
 - If the implementation proves difficult to make reliable, run an equivalent C++/Qt docking experiment rather than lowering the requirements.
