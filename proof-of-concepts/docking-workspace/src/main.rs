@@ -57,6 +57,8 @@ fn state_path() -> PathBuf {
 struct WorkspaceApp {
     workspace: SavedWorkspace,
     status: String,
+    // Runtime-only: apply saved window placement on creation, never during movement.
+    native_initialised: [bool; 3],
 }
 
 impl WorkspaceApp {
@@ -79,7 +81,11 @@ impl WorkspaceApp {
                 format!("Could not read saved layout ({error}); using defaults"),
             ),
         };
-        Self { workspace, status }
+        Self {
+            workspace,
+            status,
+            native_initialised: [false; 3],
+        }
     }
 
     fn save_workspace_to_file(&self) -> Result<(), String> {
@@ -102,6 +108,7 @@ impl WorkspaceApp {
         if let Some(path) = self.workspace.dock.find_tab(&panel) {
             if self.workspace.dock.remove_tab(path).is_some() {
                 self.workspace.native_open[slot] = true;
+                self.native_initialised[slot] = false;
             }
         }
     }
@@ -112,6 +119,7 @@ impl WorkspaceApp {
         };
         if self.workspace.native_open[slot] {
             self.workspace.native_open[slot] = false;
+            self.native_initialised[slot] = false;
             self.workspace.dock.push_to_focused_leaf(panel);
             ctx.send_viewport_cmd_to(panel_viewport_id(panel), egui::ViewportCommand::Close);
         }
@@ -126,13 +134,25 @@ impl WorkspaceApp {
                 continue;
             }
 
-            // DPI diagnostic: do not feed observed native window bounds back
-            // into the viewport builder on every frame. Windows must own the
-            // position and size while a window crosses monitors with different DPI.
-            // Restoring saved native bounds is intentionally deferred.
-            let builder = egui::ViewportBuilder::default()
-                .with_title(format!("{} — native Windows window", panel.title()))
-                .with_inner_size([320.0, 330.0]);
+            // Restore placement only when creating this OS window. Sending a
+            // position on every frame previously caused an unstable DPI loop.
+            // When omitted on later frames, ViewportBuilder retains live bounds.
+            let mut builder = egui::ViewportBuilder::default()
+                .with_title(format!("{} — native Windows window", panel.title()));
+            if !self.native_initialised[slot] {
+                if let Some(bounds) = self.workspace.native_bounds[slot].filter(|bounds| {
+                    bounds.position.iter().all(|value| value.is_finite())
+                        && bounds.inner_size.iter().all(|value| value.is_finite())
+                        && bounds.inner_size[0] >= 100.0
+                        && bounds.inner_size[1] >= 100.0
+                }) {
+                    builder = builder
+                        .with_position(egui::pos2(bounds.position[0], bounds.position[1]))
+                        .with_inner_size(bounds.inner_size);
+                } else {
+                    builder = builder.with_inner_size([320.0, 330.0]);
+                }
+            }
 
             let mut request_redock = false;
             let mut observed_bounds = None;
@@ -175,6 +195,7 @@ impl WorkspaceApp {
                 },
             );
 
+            self.native_initialised[slot] = true;
             if let Some(bounds) = observed_bounds {
                 self.workspace.native_bounds[slot] = Some(bounds);
             }
@@ -318,6 +339,7 @@ impl eframe::App for WorkspaceApp {
                 ctx.send_viewport_cmd_to(panel_viewport_id(panel), egui::ViewportCommand::Close);
             }
             self.workspace = SavedWorkspace::default();
+            self.native_initialised = [false; 3];
             self.status = "Workspace reset in memory (saved layout is unchanged).".to_owned();
         }
         if save_requested {
