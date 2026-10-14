@@ -1,10 +1,57 @@
 # PoC 2 — Docking, native windows and DPI
 
-**Status: user testing confirms patched winit resolved mixed-DPI dragging, and internal docking, layout persistence and shared state work. A subsequent test found native position restoration can strand windows off-screen. This branch implements an explicit physical-coordinate restore and on-screen recovery action; Windows validation is pending. Cross-native-window tab docking remains unimplemented.**
+**Status: user testing confirms the pinned winit patch resolves mixed-DPI dragging, internal docking and shared state work, and the follow-up safe positioning test restores native windows to their monitors. This branch adds native tab groups, controlled group merging and nonactivating workspace focus handling. Automated Windows build and GUI verification are pending; true cross-OS-window tab dragging remains unimplemented.**
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
-## Safe physical window placement — current branch
+## Native tab grouping and workspace activation — current experiment
+
+**Branch:** `poc/native-window-grouping-focus`, based on the user-tested `poc/native-window-position-safe`. All prior window positioning and the pinned experimental winit mixed-DPI fix remain in place.
+
+**Why this experiment:** Internal `egui_dock` tabs group and undock correctly, but genuine independent OS windows previously contained a lone panel without tab controls. Additionally, activating the main application did not bring its independent native tool windows forward.
+
+### New functionality (awaiting Windows testing)
+
+- Each floating OS viewport now contains its **own `DockArea` and `DockState`**. Panels within one floating OS window show normal draggable tabs.
+- The **Merge this window into…** menu moves all tabs from one actual native Windows window into another already-open native window; the emptied source window closes. This is a **controlled merge**, not cross-native-window mouse drag.
+- **Dock all tabs in main workspace** brings every tab in the selected native group back to the main application.
+- Saved `native_docks` preserve native window tab groups across restart. An older saved workspace missing this field is accepted and single-panel native windows are migrated when the app opens.
+- On Windows, main-viewport focus transitions trigger a Win32 `SetWindowPos(HWND_TOP, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE)` for tool windows belonging to this process, without changing the always-on-top flag. This uses **window-title matching for the PoC only**, not a proposed production architecture.
+- **Bring tool windows forward** is an explicit diagnostic button in the main window. It separates auto-focus event handling issues from Win32 Z-order issues.
+
+**Still NOT implemented:** Dragging a tab from one actual native Windows window into another, dragging a dock tab directly outside the main OS viewport to create a new native window, or dragging a native window's tab back to a main dock target. The Merge menu is not a pass for these requirements. Main application window positioning on restart is still not stored by this PoC.
+
+### Run and test
+
+First preserve any local modifications before switching:
+
+```powershell
+git status --short
+git fetch origin
+git switch --track origin/poc/native-window-grouping-focus
+cargo test --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+cargo run --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+```
+
+Use `git switch poc/native-window-grouping-focus` if the branch already exists locally.
+
+Manual checks, with main monitor 3 (150%) and secondary monitors 2/1 (100%):
+
+1. **Native group creation:** Detach Pages and Layers into two separate Windows windows. In one, use **Merge this window into…** to transfer into the other. Verify the receiver now has both **Pages** and **Layers** tabs and the source window closes.
+2. **Native tab docking:** Reorder the two tabs by dragging inside that native window; where supported, place them in separate docking panes and then rejoin them.
+3. **Shared state:** Change selected page or layer visibility in the native group; verify the main Canvas updates immediately.
+4. **Group persistence:** Move the grouped native window to a secondary monitor, save, exit and restart. Verify the group, its two tabs, selected state, and monitor positioning are restored. Verify neither duplicate nor missing panels.
+5. **Redock all:** Click **Dock all tabs in main workspace**; check both panel tabs return. Use **Recover floating panels** in the main window to recover all other native groups if needed.
+6. **Main app activation:** Put Explorer or another application in front of the main window and the floating tool window(s). Click the main Comic Panel Composer window. Verify its independent native tool panels come forward **without taking keyboard focus away from the main window**.
+7. **External app behaviour:** Activate Explorer again. The tool windows must **not** remain above Explorer as permanent always-on-top windows.
+8. **Focus troubleshooting:** If automatic bring-to-front fails, click **Bring tool windows forward** and note its reported count. If this works while automatic activation fails, the issue is the focus-transition detection; if the count is zero, the Win32 handle discovery is suspect.
+9. **Regression:** Drag grouped windows across monitors in both directions, use Win+Shift+Arrows, resize, restart and recover to verify the previous DPI and window-position fixes remain sound.
+
+The Windows workflow builds/tests the code, but **GUI behaviour must still be tested manually**. Record whether the interface follows the expected rules rather than assuming it does because it compiles.
+
+---
+
+## Safe physical window placement — previous experiment
 
 **Branch:** `poc/native-window-position-safe` (based on `poc/native-window-position-restore`, retaining the same experimental patched winit dependency).
 
