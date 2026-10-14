@@ -10,6 +10,9 @@ use serde::{Deserialize, Serialize};
 
 mod window_placement;
 mod window_activation;
+mod cross_window_drag;
+
+use cross_window_drag::{DropEdge, DropTarget, WindowArea};
 
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 struct WindowBounds {
@@ -124,6 +127,9 @@ struct WorkspaceApp {
     // Runtime-only: apply saved window placement on creation, never during movement.
     native_initialised: [bool; 3],
     main_was_focused: bool,
+    // An OS-wide drag gesture on an actual egui_dock tab. Runtime-only.
+    cross_window_tab_drag: Option<(Panel, WindowArea)>,
+    hovered_drop: Option<DropTarget>,
 }
 
 impl WorkspaceApp {
@@ -159,6 +165,8 @@ impl WorkspaceApp {
             status,
             native_initialised: [false; 3],
             main_was_focused: false,
+            cross_window_tab_drag: None,
+            hovered_drop: None,
         }
     }
 
@@ -172,12 +180,19 @@ impl WorkspaceApp {
     }
 
     fn detach_native(&mut self, panel: Panel) {
-        let Some(slot) = panel.native_slot() else {
+        let Some(preferred) = panel.native_slot() else {
             return;
         };
-        if self.workspace.native_open[slot] {
-            return;
-        }
+        // A window slot may now host tabs other than its original namesake.
+        // When it is occupied, find another empty OS window slot.
+        let slot = if self.workspace.native_open[preferred] {
+            let Some(free) = (0..3).find(|&i| !self.workspace.native_open[i]) else {
+                return;
+            };
+            free
+        } else {
+            preferred
+        };
 
         if let Some(path) = self.workspace.dock.find_tab(&panel) {
             if self.workspace.dock.remove_tab(path).is_some() {
@@ -233,6 +248,95 @@ impl WorkspaceApp {
         );
     }
 
+    /// Transfer exactly one panel between independent OS-window DockStates.
+    /// The target edge is explicitly chosen by screen-space hit testing.
+    fn transfer_panel(
+        &mut self,
+        panel: Panel,
+        origin: WindowArea,
+        target: DropTarget,
+        ctx: &egui::Context,
+    ) -> bool {
+        if origin == target.window || panel.native_slot().is_none() {
+            return false;
+        }
+        let source_has_tab = match origin {
+            WindowArea::Main => self.workspace.dock.find_tab(&panel).is_some(),
+            WindowArea::Native(slot) => self.workspace.native_docks[slot]
+                .as_ref().is_some_and(|dock| dock.find_tab(&panel).is_some()),
+        };
+        let target_is_valid = match target.window {
+            WindowArea::Main => self.workspace.dock.find_tab(&panel).is_none(),
+            WindowArea::Native(slot) => self.workspace.native_open[slot]
+                && self.workspace.native_docks[slot]
+                    .as_ref().is_some_and(|dock| dock.find_tab(&panel).is_none()),
+        };
+        if !source_has_tab || !target_is_valid {
+            return false;
+        }
+
+        let removed = match origin {
+            WindowArea::Main => self.workspace.dock.find_tab(&panel)
+                .and_then(|path| self.workspace.dock.remove_tab(path)),
+            WindowArea::Native(slot) => self.workspace.native_docks[slot].as_mut()
+                .and_then(|dock| dock.find_tab(&panel).and_then(|path| dock.remove_tab(path))),
+        };
+        let Some(tab) = removed else {
+            return false;
+        };
+
+        match target.window {
+            WindowArea::Main => insert_tab_at_edge(&mut self.workspace.dock, tab, target.edge),
+            WindowArea::Native(slot) => {
+                if let Some(dock) = self.workspace.native_docks[slot].as_mut() {
+                    insert_tab_at_edge(dock, tab, target.edge);
+                }
+            }
+        }
+
+        if let WindowArea::Native(slot) = origin {
+            let empty = self.workspace.native_docks[slot]
+                .as_ref().is_none_or(|dock| dock.iter_all_tabs().next().is_none());
+            if empty {
+                self.workspace.native_docks[slot] = None;
+                self.workspace.native_open[slot] = false;
+                self.native_initialised[slot] = false;
+                ctx.send_viewport_cmd_to(
+                    panel_viewport_id(Panel::FLOATABLE[slot]),
+                    egui::ViewportCommand::Close,
+                );
+            }
+        }
+        self.status = format!(
+            "Dragged {} from {:?} to {:?} ({:?})",
+            panel.title(), origin, target.window, target.edge,
+        );
+        true
+    }
+
+    fn poll_native_tab_drag(&mut self, ctx: &egui::Context) {
+        let Some((tab, origin)) = self.cross_window_tab_drag else {
+            self.hovered_drop = None;
+            return;
+        };
+        // Keep the root viewport producing frames even when the pointer has
+        // crossed the source window border (egui itself may no longer receive
+        // mouse-move events from that native viewport).
+        ctx.request_repaint_after(std::time::Duration::from_millis(16));
+        let Some(snapshot) = cross_window_drag::pointer_snapshot() else {
+            return;
+        };
+        let destination = snapshot.target.filter(|target| target.window != origin);
+        self.hovered_drop = destination;
+        if !snapshot.left_down {
+            self.cross_window_tab_drag = None;
+            self.hovered_drop = None;
+            if let Some(destination) = destination {
+                self.transfer_panel(tab, origin, destination, ctx);
+            }
+        }
+    }
+
     fn recover_all_windows(&mut self, ctx: &egui::Context) {
         for panel in Panel::FLOATABLE {
             self.redock(panel, ctx);
@@ -247,6 +351,8 @@ impl WorkspaceApp {
     fn native_windows(&mut self, ctx: &egui::Context) {
         let mut redock_requests = Vec::new();
         let mut merge_requests = Vec::new();
+        let mut drag_starts: Vec<(Panel, WindowArea)> = Vec::new();
+        let hovered_drop = self.hovered_drop;
 
         for panel in Panel::FLOATABLE {
             let slot = panel.native_slot().expect("tool panel has a native slot");
@@ -340,13 +446,15 @@ impl WorkspaceApp {
                             });
                         });
                         ui.small("Native window group: tabs below can be rearranged and stacked.");
-                        ui.small("Cross-OS-window DRAG is not implemented; Merge uses a menu for this test.");
+                        ui.small("Drag a tab into another REAL window: centre to group; edges to split.");
                         ui.separator();
                         let mut unused_detach = Vec::new();
                         if let Some(dock) = self.workspace.native_docks[slot].as_mut() {
                             let mut viewer = DockedTabViewer {
                                 document: &mut self.workspace.document,
                                 detach_requests: &mut unused_detach,
+                                drag_starts: &mut drag_starts,
+                                origin: WindowArea::Native(slot),
                                 is_native: true,
                             };
                             DockArea::new(dock)
@@ -355,6 +463,7 @@ impl WorkspaceApp {
                         }
                         ui.separator();
                         show_dpi_information(ui);
+                        paint_drop_target(ui, hovered_drop, WindowArea::Native(slot));
                     });
 
                     let (bounds, pixels) = window_ui.input(|input| {
@@ -413,7 +522,62 @@ impl WorkspaceApp {
         for panel in redock_requests {
             self.redock(panel, ctx);
         }
+        if self.cross_window_tab_drag.is_none() {
+            self.cross_window_tab_drag = drag_starts.into_iter().next();
+        }
     }
+}
+
+fn insert_tab_at_edge(dock: &mut DockState<Panel>, tab: Panel, edge: DropEdge) {
+    if edge == DropEdge::Centre {
+        dock.main_surface_mut().push_to_focused_leaf(tab);
+        return;
+    }
+    let target_leaf = dock.main_surface().focused_leaf()
+        .or_else(|| dock.main_surface().iter()
+            .enumerate()
+            .find_map(|(index, node)| node.is_leaf().then_some(NodeIndex(index))));
+    if let Some(index) = target_leaf {
+        match edge {
+            DropEdge::Left => { dock.main_surface_mut().split_left(index, 0.5, vec![tab]); }
+            DropEdge::Right => { dock.main_surface_mut().split_right(index, 0.5, vec![tab]); }
+            DropEdge::Above => { dock.main_surface_mut().split_above(index, 0.5, vec![tab]); }
+            DropEdge::Below => { dock.main_surface_mut().split_below(index, 0.5, vec![tab]); }
+            DropEdge::Centre => unreachable!(),
+        }
+    } else {
+        dock.main_surface_mut().push_to_first_leaf(tab);
+    }
+}
+
+/// Show the intended destination while crossing independent OS windows.
+/// The overlay is *whole-window*, not yet precise per-pane hit testing.
+fn paint_drop_target(ui: &mut egui::Ui, hover: Option<DropTarget>, area: WindowArea) {
+    let Some(DropTarget { window, edge }) = hover else { return };
+    if window != area {
+        return;
+    }
+    let full = ui.max_rect().shrink(9.0);
+    let w = full.width();
+    let h = full.height();
+    let region = match edge {
+        DropEdge::Centre => full.shrink2(egui::vec2(w * 0.24, h * 0.24)),
+        DropEdge::Left => egui::Rect::from_min_max(full.min, egui::pos2(full.min.x + w * 0.28, full.max.y)),
+        DropEdge::Right => egui::Rect::from_min_max(egui::pos2(full.max.x - w * 0.28, full.min.y), full.max),
+        DropEdge::Above => egui::Rect::from_min_max(full.min, egui::pos2(full.max.x, full.min.y + h * 0.28)),
+        DropEdge::Below => egui::Rect::from_min_max(egui::pos2(full.min.x, full.max.y - h * 0.28), full.max),
+    };
+    let painter = ui.painter();
+    painter.rect_filled(region, 4.0, egui::Color32::from_rgba_unmultiplied(55, 150, 255, 62));
+    painter.rect_stroke(
+        region, 4.0, egui::Stroke::new(2.0, egui::Color32::from_rgb(65, 150, 240)),
+        egui::StrokeKind::Inside,
+    );
+    painter.text(
+        region.center(), egui::Align2::CENTER_CENTER,
+        format!("DROP: {edge:?}"), egui::FontId::proportional(18.0),
+        egui::Color32::WHITE,
+    );
 }
 
 fn panel_viewport_id(panel: Panel) -> egui::ViewportId {
@@ -482,6 +646,8 @@ fn draw_panel_contents(ui: &mut egui::Ui, panel: Panel, document: &mut DocumentS
 struct DockedTabViewer<'a> {
     document: &'a mut DocumentState,
     detach_requests: &'a mut Vec<Panel>,
+    drag_starts: &'a mut Vec<(Panel, WindowArea)>,
+    origin: WindowArea,
     is_native: bool,
 }
 
@@ -494,6 +660,12 @@ impl TabViewer for DockedTabViewer<'_> {
 
     fn title(&mut self, tab: &mut Panel) -> egui::WidgetText {
         tab.title().into()
+    }
+
+    fn on_tab_button(&mut self, tab: &mut Panel, response: &egui::Response) {
+        if tab.native_slot().is_some() && response.drag_started() {
+            self.drag_starts.push((*tab, self.origin));
+        }
     }
 
     fn ui(&mut self, ui: &mut egui::Ui, tab: &mut Panel) {
@@ -514,6 +686,10 @@ impl eframe::App for WorkspaceApp {
         let mut recover_requested = false;
         let mut bring_requested = false;
         let mut detach_requests = Vec::new();
+        let mut drag_starts: Vec<(Panel, WindowArea)> = Vec::new();
+        let ctx = ui.ctx().clone();
+        self.poll_native_tab_drag(&ctx);
+        let hovered_drop = self.hovered_drop;
 
         egui::CentralPanel::default().show(ui, |ui| {
             ui.horizontal_wrapped(|ui| {
@@ -539,15 +715,20 @@ impl eframe::App for WorkspaceApp {
             let mut viewer = DockedTabViewer {
                 document: &mut self.workspace.document,
                 detach_requests: &mut detach_requests,
+                drag_starts: &mut drag_starts,
+                origin: WindowArea::Main,
                 is_native: false,
             };
             DockArea::new(&mut self.workspace.dock).show_inside(ui, &mut viewer);
+            paint_drop_target(ui, hovered_drop, WindowArea::Main);
         });
 
         for panel in detach_requests {
             self.detach_native(panel);
         }
-        let ctx = ui.ctx().clone();
+        if self.cross_window_tab_drag.is_none() {
+            self.cross_window_tab_drag = drag_starts.into_iter().next();
+        }
         self.native_windows(&ctx);
 
         // Only on a transition back to MAIN window focus; don't continuously
@@ -573,6 +754,8 @@ impl eframe::App for WorkspaceApp {
             }
             self.workspace = SavedWorkspace::default();
             self.native_initialised = [false; 3];
+            self.cross_window_tab_drag = None;
+            self.hovered_drop = None;
             self.status = "Workspace reset in memory (saved layout is unchanged).".to_owned();
         }
         if save_requested {
@@ -609,6 +792,8 @@ mod grouping_tests {
             status: String::new(),
             native_initialised: [false; 3],
             main_was_focused: false,
+            cross_window_tab_drag: None,
+            hovered_drop: None,
         }
     }
 
