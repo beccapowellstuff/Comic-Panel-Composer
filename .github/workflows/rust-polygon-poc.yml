@@ -1,0 +1,27 @@
+name: Rust polygon proof of concept
+
+on:
+  push:
+    branches:
+      - 'poc/**'
+    paths:
+      - 'proof-of-concepts/rust-polygon-editor/**'
+      - '.github/workflows/rust-polygon-poc.yml'
+  pull_request:
+    paths:
+      - 'proof-of-concepts/rust-polygon-editor/**'
+      - '.github/workflows/rust-polygon-poc.yml'
+  workflow_dispatch:
+
+jobs:
+  windows-build-and-test:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install stable Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - name: Run geometry tests
+        run: cargo test --manifest-path proof-of-concepts/rust-polygon-editor/Cargo.toml
+      - name: Build Windows application
+        run: cargo build --manifest-path proof-of-concepts/rust-polygon-editor/Cargo.toml
