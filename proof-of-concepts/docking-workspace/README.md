@@ -1,10 +1,55 @@
 # PoC 2 — Docking, native windows and DPI
 
-**Status: user testing confirms the pinned winit patch resolves mixed-DPI dragging, internal docking and shared state work, and the follow-up safe positioning test restores native windows to their monitors. This branch adds native tab groups, controlled group merging and nonactivating workspace focus handling. Windows CI confirms 12 automated tests passed and a Windows build succeeded; interactive GUI behaviour remains unverified; true cross-OS-window tab dragging remains unimplemented.**
+**Status: user testing confirms pinned winit fixes mixed-DPI motion and that native groups can merge via menu, restore positions, and come forward with the main window. This branch explores direct mouse dragging of egui_dock tabs between genuine OS windows, including tab grouping and split drop targets. Windows CI and physical cross-window mouse behaviour are undergoing verification; the tab-close defect and main window position persistence remain open.**
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
-## Native tab grouping and workspace activation — current experiment
+## True cross-OS-window tab dragging — current isolated experiment
+
+**Branch:** `poc/cross-window-tab-drag`. Based on the owner-tested native grouping/focus branch. It retains the successful Windows mixed-DPI patch, physical screen position restoration, and native group persistence.
+
+**Goal:** Discover whether the existing Rust/egui/egui_dock stack can transfer an **actual docking tab with the mouse between two separate native Windows OS windows** (including different DPI monitors), and allow centre (group) or edge (split) drops. This remains a technology probe, not a product architecture decision.
+
+### What has changed
+
+- Uses **`egui_dock::TabViewer::on_tab_button`** to observe a drag started on the real Pages/Layers/Inspector tab, **not** on a new surrogate toolbar handle.
+- Samples the left mouse button and **physical Windows cursor position** using Win32 while dragging, even if the pointer leaves the original OS window. `WindowFromPoint` / `GetAncestor` identify the real OS window under the cursor; only recognised windows owned by this process are eligible.
+- The receiving window paints a translucent drop-zone preview, using a deliberately simple **whole-window** five-zone model: centre merges into the current group; left/right/above/below inserts a new split.
+- On release over another native window or the main window, removes the dragged panel from its source `DockState` and inserts it into the destination `DockState`; automatically closes an empty source native window. The shared document model remains the same.
+- Leaves drag-and-drop *within* one `DockArea` to `egui_dock`. Mouse release outside a recognised different window should be ignored by the cross-window transfer logic.
+- Supports detaching to the next free native-window slot if the panel's old named slot now hosts another group.
+
+**Important limits and risks to evaluate:** `egui_dock` still owns its original drag gesture in the source window, while our Win32 bridge also tracks the tab. The combined event handling may abort a drag, lose the tab to an **in-app egui window**, or stop repainting when the mouse leaves the source. The preview uses the *entire OS client area*, rather than detecting precisely which leaf panel is under the cursor. The current PoC also uses static window titles for handle identification, and a panel might remain in a native window whose title was derived from a different original panel. Those are technical debts or potential rejection criteria, not resolved requirements.
+
+**Not included:** Dragging to empty desktop space to create a new native window, Windows OLE drag/drop interoperability, native per-leaf target highlighting, drag-to-undock by crossing the main window border, or production-grade focus/handle lifecycle management. The existing **Merge this window into...** menu remains a fallback.
+
+### Manual Windows acceptance test
+
+From PowerShell in the repository root, check for unrelated local modifications before switching:
+
+```powershell
+git status --short
+git fetch origin
+git switch --track origin/poc/cross-window-tab-drag
+cargo test --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+cargo run --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
+```
+
+Use `git switch poc/cross-window-tab-drag` if the branch already exists locally.
+
+1. **Actual tab drag:** Create separate Pages and Layers **native Windows windows**. Drag the *Pages tab itself* from its window into the middle of Layers, across monitors if possible. Look for the receiving blue **DROP: Centre** preview. Release. The receiving OS window should contain both tabs and the empty Pages OS window should close. This is the definitive cross-window result; using the Merge menu **does not count**.
+2. **Split:** Detach Inspector into another OS window. Drag its tab over the **bottom** (and later left/right/top) edge of the grouped native window, release, and check that Inspector forms a separately resizeable pane rather than another tab.
+3. **Main window:** Drag an actual native tab into the centre/side of the **main application window**. It should move into the main DockArea. Drag a docked tool tab from the main application into a **different existing native window**.
+4. **Ordinary docking regression:** Reorder tabs and split panes **within** a single DockArea. These ordinary local drags must still work and should **not** trigger a cross-window transfer.
+5. **Cancel behaviour:** Drop over another application or the desktop; the original panel should remain recoverable (do not count an internal egui float as success). Repeat with a quick movement.
+6. **Mixed DPI and persistence:** Try left portrait 100% and right portrait 100% versus central landscape 150%, saving and restarting after successful drops. Verify grouped/split layouts, physical locations and interactions.
+7. **Focus/recovery regression:** Clicking the main application should raise floating tools without permanently marking them always-on-top. **Recover floating panels** should still return all tabs to the main workspace.
+
+**Interpretation:** Automated model tests can prove that moving a `Panel` between `DockState`s is correct, but **cannot prove the real cross-window mouse gesture** survives native Windows/egui event routing. Only user testing does that. If the pointer never highlights the other native viewport, or release doesn't cause a transfer, the interaction is **not passed**. That is important evidence for comparing egui with Qt's docking ecosystem.
+
+---
+
+## Native tab grouping and workspace activation — previous experiment
 
 **Branch:** `poc/native-window-grouping-focus`, based on the user-tested `poc/native-window-position-safe`. All prior window positioning and the pinned experimental winit mixed-DPI fix remain in place.
 
