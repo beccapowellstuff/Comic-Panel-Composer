@@ -3,6 +3,7 @@ name: Docking workspace PoC (Windows)
 on:
   push:
     branches:
+      - main
       - 'poc/**'
     paths:
       - 'proof-of-concepts/docking-workspace/**'
