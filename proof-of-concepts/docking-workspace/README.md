@@ -1,16 +1,18 @@
 # PoC 2 — Docking, native windows and DPI
 
-**Status: user testing confirms the pinned winit patch resolves mixed-DPI dragging, internal docking and shared state work, and the follow-up safe positioning test restores native windows to their monitors. This branch adds native tab groups, controlled group merging and nonactivating workspace focus handling. Windows CI confirms 12 automated tests passed and a Windows build succeeded; interactive GUI behaviour remains unverified; true cross-OS-window tab dragging remains unimplemented.**
+**Status: owner testing confirmed internal tab dragging/splitting, genuine floating tool windows, menu-driven native group merging, native-window focus behaviour and stable movement/restoration across differently scaled monitors with a pinned experimental winit patch. Windows CI passed 12 tests and built the application. Direct dragging of tabs between independent OS windows failed in a later PoC and its unsuccessful implementation has deliberately not been adopted. This is not product code.**
+
+See [Docking Workspace PoC Findings](../../docs/DOCKING_WORKSPACE_POC_FINDINGS.md) for the consolidated evidence, failed cross-native drag investigation and remaining gaps. The historical branch-specific sections below are retained as a research record; use `main` for the preserved working source.
 
 This is an isolated technology evaluation for Comic Panel Composer, **not** a production workspace or a technology decision.
 
-## Native tab grouping and workspace activation — current experiment
+## Native tab grouping and workspace activation — preserved working experiment
 
-**Branch:** `poc/native-window-grouping-focus`, based on the user-tested `poc/native-window-position-safe`. All prior window positioning and the pinned experimental winit mixed-DPI fix remain in place.
+**Origin:** `poc/native-window-grouping-focus`, based on the previously user-tested `poc/native-window-position-safe`. The tested implementation is now preserved on `main`. All previous window positioning and the pinned experimental winit mixed-DPI fix remain in this PoC.
 
 **Why this experiment:** Internal `egui_dock` tabs group and undock correctly, but genuine independent OS windows previously contained a lone panel without tab controls. Additionally, activating the main application did not bring its independent native tool windows forward.
 
-### New functionality (awaiting Windows testing)
+### Functionality added in the preserved experiment
 
 - Each floating OS viewport now contains its **own `DockArea` and `DockState`**. Panels within one floating OS window show normal draggable tabs.
 - The **Merge this window into…** menu moves all tabs from one actual native Windows window into another already-open native window; the emptied source window closes. This is a **controlled merge**, not cross-native-window mouse drag.
@@ -28,12 +30,13 @@ First preserve any local modifications before switching:
 ```powershell
 git status --short
 git fetch origin
-git switch --track origin/poc/native-window-grouping-focus
+git switch main
+git pull --ff-only
 cargo test --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
 cargo run --manifest-path .\proof-of-concepts\docking-workspace\Cargo.toml
 ```
 
-Use `git switch poc/native-window-grouping-focus` if the branch already exists locally.
+The previously used experimental branch is historical; new development should start from a clean, current `main`.
 
 Manual checks, with main monitor 3 (150%) and secondary monitors 2/1 (100%):
 
@@ -47,7 +50,7 @@ Manual checks, with main monitor 3 (150%) and secondary monitors 2/1 (100%):
 8. **Focus troubleshooting:** If automatic bring-to-front fails, click **Bring tool windows forward** and note its reported count. If this works while automatic activation fails, the issue is the focus-transition detection; if the count is zero, the Win32 handle discovery is suspect.
 9. **Regression:** Drag grouped windows across monitors in both directions, use Win+Shift+Arrows, resize, restart and recover to verify the previous DPI and window-position fixes remain sound.
 
-The Windows workflow passed **12 tests (4 library, 8 binary)** and completed a Windows build on [commit 1a7325a](https://github.com/becciStuff/Comic-Panel-Composer/actions/runs/38531481061). The tests also exposed an upstream `egui_dock` persistence hazard: a fresh layout uses non-finite `Rect::NOTHING` bounds that JSON cannot round-trip. The PoC now sanitises a **copy** of its tab layout before saving, preserving the live layout. **GUI behaviour must still be tested manually**. Record whether the interface follows the expected rules rather than assuming it does because it compiles.
+The Windows workflow passed **12 tests (4 library, 8 binary)** and completed a Windows build on [commit 1a7325a](https://github.com/becciStuff/Comic-Panel-Composer/actions/runs/38531481061). The tests also exposed an upstream `egui_dock` persistence hazard: a fresh layout uses non-finite `Rect::NOTHING` bounds that JSON cannot round-trip. The PoC now sanitises a **copy** of its tab layout before saving, preserving the live layout. **Selected GUI behaviour was confirmed separately by the owner**, including mixed-DPI window movement, native-group menu merge and main-window activation. Additional scenarios listed above remain to be tested; compilation and unit tests alone cannot establish them.
 
 ---
 
