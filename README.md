@@ -19,7 +19,7 @@ Comic Panel Composer aims to make that process easy and enjoyable on Windows, wh
 
 | | |
 |---|---|
-| **Status** | **Preparing the technical evaluation** — no working application or tested prototype yet |
+| **Status** | **Stage 1 experiments underway** — an editable-polygon PoC and a native Windows docking-workspace PoC are in the repository. The docking interactions have been tested by the product owner; there is no finished comic editor or approved technology stack. |
 | **Goal** | Find out whether Rust and the available graphics, interface and text tools can support the comic editor we want. |
 | **What we'll test** | Custom panel shapes, images inside and beyond panel borders, speech balloons, text, smooth editing and accurate export. |
 | **Next stage** | Use what we've learnt to choose the features for the first build. |
@@ -30,7 +30,9 @@ Comic Panel Composer aims to make that process easy and enjoyable on Windows, wh
 - [ ] Check the difficult editing, rendering, text, Windows scaling and export behaviours.
 - [ ] Record the results and decide whether to proceed with a technology, investigate further or change direction.
 
-**This is an experiment, not a release promise.** Nothing is available to download yet, and there is no guaranteed delivery date or commitment to build every requested feature. If the results don't meet our expectations, we'll improve the approach, change direction, pause or stop.
+**This is an experiment, not a release promise.** Source-only technology PoCs are available in the repository, but there is no usable comic editor release, guaranteed delivery date or commitment to build every requested feature. If the results don't meet our expectations, we'll improve the approach, change direction, pause or stop.
+
+**Research so far:** [Polygon editor PoC](proof-of-concepts/rust-polygon-editor/README.md) demonstrates basic editable geometry in an independent experiment. The [Windows docking PoC](proof-of-concepts/docking-workspace/README.md) has owner-tested floating tool windows, internal docking, mixed-DPI movement using an experimental pinned winit patch, window-position restoration, menu-driven native tab-group merging and focus behaviour. **Direct tab dragging between separate native Windows windows did not work in owner testing.** See the [docking technology findings](docs/DOCKING_WORKSPACE_POC_FINDINGS.md) for verified results, limitations and remaining risks. The next proposed research is actual comic-page geometry, rich lettering and matching export. Rust/egui is still an evaluation option, not the selected product stack.
 
 ## How the project will be approached
 
@@ -70,3 +72,4 @@ A convincing interface or a large amount of AI-generated code is not proof of a 
 - [Development Direction (DRAFT)](docs/DEVELOPMENT_DIRECTION_DRAFT.md) — a friendly overview of the proposed investigation and development stages. This is a direction for discussion, not a release promise.
 - [High-Level Requirements](docs/HIGH_LEVEL_REQUIREMENTS.md) — the detailed product requirements and intended capabilities. Ticked requirements have been validated as wanted; they are **not** completed features or first-release promises.
 - [Project Planning (DRAFT)](docs/PROJECT_PLANNING_DRAFT.md) — captured questions, provisional sequencing ideas and example acceptance scenarios. This is **not** an approved delivery plan.
+- [Docking Workspace PoC Findings](docs/DOCKING_WORKSPACE_POC_FINDINGS.md) — observed Windows behaviour, CI evidence, known failures and remaining technology risks.

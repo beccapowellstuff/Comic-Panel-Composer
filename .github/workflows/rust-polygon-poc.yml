@@ -3,6 +3,7 @@ name: Rust polygon proof of concept
 on:
   push:
     branches:
+      - main
       - 'poc/**'
     paths:
       - 'proof-of-concepts/rust-polygon-editor/**'

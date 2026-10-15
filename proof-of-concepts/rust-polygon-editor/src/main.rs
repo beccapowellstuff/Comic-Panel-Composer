@@ -35,7 +35,7 @@ impl eframe::App for PolygonApp {
             painter.add(egui::Shape::convex_polygon(
                 corners.clone(),
                 Color32::from_rgba_unmultiplied(100, 150, 255, 100),
-                Stroke::new(2.0, Color32::from_rgb(0, 0, 255)),
+                Stroke::new(2.0_f32, Color32::from_rgb(0, 0, 255)),
             ));
 
             for (index, corner) in corners.iter().enumerate() {

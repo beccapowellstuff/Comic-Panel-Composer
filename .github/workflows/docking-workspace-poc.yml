@@ -1,0 +1,28 @@
+name: Docking workspace PoC (Windows)
+
+on:
+  push:
+    branches:
+      - main
+      - 'poc/**'
+    paths:
+      - 'proof-of-concepts/docking-workspace/**'
+      - '.github/workflows/docking-workspace-poc.yml'
+  pull_request:
+    paths:
+      - 'proof-of-concepts/docking-workspace/**'
+      - '.github/workflows/docking-workspace-poc.yml'
+  workflow_dispatch:
+
+jobs:
+  windows-test:
+    runs-on: windows-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      - name: Run model tests
+        run: cargo test --manifest-path proof-of-concepts/docking-workspace/Cargo.toml
+      - name: Build the native Windows app
+        run: cargo build --manifest-path proof-of-concepts/docking-workspace/Cargo.toml
